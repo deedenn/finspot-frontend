@@ -1,0 +1,16 @@
+.app {
+    max-height: 1024px;
+    max-width: 1440px;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    background-color:   #F5F7FA;
+    min-width: 1160px;
+}
+
+.app {
+    display: flex;
+    flex-direction: row; 
+}

@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.navbar__status {
+    margin: 0px 16px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #879FB9;
+
+}
+
+.navbar__status_active {
+    color:  #0078FF;
+    text-decoration: underline;
+}

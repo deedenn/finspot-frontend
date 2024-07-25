@@ -1,0 +1,13 @@
+.main {
+
+}
+
+.createRequestBtn {
+    background-color: #0078FF;
+    border-radius: 8px;
+    width: 204px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}

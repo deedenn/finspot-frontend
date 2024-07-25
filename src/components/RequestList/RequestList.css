@@ -1,0 +1,15 @@
+.requestlist {
+    margin: 0px 40px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.requestlist__captions {
+
+}
+
+.requestlist__header_caption {
+    font-size: 12px;
+    line-height: 16px;
+    color: #879FB9;
+}

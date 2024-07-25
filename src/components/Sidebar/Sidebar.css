@@ -1,0 +1,95 @@
+.sidebar {
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.sidebar_close {
+    max-width: 112px;
+}
+
+.sidebarHideBtn {
+    width: 24px;
+    height: 48px;
+    background-color: #EB5757;
+    position: absolute;
+    left: 256px;
+    top: 20px;
+}
+
+.sidebar__logo {
+    display: flex;
+    margin-top: 28px;
+    margin-left: 40px;
+}
+
+.sidebar__logo_image {
+    width: 32px;
+    height: 32px;
+}
+
+.sidebar__logo_caption {
+    color: #313A43;
+    font-size: 20px;
+    line-height: 16px;
+}
+
+.sidebarMenu {
+    margin-bottom: 40px;
+    color: #879FB9;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+}
+
+.sidebarMenuCaption {
+    margin-bottom: 24px;
+}
+
+.sidebarBtn {
+    width: 200px;
+    height: 24px;
+    display: flex;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+}
+
+.sidebarBtnLogo {
+    margin-right: 2px;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebarBtnCaption {
+    text-align: left;
+    font-size: 16px;
+    line-height: 20px;
+    color: #313A43;
+}
+
+.sidebarBtnCounter {
+    margin: 0;
+    padding: 0;
+    background-color: #EB5757;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    line-height: 14px;
+    color:  #FFFFFF;
+    text-align: center;
+}
+
+.sidebarMenuCaption {
+    font-family: Montserrat;
+    margin-bottom: 24px;
+
+}
+
+.sidebarExitBtn {
+    text-align: left;
+}
