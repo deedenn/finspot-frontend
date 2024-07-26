@@ -3,6 +3,7 @@
     flex-direction: row;
     list-style: none;
     margin-bottom: 20px;
+    margin-left: 40px;
 }
 
 .navbar__status {

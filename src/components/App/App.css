@@ -1,6 +1,10 @@
 .app {
     max-height: 1024px;
     max-width: 1440px;
+    font-family: Montserrat;
+    display: flex;
+    flex-direction: row;
+
 }
 
 .page {
@@ -8,9 +12,5 @@
     flex-direction: column;
     background-color:   #F5F7FA;
     min-width: 1160px;
-}
-
-.app {
-    display: flex;
-    flex-direction: row; 
+    margin-left: 40px;
 }

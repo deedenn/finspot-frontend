@@ -4,7 +4,6 @@
     flex-direction: column;
     color: #FFFFFF;
     padding-left: 40px;
-    padding-right: 40px;
 }
 
 .sidebar_close {
@@ -15,15 +14,13 @@
     width: 24px;
     height: 48px;
     background-color: #EB5757;
-    position: absolute;
-    left: 256px;
-    top: 20px;
 }
 
 .sidebar__logo {
     display: flex;
     margin-top: 28px;
     margin-left: 40px;
+    
 }
 
 .sidebar__logo_image {
@@ -35,6 +32,7 @@
     color: #313A43;
     font-size: 20px;
     line-height: 16px;
+    font-weight: 700;
 }
 
 .sidebarMenu {
@@ -82,6 +80,8 @@
     line-height: 14px;
     color:  #FFFFFF;
     text-align: center;
+    justify-items: end;
+    justify-self: end;
 }
 
 .sidebarMenuCaption {

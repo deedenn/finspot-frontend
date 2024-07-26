@@ -3,4 +3,18 @@
     flex-direction: row;
     justify-content: space-between;
     margin-right: 76 px;
+    margin-left: 40px;
+}
+
+.header__user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header__user_logo {
+    height: 48px;
+    width: 48px;
+    background-color: red;
+    border-radius: 30px;
 }
