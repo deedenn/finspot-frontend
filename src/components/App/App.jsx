@@ -8,6 +8,7 @@ import Main from "../Main/Main";
 import RequestList from "../RequestList/RequestList";
 import RegistryList from "../RegistryList/RegistryList";
 import Request from "../Request/Request";
+import Registry from "../Registry/Registry";
 
 import { Routes, Route, useLocation } from "react-router-dom";
 
@@ -17,9 +18,14 @@ function App() {
       <Sidebar />
       <div className="page">
         <Header />
-        {/* <RequestList />
-        <RegistryList /> */}
-        <Request />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/requestlist" element={<RequestList />} />
+          <Route path="/registrylist" element={<RegistryList />} />
+          <Route path="/request" element={<Request />} />
+          <Route path="/registry" element={<Registry />} />
+        </Routes>
+
       </div>
     </div>
   );

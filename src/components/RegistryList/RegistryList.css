@@ -1,0 +1,40 @@
+.registrylist {
+    margin: 0px 40px;
+    background-color: white;
+    border-radius: 20px;
+    
+}
+
+
+.registrylist__header_caption {
+    font-size: 12px;
+    line-height: 16px;
+    color: #879FB9;
+   
+}
+
+.registrylist__captions {
+    display: flex;
+    flex-direction: row;
+    color: #313A43;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    height: 24px;
+}
+
+
+.registrylist__items {
+    display: grid;
+    grid-template-columns: 180px 95px 96px 140px 200px;
+    grid-template-rows: repeat(6, 20px);
+    gap: 16px;
+    padding-right: 32px;
+}
+
+.registrylist__itemCaption {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #313A43;
+}

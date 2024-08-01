@@ -39,6 +39,7 @@
 }
 
 .sidebarMenu {
+    margin-top: 80px;
     margin-bottom: 40px;
     color: #879FB9;
     font-size: 12px;
@@ -51,16 +52,24 @@
 }
 
 .sidebarBtn {
+    padding: 0;
+    margin: 0;
     width: 200px;
     height: 24px;
     display: flex;
     margin-bottom: 20px;
     background: none;
     border: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: none;
+    font-style: normal;
+    
 }
 
 .sidebarBtn:hover {
-    background-color: #EB5757;
+    background-color:  #B6CADF;
+    border-radius: 20px;
 }
 
 .sidebarBtnLogo {
@@ -87,8 +96,6 @@
     line-height: 14px;
     color:  #FFFFFF;
     text-align: center;
-    justify-items: end;
-    justify-self: end;
 }
 
 .sidebarMenuCaption {

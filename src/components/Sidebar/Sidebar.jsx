@@ -1,4 +1,6 @@
 import React from "react";
+import { Link, useLocation } from 'react-router-dom';
+
 import "./Sidebar.css";
 import { actionSidebar } from "../../redux/slices/viewSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,43 +30,49 @@ function Sidebar() {
 
       <div className="sidebarMenu">
         <div className="sidebarMenuCaption">Меню</div>
-        <button className="sidebarBtn">
+        <Link to="/requestlist" className="sidebarBtn" alt="Заявки" type="button">
           <img className="sidebarBtnLogo" alt="Заявки" src={requestImg}></img>
           <div className="sidebarBtnCaption">Заявки</div>
           <div className="sidebarBtnCounter">3</div>
-        </button>
-        <button className="sidebarBtn">
+        </Link>
+
+        <Link to="/registrylist" className="sidebarBtn" alt="Реестры" type="button">
           <img className="sidebarBtnLogo" alt="Реестры" src={registryImg}></img>
           <div className="sidebarBtnCaption">Реестры</div>
           <div className="sidebarBtnCounter">2</div>
-        </button>
-        <button className="sidebarBtn">
+          </Link>
+
+        <Link to="/profile" className="sidebarBtn" alt="Профиль" type="button">
           <img
             className="sidebarBtnLogo"
             alt="Личный кабинет"
             src={profileImg}
           ></img>
           <div className="sidebarBtnCaption">Личный кабинет</div>
-        </button>
+          </Link>
+
       </div>
       <div className="sidebarMenu">
         <div className="sidebarMenuCaption">Быстрые действия</div>
-        <button className="sidebarBtn">
+
+        <Link to="/request" className="sidebarBtn" alt="Создать заявку" type="button">
           <img
             className="sidebarBtnLogo"
             alt="Создать заявку"
             src={addReguestImg}
           ></img>
           <div className="sidebarBtnCaption">Создать заявку</div>
-        </button>
-        <button className="sidebarBtn">
+          </Link>
+
+          <Link to="/registry" className="sidebarBtn" alt="Создать реестр" type="button">
           <img
             className="sidebarBtnLogo"
             alt="Создать реестр"
             src={addRegistryImg}
           ></img>
           <div className="sidebarBtnCaption">Создать реестр</div>
-        </button>
+          </Link>
+
       </div>
       <div className="sidebarMenu">
         <div className="sidebarMenuCaption">Компания</div>
