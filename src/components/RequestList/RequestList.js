@@ -1,9 +1,11 @@
 import React from "react";
 import './RequestList.css';
+import NavBar from "../NavBar/NavBar";
 
 function RequestList() {
     return (
         <div className="requestlist">
+            <NavBar />
             <div classname="requestlist__captions">
                 <p className="requestlist__header_caption">Дата создания</p>
                 <p className="requestlist__header_caption">Контрагент</p>

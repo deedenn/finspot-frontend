@@ -20,11 +20,12 @@ function Sidebar() {
       <div className="sidebar__logo">
         <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
         <div className="sidebar__logo_caption">FINSPOT</div>
+        <button
+          className="sidebarHideBtn"
+          onClick={() => dispatch(actionSidebar())}
+        ></button>
       </div>
-      <button
-        className="sidebarHideBtn"
-        onClick={() => dispatch(actionSidebar())}
-      ></button>
+
       <div className="sidebarMenu">
         <div className="sidebarMenuCaption">Меню</div>
         <button className="sidebarBtn">

@@ -4,6 +4,7 @@
     flex-direction: column;
     color: #FFFFFF;
     padding-left: 40px;
+    padding-right: 40px;
 }
 
 .sidebar_close {
@@ -13,14 +14,16 @@
 .sidebarHideBtn {
     width: 24px;
     height: 48px;
-    background-color: #EB5757;
+    background-image: url("../../images/chevron.png");
+    border: none;
 }
 
 .sidebar__logo {
     display: flex;
     margin-top: 28px;
-    margin-left: 40px;
-    
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .sidebar__logo_image {
@@ -54,6 +57,10 @@
     margin-bottom: 20px;
     background: none;
     border: none;
+}
+
+.sidebarBtn:hover {
+    background-color: #EB5757;
 }
 
 .sidebarBtnLogo {

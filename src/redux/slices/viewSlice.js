@@ -15,6 +15,6 @@ export const viewSlice = createSlice({
 })
 
 
-export const { actionSidebar } = viewSlice.actions
+export const { actionSidebar } = viewSlice.actions;
 
-export default viewSlice.reducer
+export default viewSlice.reducer;

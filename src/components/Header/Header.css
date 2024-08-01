@@ -3,7 +3,6 @@
     flex-direction: row;
     justify-content: space-between;
     margin-right: 76 px;
-    margin-left: 40px;
 }
 
 .header__user {
@@ -17,4 +16,19 @@
     width: 48px;
     background-color: red;
     border-radius: 30px;
+}
+
+.header__createRequestBtn {
+    background-color: #0078FF;
+    border-radius: 8px;
+    width: 204px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.header__createRequestBtn:hover {
+    background-color: antiquewhite;
+    color: black;
 }

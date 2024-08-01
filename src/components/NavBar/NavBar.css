@@ -11,7 +11,10 @@
     font-size: 14px;
     line-height: 16px;
     color: #879FB9;
+}
 
+.navbar__status:hover {
+    color:  #0078FF;
 }
 
 .navbar__status_active {
