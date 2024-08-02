@@ -79,10 +79,10 @@ function Sidebar() {
         <button className="sidebarBtn">Пользователи</button>
         <button className="sidebarBtn">Изменить логотип</button>
       </div>
-      <button className="sidebarBtn">
+      <Link to="/login" className="sidebarBtn" alt="Выйти" type="button">
         <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
         <div className="sidebarBtnCaption">Выйти</div>
-      </button>
+        </Link>
     </div>
   );
 }

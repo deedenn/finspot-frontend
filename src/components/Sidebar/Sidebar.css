@@ -18,6 +18,11 @@
     border: none;
 }
 
+.sidebarHideBtn:hover {
+    opacity: 60%;
+    cursor: pointer;
+}
+
 .sidebar__logo {
     display: flex;
     margin-top: 28px;

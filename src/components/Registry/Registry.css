@@ -1,0 +1,45 @@
+.registry {
+
+}
+
+.registryInfo {
+    margin: 0;
+    padding: 32px 32px 36px 32px;
+    height: 92px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: 10px 10px;
+    gap: 12px;
+}
+
+.registryInfoCaption {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: #879FB9;
+    margin: 0 0 12px 0;
+}
+
+.registryInfoValue {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #313A43;
+}
+
+.registryList {
+    display: grid;
+    grid-template-columns: 113px auto auto auto auto 155px;
+    grid-template-rows: repeat(6, 20px);
+    gap: 16px;
+    padding-right: 32px;
+}
+
+.registrylist__item {
+    font-size: 14px;
+    line-height: 16px;
+    color: #313A43;
+    
+}
