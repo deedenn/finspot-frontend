@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     openedSidebar: true,
+    headerTitle: 'Заявки',
 }
 
 export const viewSlice = createSlice({
@@ -10,11 +11,14 @@ export const viewSlice = createSlice({
     reducers: {
         actionSidebar: (state) => {
             state.openedSidebar = !state.openedSidebar;
+        },
+        setHeaderTitle: (state, action) => {
+            state.headerTitle = action.payload;
         }
     },
 })
 
 
-export const { actionSidebar } = viewSlice.actions;
+export const { actionSidebar, setHeaderTitle } = viewSlice.actions;
 
 export default viewSlice.reducer;

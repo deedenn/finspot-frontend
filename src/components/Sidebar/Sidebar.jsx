@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 
 import "./Sidebar.css";
-import { actionSidebar } from "../../redux/slices/viewSlice";
+import { actionSidebar, setHeaderTitle } from "../../redux/slices/viewSlice";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "../../images/logo.png";
 import requestImg from "../../images/sidebarBtn_request.png";
@@ -21,58 +21,95 @@ function Sidebar() {
     <div className={`sidebar ${!openedSidebar && "sidebar_close"}`}>
       <div className="sidebar__logo">
         <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
-        <div className="sidebar__logo_caption">FINSPOT</div>
+        {openedSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
         <button
-          className="sidebarHideBtn"
+          className={`sidebarHideBtn ${
+            !openedSidebar && "sidebarHideBtn-close"
+          }`}
           onClick={() => dispatch(actionSidebar())}
         ></button>
       </div>
 
       <div className="sidebarMenu">
-        <div className="sidebarMenuCaption">Меню</div>
-        <Link to="/requestlist" className="sidebarBtn" alt="Заявки" type="button">
+        {openedSidebar && <div className="sidebarMenuCaption">Меню</div>}
+        <Link
+          onClick={() => dispatch(setHeaderTitle("Заявки"))}
+          to="/requestlist"
+          className="sidebarBtn"
+          alt="Заявки"
+          type="button"
+        >
           <img className="sidebarBtnLogo" alt="Заявки" src={requestImg}></img>
-          <div className="sidebarBtnCaption">Заявки</div>
+          {openedSidebar && <div className="sidebarBtnCaption">Заявки</div>}
           <div className="sidebarBtnCounter">3</div>
         </Link>
 
-        <Link to="/registrylist" className="sidebarBtn" alt="Реестры" type="button">
+        <Link
+          onClick={() => dispatch(setHeaderTitle("Реестры"))}
+          to="/registrylist"
+          className="sidebarBtn"
+          alt="Реестры"
+          type="button"
+        >
           <img className="sidebarBtnLogo" alt="Реестры" src={registryImg}></img>
-          <div className="sidebarBtnCaption">Реестры</div>
+          {openedSidebar && <div className="sidebarBtnCaption">Реестры</div>}
           <div className="sidebarBtnCounter">2</div>
-          </Link>
+        </Link>
 
-        <Link to="/profile" className="sidebarBtn" alt="Профиль" type="button">
+        <Link
+          onClick={() => dispatch(setHeaderTitle("Профиль"))}
+          to="/profile"
+          className="sidebarBtn"
+          alt="Профиль"
+          type="button"
+        >
           <img
             className="sidebarBtnLogo"
             alt="Личный кабинет"
             src={profileImg}
           ></img>
-          <div className="sidebarBtnCaption">Личный кабинет</div>
-          </Link>
-
+          {openedSidebar && (
+            <div className="sidebarBtnCaption">Личный кабинет</div>
+          )}
+        </Link>
       </div>
       <div className="sidebarMenu">
-        <div className="sidebarMenuCaption">Быстрые действия</div>
+        {openedSidebar && (
+          <div className="sidebarMenuCaption">Быстрые действия</div>
+        )}
 
-        <Link to="/request" className="sidebarBtn" alt="Создать заявку" type="button">
+        <Link
+          onClick={() => dispatch(setHeaderTitle("Создать заявку"))}
+          to="/request"
+          className="sidebarBtn"
+          alt="Создать заявку"
+          type="button"
+        >
           <img
             className="sidebarBtnLogo"
             alt="Создать заявку"
             src={addReguestImg}
           ></img>
-          <div className="sidebarBtnCaption">Создать заявку</div>
-          </Link>
+          {openedSidebar && (
+            <div className="sidebarBtnCaption">Создать заявку</div>
+          )}
+        </Link>
 
-          <Link to="/registry" className="sidebarBtn" alt="Создать реестр" type="button">
+        <Link
+          to="/registry"
+          className="sidebarBtn"
+          alt="Создать реестр"
+          type="button"
+        >
           <img
             className="sidebarBtnLogo"
             alt="Создать реестр"
             src={addRegistryImg}
           ></img>
-          <div className="sidebarBtnCaption">Создать реестр</div>
-          </Link>
-
+          {openedSidebar && (
+            <div className="sidebarBtnCaption">Создать реестр</div>
+          )}
+        </Link>
       </div>
       <div className="sidebarMenu">
         <div className="sidebarMenuCaption">Компания</div>
@@ -82,7 +119,7 @@ function Sidebar() {
       <Link to="/login" className="sidebarBtn" alt="Выйти" type="button">
         <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
         <div className="sidebarBtnCaption">Выйти</div>
-        </Link>
+      </Link>
     </div>
   );
 }
