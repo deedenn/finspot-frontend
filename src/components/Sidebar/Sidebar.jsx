@@ -10,6 +10,8 @@ import registryImg from "../../images/sidebarBtn_registry.png";
 import profileImg from "../../images/sidebarBtn_profile.png";
 import addReguestImg from "../../images/sidebarBtn_addRequest.png";
 import addRegistryImg from "../../images/sidebarBtn_addRegistry.png";
+import usersImg from "../../images/sidebarBtn_users.png";
+import logoChange from "../../images/sidebarBtn_changeLogo.png";
 import logoutImg from "../../images/sidebarBtn_logout.png";
 import navbarBtnImg from "../../images/navbarBtn.png";
 
@@ -23,9 +25,8 @@ function Sidebar() {
         <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
         {openedSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
         <button
-          className={`sidebarHideBtn ${
-            !openedSidebar && "sidebarHideBtn-close"
-          }`}
+          className={`sidebarHideBtn ${!openedSidebar && "sidebarHideBtn-close"
+            }`}
           onClick={() => dispatch(actionSidebar())}
         ></button>
       </div>
@@ -96,6 +97,7 @@ function Sidebar() {
         </Link>
 
         <Link
+          onClick={() => dispatch(setHeaderTitle("Создать реестр"))}
           to="/registry"
           className="sidebarBtn"
           alt="Создать реестр"
@@ -113,8 +115,38 @@ function Sidebar() {
       </div>
       <div className="sidebarMenu">
         <div className="sidebarMenuCaption">Компания</div>
-        <button className="sidebarBtn">Пользователи</button>
-        <button className="sidebarBtn">Изменить логотип</button>
+        <Link
+          onClick={() => dispatch(setHeaderTitle("Пользователи"))}
+          to="/users"
+          className="sidebarBtn"
+          alt="Пользовователи"
+          type="button"
+        >
+          <img
+            className="sidebarBtnLogo"
+            alt="Пользователи"
+            src={usersImg}
+          ></img>
+          {openedSidebar && (
+            <div className="sidebarBtnCaption">Пользователи</div>
+          )}
+        </Link>
+        <Link
+          onClick={() => dispatch(setHeaderTitle("Изменить логотип"))}
+          to="/changelogo"
+          className="sidebarBtn"
+          alt="Изменить логотип"
+          type="button"
+        >
+          <img
+            className="sidebarBtnLogo"
+            alt="Изменить логотип"
+            src={logoChange}
+          ></img>
+          {openedSidebar && (
+            <div className="sidebarBtnCaption">Изменить логотип</div>
+          )}
+        </Link>
       </div>
       <Link to="/login" className="sidebarBtn" alt="Выйти" type="button">
         <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>

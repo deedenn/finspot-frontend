@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./RequestList.css";
 import NavBar from "../NavBar/NavBar";
-import requests from "../../requests";
+import requests from "../../data/requests";
 
 function RequestList() {
   const [filterRequests, setFilterRequests] = useState(requests);

@@ -1,9 +1,17 @@
 import React from "react";
 import "./NavBar.css";
+import { useState } from "react";
 
 function NavBar() {
+  
+  const [isBtnActive, setIsBtnActive] = React.useState(false);
+
+  const checkBtnFilter = () => {
+    setIsBtnActive(true);
+  };
+
   return (
-    <div className="navbar">
+    <div className="navbar" onClick={checkBtnFilter}>
       <li className="navbar__status navbar__status_active">Все</li>
       <li className="navbar__status">Черновик</li>
       <li className="navbar__status">Согласование ФД</li>

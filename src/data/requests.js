@@ -14,6 +14,22 @@ const requests = [
         file: "photo.jpg",
         sum: "6 000.00",
         state: "Согласование ФД",
+    },
+    {
+        dateToCreate: "25.03.2024",
+        contrAgent: 'ООО "Альтера"',
+        initiator: "Денисов А.В.",
+        file: "ph.jpg",
+        sum: "250 000.00",
+        state: "Утверждение ГД",
+    },
+    {
+        dateToCreate: "20.03.2024",
+        contrAgent: 'ООО "Петрович"',
+        initiator: "Петров А.М.",
+        file: "p.jpg",
+        sum: "5 000 000.00",
+        state: "В реестре",
     }
 
 ]
