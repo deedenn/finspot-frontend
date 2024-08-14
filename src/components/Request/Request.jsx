@@ -8,20 +8,19 @@ function Request() {
         <ul className="request__form_caption">№ заявки</ul>
         <ul className="request__form_field">12334213</ul>
         <ul className="request__form_caption">Контрагент</ul>
-        <ul className="request__form_field">ООО "Ромашка"</ul>
+        <input className="request__form_field" type="text" placeholder="ООО Ромашка" />
         <ul className="request__form_caption">Инициатор</ul>
         <ul classname="request__form_field">Громова Анастасия Владимировна</ul>
         <ul className="request__form_caption">Статус</ul>
-        <ul className="request__form_field">Согласование ФД</ul>
+        <ul className="request__form_field">Черновик</ul>
         <ul className="request__form_caption">Тип заявки</ul>
         <ul className="request__form_field">Безнал</ul>
         <ul className="request__form_caption">Файл</ul>
         <ul className="request__form_field">photo.jpg</ul>
         <ul className="request__form_caption">Сумма</ul>
-        <ul className="request__form_fieldSum" type="input">
-          20 000 руб.
-        </ul>
+        <input className="request__form_field" type="text" placeholder="20 000"/>
         <ul className="request__form_caption">Срок оплаты</ul>
+        <input className="request__form_field" type="date"/>
       </div>
 
       <button className="requestBtn">Создать заявку</button>

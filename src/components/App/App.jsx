@@ -17,6 +17,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 function App() {
   return (
     <div className="app">
+      
       <Sidebar />
       <div className="page">
         <Header />
