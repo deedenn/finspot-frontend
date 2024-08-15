@@ -1,8 +1,108 @@
-.login {
-
+.loginPage {
+    display: flex;
+    max-height: 1024px;
+    margin: 0;
 }
 
 .loginPageLeft {
-    width: 640 px;
-    
+    width: 640px;
+    background-color: #FFFF;
+    margin: 0;
+}
+
+.loginPage__logo_container {
+    margin: 160px auto 0px 160px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+.loginPage__logo_name {
+    color: #313A43;
+    line-height: 16px;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 0 15px;
+}
+
+.loginPage__form {
+    width: 320px;
+    margin: 128px auto auto 160px;
+}
+
+.loginPage__form_header {
+    color: #313A43;
+    line-height: 32px;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.loginPage__form_caption {
+    color: #313A43;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.loginPage__form_inputcaption {
+    color: #313A43;
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.loginPage__form_input {
+    height: 48px;
+    width: 320px;
+    border: 1px #B6CADF solid;
+    border-radius: 8px;
+    padding: 0;
+    margin: 0;
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.loginPage__form_chkbxContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loginPage__forgotBtn {
+    color: #0078FF;
+    border: none;
+    background-color: inherit;
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.loginPage__form_button {
+    width: 320px;
+    height: 48px;
+    background-color: #0078FF;
+    color: #FFFFFF;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+}
+
+.loginPage__about {
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #879FB9;
+    margin-top: 152px;
+}
+
+.loginPageRight {
+    background-color: #F5F7FA;
+    max-width: 960px;
+}
+
+.loginPagePicture {
+    margin: 168px 0 168px 160px;
 }
