@@ -8,7 +8,7 @@ function RequestList() {
 
   return (
     <div className="request__container">
-      <NavBar />
+      <NavBar setFilterRequests={setFilterRequests} requests={requests} />
 
       <div className="requestlist">
         <div className="requestlist__captions requestlist__items">

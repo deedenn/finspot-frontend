@@ -1,5 +1,3 @@
-const BASE_IMG_LINK = 'http://api.finspot.ru';
-
 export default class MainApi {
   constructor({ url, headers }) {
     this._url = url;
@@ -34,32 +32,5 @@ export default class MainApi {
 
   //редактирование профиля
 
-  //добавление в избранное
-  favoriteMovie(movie) {
-    return this._request(`${this._url}/movies`, {
-      method: 'POST',
-      body: JSON.stringify({
-        country: movie.country,
-        director: movie.director,
-        duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
-        image: BASE_IMG_LINK + movie.image.url,
-        trailerLink: movie.trailerLink,
-        thumbnail: BASE_IMG_LINK + movie.image.formats.thumbnail.url,
-        movieId: movie.id,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
-      }),
-      headers: this._headers,
-    });
-  }
 
-  //удалить из избранного
-  deleteMovie(id) {
-    return this._request(`${this._url}/movies/${id}`, {
-      method: 'DELETE',
-      headers: this._headers,
-    });
-  }
 }

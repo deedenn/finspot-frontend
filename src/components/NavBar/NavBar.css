@@ -15,7 +15,9 @@
 
 .navbar__status:hover {
     color:  #0078FF;
+    cursor: pointer;
 }
+
 
 .navbar__status_active {
     color:  #0078FF;

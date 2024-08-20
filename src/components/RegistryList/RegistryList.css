@@ -5,7 +5,6 @@
     
 }
 
-
 .registrylist__header_caption {
     font-size: 12px;
     line-height: 16px;
@@ -28,7 +27,6 @@
 .registrylist__items {
     display: grid;
     grid-template-columns: 180px 95px 96px 140px 200px;
-    grid-template-rows: repeat(6, 20px);
     gap: 16px;
     padding-right: 32px;
 }

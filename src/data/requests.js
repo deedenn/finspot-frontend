@@ -1,5 +1,6 @@
 const requests = [
     {
+        id: 1,
         dateToCreate: "20.03.2024",
         contrAgent: 'ООО "Ромашковые сети"',
         initiator: "Климантович А.В.",
@@ -8,6 +9,7 @@ const requests = [
         state: "Черновик",
     },
     {
+        id: 2,
         dateToCreate: "01.03.2024",
         contrAgent: 'ООО "Незабудка"',
         initiator: "Денисов А.В.",
@@ -16,6 +18,7 @@ const requests = [
         state: "Согласование ФД",
     },
     {
+        id: 3,
         dateToCreate: "25.03.2024",
         contrAgent: 'ООО "Альтера"',
         initiator: "Денисов А.В.",
@@ -24,6 +27,7 @@ const requests = [
         state: "Утверждение ГД",
     },
     {
+        id: 4,
         dateToCreate: "20.03.2024",
         contrAgent: 'ООО "Петрович"',
         initiator: "Петров А.М.",

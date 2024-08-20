@@ -1,26 +1,54 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./NavBar.css";
 import { useState } from "react";
 
-function NavBar() {
-  
-  const [isBtnActive, setIsBtnActive] = React.useState(false);
+const arrCategory = [
+  "Черновик",
+  "Согласование ФД",
+  "Согласование ГД",
+  "Утверждено",
+  "В реестре",
+  "В оплате",
+  "Оплачено",
+  "Отменено",
+];
 
-  const checkBtnFilter = () => {
-    setIsBtnActive(true);
-  };
+function NavBar({ setFilterRequests, requests }) {
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  function handleClick(e, index) {
+    setActiveIndex(index);
+    setFilterRequests(() =>
+      requests.filter((item) => item.state === e.target.textContent)
+    );
+  }
 
   return (
-    <div className="navbar" onClick={checkBtnFilter}>
-      <li className="navbar__status navbar__status_active">Все</li>
-      <li className="navbar__status">Черновик</li>
-      <li className="navbar__status">Согласование ФД</li>
-      <li className="navbar__status">Согласование ГД</li>
-      <li className="navbar__status">Утверждено</li>
-      <li className="navbar__status">В реестре</li>
-      <li className="navbar__status">В оплате</li>
-      <li className="navbar__status">Оплачено</li>
-      <li className="navbar__status">Отменено</li>
+    <div className="navbar">
+      <li
+        onClick={() => {
+          setActiveIndex(-1);
+          setFilterRequests(requests);
+        }}
+        className={`navbar__status ${
+          activeIndex === -1 && "navbar__status_active"
+        }`}
+      >
+        Все
+      </li>
+      {arrCategory.map((item, index) => {
+        return (
+          <li
+            key={index}
+            onClick={(e) => handleClick(e, index)}
+            className={`navbar__status ${
+              activeIndex === index && "navbar__status_active"
+            }`}
+          >
+            {item}
+          </li>
+        );
+      })}
     </div>
   );
 }
