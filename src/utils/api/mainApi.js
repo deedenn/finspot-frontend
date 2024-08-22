@@ -33,4 +33,11 @@ export default class MainApi {
   //редактирование профиля
 
 
+  //метод, чтобы получить все заявки через запрос к серверу
+  getRequests() {
+    return this._request(`${this._url}`, {
+      headers: this._headers,
+    });
+  }
+
 }

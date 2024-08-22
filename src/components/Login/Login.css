@@ -62,6 +62,7 @@
     line-height: 16px;
     font-size: 14px;
     font-weight: 400;
+    white-space: nowrap;
 }
 
 .loginPage__form_chkbxContainer {

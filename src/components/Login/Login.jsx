@@ -8,22 +8,33 @@ import auth from "../../utils/api/auth";
 
 function Login(props) {
   const { values, handleChange, errors, isValid } = useFormValidation();
+  console.log(values);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      console.log(e);
 
-      //   if (!values.email || !values.password) {
-      //     return;
-      //   }
+      if (!values.email || !values.password) {
+        return;
+      }
       const res = await auth.authorization(values);
       console.log(res);
     } catch (err) {
       console.error(err);
     }
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (!values.email || !values.password) {
+  //     return;
+  //   }
+  //   props.onLogin(values);
+  // };
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");

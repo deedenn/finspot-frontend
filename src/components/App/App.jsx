@@ -10,7 +10,6 @@ import Registry from "../Registry/Registry";
 import Login from "../Login/Login";
 import Users from "../Users/Users";
 import MainApi from "../../utils/api/mainApi";
-import RequestsApi from "../../utils/api/requestsApi";
 import ProtectedRoute from "../../pages/protectedRoute/protectedRoute";
 
 import auth from "../../utils/api/auth";
@@ -32,13 +31,6 @@ function App() {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
-  const requestsApi = new RequestsApi({
-    url: "https://api.finspot.ru/requests",
-    headers: {
-      "Content-Type": "application/json",
     },
   });
 
@@ -99,7 +91,7 @@ function App() {
 
   React.useEffect(() => {
     loggedIn &&
-      Promise.all([mainApi.getUsers(), requestsApi.getRequests()])
+      Promise.all([mainApi.getUsers(), mainApi.getRequests()])
         .then(([userData, savedArray]) => {
           setCurrentUser(userData);
           localStorage.setItem("", JSON.stringify(savedArray));
@@ -115,7 +107,7 @@ function App() {
       <div className="app">
         {pathname !== "/signin" ? <Sidebar loggedIn={loggedIn} /> : null}
         <div className="page">
-          <Header />
+          {pathname !== "/signin" ? <Header loggedIn={loggedIn} /> : null}
           <Routes>
             <Route
               path="/"
