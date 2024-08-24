@@ -20,8 +20,17 @@ function Login(props) {
       if (!values.email || !values.password) {
         return;
       }
-      const res = await auth.authorization(values);
-      console.log(res);
+      const res = await auth.authorization({
+        email: values.email,
+        password: values.password,
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          navigate("/");
+        }
+      }
     } catch (err) {
       console.error(err);
     }
@@ -58,24 +67,27 @@ function Login(props) {
             className="loginPage__form_input"
             id="email"
             autoComplete="off"
-            value={values.email || ""}
+            value={values.email}
             type="email"
-            onChange={handleChange}
+            onInput={handleChange}
             placeholder="example@yandex.ru"
             minLength="2"
             maxLength="70"
+            name="email"
             required
           ></input>
           <p className="loginPage__form_inputcaption"> Пароль</p>
           <input
             className="loginPage__form_input"
             type="password"
-            onChange={handleChange}
+            onInput={handleChange}
+            name="password"
             id="password"
             autoComplete="off"
             placeholder="Введите пароль"
             minLength="2"
             maxLength="40"
+            value={values.password}
             required
           ></input>
           <div className="loginPage__form_chkbxContainer">

@@ -1,0 +1,14 @@
+.organizations__container {
+    background-color: white;
+    border-radius: 20px;
+
+}
+
+.organizations__captions {
+
+}
+
+.organizations__values {
+    display: grid;
+    grid-template-columns: 300px 150px 150px;
+}

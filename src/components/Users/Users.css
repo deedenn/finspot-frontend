@@ -1,3 +1,34 @@
-.users__values {
+.users__container {
+    margin: 0;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
 
+.users__captions {
+    color: #879FB9;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.users__values {
+    display: grid;
+    grid-template-columns: 300px 300px 300px 240px;
+    color: #313A43;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+.users__addBtn {
+    margin-top: 32px;
+    background-color: #0078FF;
+    width: 278px;
+    height: 48px;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
 }

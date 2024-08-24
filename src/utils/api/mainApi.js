@@ -1,7 +1,10 @@
-export default class MainApi {
-  constructor({ url, headers }) {
-    this._url = url;
-    this._headers = headers;
+class MainApi {
+
+
+  _url = "https://api.finspot.ru"
+  _headers = {
+    "Content-Type": "application/json",
+    authorization: `Bearer ${localStorage.getItem("token")}`,
   }
 
   _returnResponse(res) {
@@ -23,9 +26,23 @@ export default class MainApi {
     return fetch(url, options).then(this._returnResponse);
   }
 
+
+  //получение список организаций
+  getOrganizations() {
+    return this._request(`${this._url}/organizations`, {
+      headers: this._headers,
+    });
+  }
+
+  addOrganizations() {
+    return this._request(`${this._url}/organizations/add`, {
+      headers: this._headers,
+    });
+  }
+
   //получение информации о пользователе
-  getUsers() {
-    return this._request(`${this._url}/users/`, {
+  getInfoUser() {
+    return this._request(`${this._url}/users/me`, {
       headers: this._headers,
     });
   }
@@ -33,11 +50,22 @@ export default class MainApi {
   //редактирование профиля
 
 
-  //метод, чтобы получить все заявки через запрос к серверу
+  //получение всех заявок пользователя
   getRequests() {
-    return this._request(`${this._url}`, {
+    return this._request(`${this._url}/requests`, {
+      headers: this._headers,
+    });
+  }
+
+  //добавление заявки
+  addRequests() {
+    return this._request(`${this._url}/requests/add`, {
       headers: this._headers,
     });
   }
 
 }
+
+const mainApi = new MainApi();
+
+export default mainApi;

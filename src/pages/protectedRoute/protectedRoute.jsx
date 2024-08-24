@@ -8,8 +8,13 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     auth
       .checkToken()
-      .then((data) => {
-        console.log(data);
+      .then(async (res) => {
+        if (res.ok) {
+          const data = await res.json();
+          // сохранять данные юзера в redux
+        } else {
+          navigate("/signin");
+        }
       })
       .catch(() => {
         navigate("/signin");

@@ -31,19 +31,12 @@ class Auth {
   }
 
   //авторизация
-  authorization(email, password) {
+  authorization(body) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: `${email}`, password: `${password}` }),
+      body: JSON.stringify(body),
     })
-      .then(this._returnResponse)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem('token', data.token);
-          return data;
-        }
-      });
   }
 
   //проверка токена
@@ -55,8 +48,6 @@ class Auth {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
-      .then(this._returnResponse)
-      .then((data) => data);
   }
 }
 

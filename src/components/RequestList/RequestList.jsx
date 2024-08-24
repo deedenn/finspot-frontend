@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./RequestList.css";
 import NavBar from "../NavBar/NavBar";
-import requests from "../../data/requests";
+import mainApi from "../../utils/api/mainApi";
 
 function RequestList() {
-  const [filterRequests, setFilterRequests] = useState(requests);
+  const [filterRequests, setFilterRequests] = useState([]);
+
+  useEffect(() => {
+    mainApi.getRequests().then((data) => {
+      setFilterRequests(data);
+      console.log(data);
+    });
+  }, []);
 
   return (
     <div className="request__container">
-      <NavBar setFilterRequests={setFilterRequests} requests={requests} />
+      <NavBar setFilterRequests={setFilterRequests} requests={filterRequests} />
 
       <div className="requestlist">
         <div className="requestlist__captions requestlist__items">
@@ -22,12 +29,14 @@ function RequestList() {
         {filterRequests.map((item, index) => {
           return (
             <div key={index} className="requestlist__items">
-              <p className="requestlist__items_caption">{item.dateToCreate}</p>
-              <p className="requestlist__items_caption">{item.contrAgent}</p>
-              <p className="requestlist__items_caption">{item.initiator}</p>
+              <p className="requestlist__items_caption">{item.createdAt}</p>
+              <p className="requestlist__items_caption">{item.contragent}</p>
+              <p className="requestlist__items_caption">
+                {item.owner.name} {item.owner.fullname}
+              </p>
               <p className="requestlist__items_caption">{item.file}</p>
-              <p className="requestlist__items_caption">{item.sum}</p>
-              <p className="requestlist__items_caption">{item.state}</p>
+              <p className="requestlist__items_caption">{item.amount}</p>
+              <p className="requestlist__items_caption">{item.status}</p>
             </div>
           );
         })}

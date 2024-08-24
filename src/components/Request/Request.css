@@ -33,3 +33,8 @@
     background-color: #B6CADF;
     color: #EBF4FD;
 }
+
+.request_form_radioContainer {
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,52 @@
+.newuser__formContainer {
+    padding: 32px;
+    margin: 0;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: auto 371px;
+    grid-template-rows: repeat(5, 32px);
+    gap: 20px;
+    width: 556px;
+    height: 252px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #313A43;
+}
+
+.newuser__fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.newuser__input {
+    border: 1px #B6CADF solid;
+    height: 32px;
+}
+
+.newuser__captions {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+.newuser__radioContainer {
+    align-self: center;
+}
+
+.newuser__radioButton {
+    background-color: #EBF4FD;
+    margin-right: 16px;
+    margin-left: 7px;
+}
+
+.newuser__submitBtn {
+    background-color: #B6CADF;
+    border-radius: 8px;
+    border: none;
+    height: 48px;
+    width: 260px;
+    margin-top: 32px;
+    color: #EBF4FD;
+}

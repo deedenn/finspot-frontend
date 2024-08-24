@@ -15,7 +15,7 @@ import logoChange from "../../images/sidebarBtn_changeLogo.png";
 import logoutImg from "../../images/sidebarBtn_logout.png";
 import navbarBtnImg from "../../images/navbarBtn.png";
 
-function Sidebar() {
+function Sidebar(onSignOut) {
   const openedSidebar = useSelector((state) => state.viewSlice.openedSidebar);
   const dispatch = useDispatch();
 
@@ -25,8 +25,9 @@ function Sidebar() {
         <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
         {openedSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
         <button
-          className={`sidebarHideBtn ${!openedSidebar && "sidebarHideBtn-close"
-            }`}
+          className={`sidebarHideBtn ${
+            !openedSidebar && "sidebarHideBtn-close"
+          }`}
           onClick={() => dispatch(actionSidebar())}
         ></button>
       </div>
@@ -132,6 +133,18 @@ function Sidebar() {
           )}
         </Link>
         <Link
+          onClick={() => dispatch(setHeaderTitle("Организации"))}
+          to="/organizations"
+          className="sidebarBtn"
+          alt="Организации"
+          type="button"
+        >
+          <img className="sidebarBtnLogo" alt="Органзации" src={usersImg}></img>
+          {openedSidebar && (
+            <div className="sidebarBtnCaption">Организации</div>
+          )}
+        </Link>
+        <Link
           onClick={() => dispatch(setHeaderTitle("Изменить логотип"))}
           to="/changelogo"
           className="sidebarBtn"
@@ -148,7 +161,13 @@ function Sidebar() {
           )}
         </Link>
       </div>
-      <Link to="/login" className="sidebarBtn" alt="Выйти" type="button">
+      <Link
+        to="/signin"
+        className="sidebarBtn"
+        alt="Выйти"
+        type="button"
+        onClick={onSignOut}
+      >
         <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
         <div className="sidebarBtnCaption">Выйти</div>
       </Link>

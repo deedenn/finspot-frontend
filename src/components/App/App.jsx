@@ -9,7 +9,10 @@ import Request from "../Request/Request";
 import Registry from "../Registry/Registry";
 import Login from "../Login/Login";
 import Users from "../Users/Users";
-import MainApi from "../../utils/api/mainApi";
+import NewUser from "../NewUser/NewUser";
+import Organizations from "../Organizations/Organizations";
+import Profile from "../Profile/Profile";
+import mainApi from "../../utils/api/mainApi";
 import ProtectedRoute from "../../pages/protectedRoute/protectedRoute";
 
 import auth from "../../utils/api/auth";
@@ -26,17 +29,10 @@ function App() {
   const [serverError, setServerError] = React.useState({});
   const [isOkRequest, setIsOkRequest] = React.useState(false);
 
-  const mainApi = new MainApi({
-    url: "https://api.finspot.ru/",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
   // блок авторизация
 
   //проверка токена
+  // создать отдельный хук
   React.useEffect(() => {
     const jwt = localStorage.getItem("token");
     if (jwt) {
@@ -91,10 +87,10 @@ function App() {
 
   React.useEffect(() => {
     loggedIn &&
-      Promise.all([mainApi.getUsers(), mainApi.getRequests()])
-        .then(([userData, savedArray]) => {
+      Promise.all([mainApi.getInfoUser(), mainApi.getRequests()])
+        .then(([userData]) => {
           setCurrentUser(userData);
-          localStorage.setItem("", JSON.stringify(savedArray));
+          console.log(userData);
         })
         .catch((err) => {
           console.error(`Ошибка: ${err}`);
@@ -105,10 +101,20 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        {pathname !== "/signin" ? <Sidebar loggedIn={loggedIn} /> : null}
+        {pathname !== "/signin" ? (
+          <Sidebar loggedIn={loggedIn} onSignOut={onSignOut} />
+        ) : null}
         <div className="page">
           {pathname !== "/signin" ? <Header loggedIn={loggedIn} /> : null}
           <Routes>
+            <Route
+              path="/requestlist"
+              element={
+                <ProtectedRoute>
+                  <RequestList />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/"
               element={
@@ -146,6 +152,30 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Users />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users/add"
+              element={
+                <ProtectedRoute>
+                  <NewUser />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/organizations"
+              element={
+                <ProtectedRoute>
+                  <Organizations />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
                 </ProtectedRoute>
               }
             />
