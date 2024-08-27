@@ -4,8 +4,9 @@
     margin: 0;
 }
 
+
 .loginPageLeft {
-    width: 640px;
+    max-width: 640px;
     background-color: #FFFF;
     margin: 0;
 }
@@ -106,4 +107,35 @@
 
 .loginPagePicture {
     margin: 168px 0 168px 160px;
+}
+
+@media screen and (max-width: 768px) {
+    .loginPage {
+        max-height: 760px;
+        margin: auto 0;
+    }
+    .loginPageLeft {
+        max-width: 760px;
+    }
+
+    .loginPageRight {
+        display: none;
+    }
+    .loginPage__form {
+        width: 300px;
+        margin: 0 20px;
+    }
+    .loginPage__logo_container {
+        margin: 40px auto 144px 20px;
+    }
+
+}
+
+@media screen and (max-width: 360px) {
+.loginPage__form_input {
+    max-width: 300px;
+}
+.loginPage__form_button {
+    max-width: 300px;
+}
 }
