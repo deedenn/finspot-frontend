@@ -18,7 +18,7 @@ import ProtectedRoute from "../../pages/protectedRoute/protectedRoute";
 import auth from "../../utils/api/auth";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 
 function App() {
   const { pathname } = useLocation();
@@ -38,7 +38,7 @@ function App() {
     if (jwt) {
       auth
         .checkToken()
-        .then((res) => {
+        .then(() => {
           setLoggedIn(true);
           navigate(pathname);
         })
@@ -102,15 +102,16 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         {pathname !== "/signin" ? (
-          <Sidebar loggedIn={loggedIn} onSignOut={onSignOut} />
+          <Sidebar  onSignOut={onSignOut} />
         ) : null}
         <div className="page">
-          {pathname !== "/signin" ? <Header loggedIn={loggedIn} /> : null}
+          {pathname !== "/signin" ? <Header  /> : null}
           <Routes>
+          <Route path="*" element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />} />
             <Route
               path="/requestlist"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <RequestList />
                 </ProtectedRoute>
               }
@@ -118,7 +119,7 @@ function App() {
             <Route
               path="/"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <RequestList />
                 </ProtectedRoute>
               }
@@ -126,7 +127,7 @@ function App() {
             <Route
               path="/registrylist"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <RegistryList />
                 </ProtectedRoute>
               }
@@ -134,7 +135,7 @@ function App() {
             <Route
               path="/request"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <Request />
                 </ProtectedRoute>
               }
@@ -142,7 +143,7 @@ function App() {
             <Route
               path="/registry"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <Registry />
                 </ProtectedRoute>
               }
@@ -150,7 +151,7 @@ function App() {
             <Route
               path="/users"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <Users />
                 </ProtectedRoute>
               }
@@ -158,7 +159,7 @@ function App() {
             <Route
               path="/users/add"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <NewUser />
                 </ProtectedRoute>
               }
@@ -166,7 +167,7 @@ function App() {
             <Route
               path="/organizations"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <Organizations />
                 </ProtectedRoute>
               }
@@ -174,7 +175,7 @@ function App() {
             <Route
               path="/profile"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute loggedIn={loggedIn}>
                   <Profile />
                 </ProtectedRoute>
               }

@@ -14,12 +14,30 @@ export default function ProtectedRoute({ children }) {
           // сохранять данные юзера в redux
         } else {
           navigate("/signin");
+          console.log("Ошибка обработки");
         }
       })
       .catch(() => {
         navigate("/signin");
+        console.log("Ошибка обработки входа");
       });
   }, []);
 
   return children;
 }
+
+
+// import React from "react";
+// import { Navigate } from "react-router-dom";
+
+// function ProtectedRoute({ isLoggedIn, children }) {
+//     if (!isLoggedIn) {
+//         return (
+//             <Navigate to="/signin" />
+//         )
+
+//     }
+//     return children;
+// }
+
+// export default ProtectedRoute;
