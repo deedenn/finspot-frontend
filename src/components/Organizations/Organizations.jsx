@@ -7,8 +7,7 @@ function Organizations() {
 
   useEffect(() => {
     mainApi.getOrganizations().then((data) => {
-      setOrganizations(data);
-      console.log(data);
+      setOrganizations(data.organizations);
     });
   }, []);
 
@@ -20,15 +19,17 @@ function Organizations() {
           <p>ИНН</p>
           <p>Оплачено до</p>
         </div>
-        {organizations.map((item, index) => {
+
+        {Object.values(organizations).map((item, index) => {
           return (
             <div key={index} className="organizations__values">
-              <p>{item._id}</p>
-              <p></p>
-              <p></p>
+              <p>{item.name}</p>
+              <p>{item.inn}</p>
+              <p>{item.expiredof}</p>
             </div>
-          );
-        })}
+          )
+        }
+        )}
       </div>
     </div>
   );

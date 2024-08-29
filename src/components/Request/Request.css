@@ -12,6 +12,13 @@
 .request__form_field {
     max-width: 385px;
     background-color: F5F7FA;
+    align-self: center;
+    padding: 0;
+}
+
+.request__form_caption {
+    align-self: center;
+    margin: 0px 20px;
 }
 
 .request__form_fieldSum {
@@ -37,4 +44,26 @@
 .request_form_radioContainer {
     margin: 0;
     padding: 0;
+    align-items: end;
+    justify-items: end;
+    align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+
+    .request {
+        
+        
+    }
+    .request__form {
+        margin: 0 15px;
+        grid-template-columns: auto auto;
+        grid-template-rows: repeat(8, 32px);   
+    }
+
+    .request__form_caption {
+        align-self: center;
+        margin: 0;
+        padding-left: 20px;
+    }
 }

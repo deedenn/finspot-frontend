@@ -6,12 +6,12 @@ function Profile() {
 
   return (
     <div>
-      <div>Фамилия</div>
-      <div>{currentUser.data.fullname}</div>
-      <div>Имя</div>
-      <div>{currentUser.data.name}</div>
-      <div>email</div>
-      <div>{currentUser.data.email}</div>
+      <p>Фамилия</p>
+      <p>{currentUser.fullname}</p>
+      <p>Имя</p>
+      <p>{currentUser.name}</p>
+      <p>email</p>
+      <p>{currentUser.email}</p>
       <button>Изменить пароль</button>
     </div>
   );

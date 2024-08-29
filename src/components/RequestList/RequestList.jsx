@@ -27,13 +27,13 @@ function RequestList() {
           <p className="requestlist__header_caption">Статус</p>
         </div>
         {filterRequests.map((item, index) => {
+          console.log(typeof(filterRequests))
           return (
             <div key={index} className="requestlist__items">
               <p className="requestlist__items_caption">{item.createdAt}</p>
               <p className="requestlist__items_caption">{item.contragent}</p>
               <p className="requestlist__items_caption">
-                {item.owner.name} {item.owner.fullname}
-              </p>
+                {item.owner.name} {item.owner.fullname}              </p>
               <p className="requestlist__items_caption">{item.file}</p>
               <p className="requestlist__items_caption">{item.amount}</p>
               <p className="requestlist__items_caption">{item.status}</p>

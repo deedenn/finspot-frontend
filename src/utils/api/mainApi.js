@@ -58,8 +58,23 @@ class MainApi {
   }
 
   //добавление заявки
-  addRequests() {
+  addRequest() {
     return this._request(`${this._url}/requests/add`, {
+      method: "POST",
+      headers: this._headers,
+    });
+  }
+
+  //получение всех реестров пользователя
+  getRegistries() {
+    return this._request(`${this._url}/registries/all`, {
+      headers: this._headers,
+    });
+  }
+
+  //создание реестра
+  addRegistry() {
+    return this._request(`${this._url}/registries/add`, {
       headers: this._headers,
     });
   }

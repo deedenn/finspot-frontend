@@ -89,8 +89,8 @@ function App() {
     loggedIn &&
       Promise.all([mainApi.getInfoUser(), mainApi.getRequests()])
         .then(([userData]) => {
-          setCurrentUser(userData);
-          console.log(userData);
+          setCurrentUser(userData.data);
+          console.log(userData.data);
         })
         .catch((err) => {
           console.error(`Ошибка: ${err}`);
