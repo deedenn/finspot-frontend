@@ -1,18 +1,19 @@
 import React from "react";
+import './Profile.css';
 import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 
 function Profile() {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
-    <div>
-      <p>Фамилия</p>
+    <div className="profile">
+      <p className="profile__caption">Фамилия</p>
       <p>{currentUser.fullname}</p>
-      <p>Имя</p>
+      <p className="profile__caption">Имя</p>
       <p>{currentUser.name}</p>
-      <p>email</p>
+      <p className="profile__caption">email</p>
       <p>{currentUser.email}</p>
-      <button>Изменить пароль</button>
+      <button className="profile__changePasswordBtn">Изменить пароль</button>
     </div>
   );
 }

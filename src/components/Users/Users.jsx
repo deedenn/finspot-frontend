@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Users.css";
 import { Link } from "react-router-dom";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
 import { useSelector, useDispatch } from "react-redux";
+import mainApi from '../../utils/api/mainApi'
 
 function Users() {
   const dispatch = useDispatch();
+
+const [users, setUsers] = useState([]);
+
+useEffect(() => {
+  mainApi.getUsers().then((data) => {
+    setUsers(data.users);
+  })
+}, [])
 
   return (
     <div className="users">
@@ -16,22 +25,26 @@ function Users() {
           <p>email</p>
           <p>Роль</p>
         </div>
-
-        <div className="users__values">
-          <p>Климантович</p>
-          <p>Александра</p>
-          <p>ivanova@mail.ru</p>
-          <p>Главный бухгалтер</p>
+      {users.map((item, index) => {
+        return (
+          <div key={index} className="users__values">
+          <p>{item.fullname}</p>
+          <p>{item.name}</p>
+          <p>{item.email}</p>
+          <p></p>
         </div>
+        )
+      })}
+
       </div>
-      <Link
+      <button
         className="users__addBtn"
         to="/users/add"
         onClick={() => dispatch(setHeaderTitle("Создать пользователя"))}
         type="button"
       >
         Добавить пользователя
-      </Link>
+      </button>
     </div>
   );
 }

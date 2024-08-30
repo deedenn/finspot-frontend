@@ -5,6 +5,12 @@ import mainApi from "../../utils/api/mainApi";
 
 function RequestList() {
   const [filterRequests, setFilterRequests] = useState([]);
+  const [selectedRequest, setSelectedRequest] = useState();
+
+  const handleSelectedRequest = (evt) => {
+    setSelectedRequest(evt.target.value);
+    console.log(evt.target);
+  }
 
   useEffect(() => {
     mainApi.getRequests().then((data) => {
@@ -29,7 +35,7 @@ function RequestList() {
         {filterRequests.map((item, index) => {
           console.log(typeof(filterRequests))
           return (
-            <div key={index} className="requestlist__items">
+            <div key={index} className="requestlist__items" onClick={handleSelectedRequest}>
               <p className="requestlist__items_caption">{item.createdAt}</p>
               <p className="requestlist__items_caption">{item.contragent}</p>
               <p className="requestlist__items_caption">

@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import RequestList from "../RequestList/RequestList";
 import RegistryList from "../RegistryList/RegistryList";
+import NewRequest from "../NewRequest/NewRequest";
 import Request from "../Request/Request";
 import Registry from "../Registry/Registry";
 import Login from "../Login/Login";
@@ -19,6 +20,7 @@ import auth from "../../utils/api/auth";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
+import NewOrganization from "../NewOrganization/NewOrganization";
 
 function App() {
   const { pathname } = useLocation();
@@ -81,7 +83,7 @@ function App() {
   // выход
   const onSignOut = () => {
     localStorage.removeItem("token");
-    navigate("/", { replace: true });
+    navigate("/signin", { replace: true });
     setLoggedIn(false);
   };
 
@@ -102,12 +104,12 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         {pathname !== "/signin" ? (
-          <Sidebar  onSignOut={onSignOut} />
+          <Sidebar onSignOut={onSignOut} />
         ) : null}
         <div className="page">
-          {pathname !== "/signin" ? <Header  /> : null}
+          {pathname !== "/signin" ? <Header /> : null}
           <Routes>
-          <Route path="*" element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />} />
+            <Route path="*" element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />} />
             <Route
               path="/requestlist"
               element={
@@ -133,10 +135,18 @@ function App() {
               }
             />
             <Route
-              path="/request"
+              path="/request/:id"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Request />
+                </ProtectedRoute>
+              }
+              />
+            <Route
+              path="/request/add"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <NewRequest />
                 </ProtectedRoute>
               }
             />
@@ -169,6 +179,14 @@ function App() {
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Organizations />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/organizations/add"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <NewOrganization />
                 </ProtectedRoute>
               }
             />

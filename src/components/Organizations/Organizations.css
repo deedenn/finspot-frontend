@@ -12,3 +12,8 @@
     display: grid;
     grid-template-columns: 300px 150px 150px;
 }
+
+.organizations__addBtn {
+    height: 40px;
+    
+}

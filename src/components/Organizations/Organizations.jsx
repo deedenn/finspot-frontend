@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Organizations.css";
 import mainApi from "../../utils/api/mainApi";
+import { setHeaderTitle } from "../../redux/slices/viewSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function Organizations() {
   const [organizations, setOrganizations] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     mainApi.getOrganizations().then((data) => {
@@ -12,7 +16,7 @@ function Organizations() {
   }, []);
 
   return (
-    <div>
+    <div className="organizations">
       <div className="organizations__container">
         <div className="organizations__values">
           <p>Организация</p>
@@ -31,6 +35,14 @@ function Organizations() {
         }
         )}
       </div>
+      <Link
+        className="organizations__addBtn"
+        to="/organizations/add"
+        onClick={() => dispatch(setHeaderTitle("Создать организацию"))}
+        type="button"
+      >
+        Добавить организацию
+      </Link>
     </div>
   );
 }

@@ -34,8 +34,17 @@ class MainApi {
     });
   }
 
-  addOrganizations() {
+  // добавить организацию
+  addOrganization() {
     return this._request(`${this._url}/organizations/add`, {
+      method: "POST",
+      headers: this._headers,
+    });
+  }
+
+  //получение cписка всех пользователей
+  getUsers() {
+    return this._request(`${this._url}/users/`, {
       headers: this._headers,
     });
   }
@@ -47,6 +56,16 @@ class MainApi {
     });
   }
 
+  //регистрация пользователя
+  addUser(data) {
+    return this._request(`${this._url}/signup`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify(data)
+    });
+  }
+
+
   //редактирование профиля
 
 
@@ -57,13 +76,30 @@ class MainApi {
     });
   }
 
+    //открыть одну заявку
+    getRequestByID(id) {
+      return this._request(`${this._url}/requests/${id}`, {
+        headers: this._headers,
+      });
+    }
+
   //добавление заявки
-  addRequest() {
+  addRequest(data) {
     return this._request(`${this._url}/requests/add`, {
       method: "POST",
       headers: this._headers,
+      body: JSON.stringify(data)
     });
   }
+
+    //редактирование заявки
+    editRequest(data) {
+      return this._request(`${this._url}/requests/edit`, {
+        method: "PATCH",
+        headers: this._headers,
+        body: JSON.stringify(data)
+      });
+    }
 
   //получение всех реестров пользователя
   getRegistries() {
@@ -75,6 +111,7 @@ class MainApi {
   //создание реестра
   addRegistry() {
     return this._request(`${this._url}/registries/add`, {
+      method: "POST",
       headers: this._headers,
     });
   }
