@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Organizations.css";
 import mainApi from "../../utils/api/mainApi";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
@@ -31,18 +30,17 @@ function Organizations() {
               <p>{item.inn}</p>
               <p>{item.expiredof}</p>
             </div>
-          )
-        }
-        )}
+          );
+        })}
       </div>
-      <Link
+      <button
         className="organizations__addBtn"
         to="/organizations/add"
         onClick={() => dispatch(setHeaderTitle("Создать организацию"))}
         type="button"
       >
         Добавить организацию
-      </Link>
+      </button>
     </div>
   );
 }

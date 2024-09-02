@@ -1,83 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Request.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
+import { useParams } from "react-router-dom";
 import mainApi from "../../utils/api/mainApi";
+import { actionSidebar, setHeaderTitle } from "../../redux/slices/viewSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function Request() {
-    const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext);
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-    return (
-        <div className="request">
-            <form className="request__form" >
-                <ul className="request__form_caption">№ заявки</ul>
-                <ul className="request__form_field">12334213</ul>
-                <ul className="request__form_caption">Контрагент</ul>
-                <input
-                    className="request__form_field"
-                    type="text"
-                    placeholder="Введите название контрагента"
-                    name="contragent"
+  const [request, setRequest] = useState({});
+  const [owner, setOwner] = useState({});
 
-                />
-                <ul className="request__form_caption">Инициатор</ul>
-                <ul className="request__form_field">
-                    {currentUser.name + " " + currentUser.fullname}
-                </ul>
-                <ul className="request__form_caption">Содержание</ul>
-                <input
-                    className="request__form_field"
-                    type="text"
-                    placeholder="За что платим"
-                    name="description"
+  async function getDataRequest() {
+    try {
+      const dataRequest = await mainApi.getRequestByID(id);
+      const { data } = await mainApi.getInfoUser(dataRequest.owner);
+      setRequest(dataRequest);
+      setOwner(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-                />
-                <ul className="request__form_caption">Тип заявки</ul>
-                <div className="request_form_radioContainer">
-                    <input
-                        className="request__form_field"
-                        id="radioCash"
-                        type="radio"
-                        name="radioCash"
-                        value="Безнал"
+  useEffect(() => {
+    getDataRequest();
+  }, []);
 
-                    />
-                    <label htmlFor="radioCashless" className="request__form_radioLabel">
-                        Безнал
-                    </label>
-                    <input
-                        className="request__form_field"
-                        id="radioCash"
-                        type="radio"
-                        name="radioCash"
-                        value="Нал"
+  console.log(request, owner);
 
-                    />
-                    <label htmlFor="radioCash" className="request__form_radioLabel">
-                        Нал
-                    </label>
-                </div>
+  return (
+    <div className="request">
+      <form className="request__form">
+        <ul className="request__form_caption">№ заявки</ul>
+        <ul className="request__form_field">12334213</ul>
+        <ul className="request__form_caption">Контрагент</ul>
 
-                <ul className="request__form_caption">Файл</ul>
-                <ul className="request__form_field">photo.jpg</ul>
-                <ul className="request__form_caption">Сумма</ul>
-                <input
-                    className="request__form_field"
-                    type="number"
-                    placeholder="Введите сумму"
-                    name="amount"
+        <div className="request__form_field">{request.contragent}</div>
+        <ul className="request__form_caption">Инициатор</ul>
+        <ul className="request__form_field">
+          {owner.name + " " + owner.fullname}
+        </ul>
+        <ul className="request__form_caption">Содержание</ul>
+        <div className="request__form_field">{request.description}</div>
+        <ul className="request__form_caption">Тип заявки</ul>
+        <div className="request_form_radioContainer">{request.type}</div>
 
-                />
-                <ul className="request__form_caption">Срок оплаты</ul>
-                <input className="request__form_field" type="date" name="dateToPay" />
-            </form>
+        <ul className="request__form_caption">Файл</ul>
+        <ul className="request__form_field">photo.jpg</ul>
+        <ul className="request__form_caption">Сумма</ul>
+        <div className="request__form_field">{request.amount}</div>
+        <ul className="request__form_caption">Срок оплаты</ul>
+        <div className="request__form_field">{request.dayToPay}</div>
+      </form>
 
-            <button className="requestBtn" type="submit">
-                Создать заявку
-            </button>
-            <button className="requestBtn">Сохранить черновик</button>
-            <button className="requestBtn">Отменить</button>
-        </div>
-    );
+      <div className="request__log">Лог заявки</div>
+
+      <button className="requestBtn" type="submit">
+        Утвердить заявку
+      </button>
+      <button className="requestBtn">Отменить</button>
+    </div>
+  );
 }
 
 export default Request;

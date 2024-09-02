@@ -18,7 +18,7 @@ import navbarBtnImg from "../../images/navbarBtn.png";
 function Sidebar(onSignOut) {
   const openedSidebar = useSelector((state) => state.viewSlice.openedSidebar);
   const dispatch = useDispatch();
-  
+
   return (
     <div className={`sidebar ${!openedSidebar && "sidebar_close"}`}>
       <Link to="/" className="sidebar__logo">
@@ -82,7 +82,7 @@ function Sidebar(onSignOut) {
 
         <Link
           onClick={() => dispatch(setHeaderTitle("Создать заявку"))}
-          to="/request"
+          to="/request/add"
           className="sidebarBtn"
           alt="Создать заявку"
           type="button"
@@ -144,7 +144,6 @@ function Sidebar(onSignOut) {
             <div className="sidebarBtnCaption">Организации</div>
           )}
         </Link>
-
       </div>
       <Link
         to="/signin"

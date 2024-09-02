@@ -39,15 +39,19 @@ function NewRequest() {
 
   const onAddRequest = (newRequest) => {
     console.log(newRequest);
-    mainApi.addRequest(newRequest).then((newRequest) => {
-      console.log(newRequest);
-    })
+    mainApi
+      .addRequest(newRequest)
+      .then((newRequest) => {
+        console.log(newRequest);
+      })
       .catch((err) => {
         console.error(`Ошибка: ${err}`);
-      })
-  }
+      });
+  };
 
   const onHandleSubmit = () => {
+    console.log(typeOfPay);
+
     onAddRequest({
       type: typeOfPay,
       amount: amount,
@@ -55,12 +59,12 @@ function NewRequest() {
       dateToPay: dateToPay,
       owner: { currentUser },
       description: description,
-    })
+    });
   };
 
   return (
     <div className="request">
-      <form className="request__form" >
+      <form className="request__form">
         <ul className="request__form_caption">№ заявки</ul>
         <ul className="request__form_field">12334213</ul>
         <ul className="request__form_caption">Контрагент</ul>
@@ -120,7 +124,12 @@ function NewRequest() {
           onChange={handleChangeAmount}
         />
         <ul className="request__form_caption">Срок оплаты</ul>
-        <input className="request__form_field" type="date" name="dateToPay" onChange={handleChangeDateToPay} />
+        <input
+          className="request__form_field"
+          type="date"
+          name="dateToPay"
+          onChange={handleChangeDateToPay}
+        />
       </form>
 
       <button className="requestBtn" type="submit" onClick={onHandleSubmit}>
