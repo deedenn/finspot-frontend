@@ -11,7 +11,7 @@ import Registry from "../Registry/Registry";
 import Login from "../Login/Login";
 import Users from "../Users/Users";
 import NewUser from "../NewUser/NewUser";
-import Organizations from "../Organizations/Organizations";
+import OrganizationsList from "../OrganizationsList/OrganizationsList";
 import Profile from "../Profile/Profile";
 import mainApi from "../../utils/api/mainApi";
 import ProtectedRoute from "../../pages/protectedRoute/protectedRoute";
@@ -21,6 +21,7 @@ import auth from "../../utils/api/auth";
 import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 import NewOrganization from "../NewOrganization/NewOrganization";
+import Organization from "../Organization/Organization";
 
 function App() {
   const { pathname } = useLocation();
@@ -175,10 +176,18 @@ function App() {
               }
             />
             <Route
-              path="/organizations"
+              path="/organizationslist"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
-                  <Organizations />
+                  <OrganizationsList />
+                </ProtectedRoute>
+              }
+            />
+                        <Route
+              path="/organization/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <Organization />
                 </ProtectedRoute>
               }
             />

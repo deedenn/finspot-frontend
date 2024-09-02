@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./NewRequest.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import mainApi from "../../utils/api/mainApi";
+import { useNavigate } from "react-router-dom";
 
 function NewRequest() {
   const currentUser = React.useContext(CurrentUserContext);
+  const navigate = useNavigate()
 
   const [typeOfPay, setTypeOfPay] = useState("");
   const [contragent, setContragent] = useState("");
@@ -136,7 +138,7 @@ function NewRequest() {
         Создать заявку
       </button>
       <button className="requestBtn">Сохранить черновик</button>
-      <button className="requestBtn">Отменить</button>
+      <button className="requestBtn" onClick={() => (navigate('/requestlist'))}>Отменить</button>
     </div>
   );
 }

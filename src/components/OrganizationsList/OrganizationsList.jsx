@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
-import "./Organizations.css";
+import "./OrganizationsList.css";
 import mainApi from "../../utils/api/mainApi";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-function Organizations() {
+function OrganizationsList() {
   const [organizations, setOrganizations] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSelectedOrganization = ({ _id }) => {
+    navigate("/organization/" + _id);
+  };
+
 
   useEffect(() => {
     mainApi.getOrganizations().then((data) => {
@@ -15,9 +22,9 @@ function Organizations() {
   }, []);
 
   return (
-    <div className="organizations">
-      <div className="organizations__container">
-        <div className="organizations__values">
+    <div className="organizationsList">
+      <div className="organizationsList__container">
+        <div className="organizationsList__values">
           <p>Организация</p>
           <p>ИНН</p>
           <p>Оплачено до</p>
@@ -25,7 +32,11 @@ function Organizations() {
 
         {Object.values(organizations).map((item, index) => {
           return (
-            <div key={index} className="organizations__values">
+            <div key={index} className="organizationsList__values"
+              onClick={() => {
+                dispatch(setHeaderTitle("Организация " + item.name));
+                handleSelectedOrganization(item);
+              }}>
               <p>{item.name}</p>
               <p>{item.inn}</p>
               <p>{item.expiredof}</p>
@@ -34,9 +45,10 @@ function Organizations() {
         })}
       </div>
       <button
-        className="organizations__addBtn"
-        to="/organizations/add"
-        onClick={() => dispatch(setHeaderTitle("Создать организацию"))}
+        className="organizationsList__addBtn"
+        onClick={() => {
+          dispatch(setHeaderTitle("Создать организацию"));
+          navigate("/organizations/add");}}
         type="button"
       >
         Добавить организацию
@@ -45,4 +57,4 @@ function Organizations() {
   );
 }
 
-export default Organizations;
+export default OrganizationsList;

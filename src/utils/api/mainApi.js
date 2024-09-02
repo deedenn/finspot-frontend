@@ -27,9 +27,16 @@ class MainApi {
   }
 
 
-  //получение список организаций
+  //получение списка организаций
   getOrganizations() {
     return this._request(`${this._url}/organizations`, {
+      headers: this._headers,
+    });
+  }
+
+  //открыть одну организацию
+  getOrganizationByID(id) {
+    return this._request(`${this._url}/organizations/${id}`, {
       headers: this._headers,
     });
   }
@@ -42,6 +49,14 @@ class MainApi {
     });
   }
 
+  // изменить согласователей заявок и реестров
+  updateOrganizationApprovers(id, approveUsers) {
+    return this._request(`${this._url}/organizations/approve/${id}`, {
+      method: "PATCH",
+      headers: this._headers,
+    });
+  }
+
   //получение cписка всех пользователей
   getUsers() {
     return this._request(`${this._url}/users/`, {
@@ -49,9 +64,23 @@ class MainApi {
     });
   }
 
-  //получение информации о пользователе
+  //получение информации об авторизованном пользователе
   getInfoUser() {
     return this._request(`${this._url}/users/me`, {
+      headers: this._headers,
+    });
+  }
+
+  //получение информации о пользователе по ID
+  getInfoUserByID(id) {
+    return this._request(`${this._url}/users/${id}`, {
+      headers: this._headers,
+    });
+  }
+
+  //получение информации о пользователе по email
+  getInfoUserByEmail(email) {
+    return this._request(`${this._url}/users/email/check`, {
       headers: this._headers,
     });
   }
@@ -76,12 +105,12 @@ class MainApi {
     });
   }
 
-    //открыть одну заявку
-    getRequestByID(id) {
-      return this._request(`${this._url}/requests/${id}`, {
-        headers: this._headers,
-      });
-    }
+  //открыть одну заявку
+  getRequestByID(id) {
+    return this._request(`${this._url}/requests/${id}`, {
+      headers: this._headers,
+    });
+  }
 
   //добавление заявки
   addRequest(data) {
@@ -92,14 +121,14 @@ class MainApi {
     });
   }
 
-    //редактирование заявки
-    editRequest(data) {
-      return this._request(`${this._url}/requests/edit`, {
-        method: "PATCH",
-        headers: this._headers,
-        body: JSON.stringify(data)
-      });
-    }
+  //редактирование заявки
+  editRequest(data) {
+    return this._request(`${this._url}/requests/edit`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(data)
+    });
+  }
 
   //получение всех реестров пользователя
   getRegistries() {

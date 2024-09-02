@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Users.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
 import { useSelector, useDispatch } from "react-redux";
 import mainApi from '../../utils/api/mainApi'
@@ -9,6 +9,7 @@ function Users() {
   const dispatch = useDispatch();
 
 const [users, setUsers] = useState([]);
+const navigate = useNavigate();
 
 useEffect(() => {
   mainApi.getUsers().then((data) => {
@@ -39,8 +40,10 @@ useEffect(() => {
       </div>
       <button
         className="users__addBtn"
-        to="/users/add"
-        onClick={() => dispatch(setHeaderTitle("Создать пользователя"))}
+        onClick={() => {
+          navigate('/users/add');
+          dispatch(setHeaderTitle("Создать пользователя"))}
+        }
         type="button"
       >
         Добавить пользователя

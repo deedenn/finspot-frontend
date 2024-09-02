@@ -134,12 +134,12 @@ function Sidebar(onSignOut) {
         </Link>
         <Link
           onClick={() => dispatch(setHeaderTitle("Организации"))}
-          to="/organizations"
+          to="/organizationslist"
           className="sidebarBtn"
           alt="Организации"
           type="button"
         >
-          <img className="sidebarBtnLogo" alt="Органзации" src={usersImg}></img>
+          <img className="sidebarBtnLogo" alt="Организации" src={usersImg}></img>
           {openedSidebar && (
             <div className="sidebarBtnCaption">Организации</div>
           )}

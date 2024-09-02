@@ -1,0 +1,16 @@
+.organization__headerContainer {
+    display: grid;
+    grid-template-columns: 150px 250px;
+}
+
+.organization__trackContainer {
+    display: grid;
+    grid-template-columns: 250px 300px;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+}
+
+.organization__input {
+    height: 25px;
+}

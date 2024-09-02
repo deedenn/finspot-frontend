@@ -1,19 +1,25 @@
-.organizations__container {
+.organizationsList__container {
     background-color: white;
     border-radius: 20px;
 
 }
 
-.organizations__captions {
+.organizationsList__captions {
 
 }
 
-.organizations__values {
+.organizationsList__values {
     display: grid;
     grid-template-columns: 300px 150px 150px;
 }
 
-.organizations__addBtn {
+.organizationsList__values:hover {
+    border: #879FB9 1px solid;
+    background-color: #879FB9;
+    border-radius: 5px;
+}
+
+.organizationsList__addBtn {
     margin-top: 32px;
     background-color: #0078FF;
     width: 278px;

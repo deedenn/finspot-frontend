@@ -13,7 +13,8 @@ function RegistryList() {
       console.log(data.registry);
     }
     )
-  }, [])
+  }, []);
+   
 
   return (
     <div>

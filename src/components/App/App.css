@@ -1,7 +1,6 @@
 .app {
     margin: 0 auto;
-    /* max-height: 1024px;
-    max-width: 1440px; */
+    max-width: 1440px;
     font-family: Montserrat;
     display: flex;
     flex-direction: row;
@@ -13,7 +12,6 @@
     flex-direction: column;
     background-color:   #F5F7FA;
     padding: 0 40px;
-    max-width: 1024px;
 }
 
 @media screen and (max-width: 768px) {
