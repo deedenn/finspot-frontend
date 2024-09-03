@@ -22,6 +22,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 import NewOrganization from "../NewOrganization/NewOrganization";
 import Organization from "../Organization/Organization";
+import OrganizationSettings from "../OrganizationSettings/OrganizationSettings";
 
 function App() {
   const { pathname } = useLocation();
@@ -81,12 +82,7 @@ function App() {
       });
   };
 
-  // выход
-  const onSignOut = () => {
-    localStorage.removeItem("token");
-    navigate("/signin", { replace: true });
-    setLoggedIn(false);
-  };
+
 
   React.useEffect(() => {
     loggedIn &&
@@ -105,7 +101,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         {pathname !== "/signin" ? (
-          <Sidebar onSignOut={onSignOut} />
+          <Sidebar />
         ) : null}
         <div className="page">
           {pathname !== "/signin" ? <Header /> : null}
@@ -142,7 +138,7 @@ function App() {
                   <Request />
                 </ProtectedRoute>
               }
-              />
+            />
             <Route
               path="/request/add"
               element={
@@ -160,7 +156,7 @@ function App() {
               }
             />
             <Route
-              path="/users"
+              path="/organizations/users/:id"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Users />
@@ -168,7 +164,7 @@ function App() {
               }
             />
             <Route
-              path="/users/add"
+              path="/users/add/:id"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <NewUser />
@@ -183,11 +179,19 @@ function App() {
                 </ProtectedRoute>
               }
             />
-                        <Route
+            <Route
               path="/organization/:id"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Organization />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/organization/settings/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <OrganizationSettings />
                 </ProtectedRoute>
               }
             />

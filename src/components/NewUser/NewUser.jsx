@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./NewUser.css";
 import mainApi from "../../utils/api/mainApi";
+import { useNavigate, useParams } from "react-router-dom";
 
 function NewUser() {
+
+  const { id } = useParams();
+const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [fullname, setFullname] = useState("");
@@ -53,6 +57,8 @@ function NewUser() {
   return (
     <div className="newuser">
       <div className="newuser__formContainer">
+        <p className="newuser__captions">Организация</p>
+        <div className="newuser__input">{id}</div>
         <p className="newuser__captions">Фамилия</p>
         <input className="newuser__input" placeholder="Введите фамилию" onChange={handleChangeFullname} />
         <p className="newuser__captions">Имя</p>
@@ -94,7 +100,10 @@ function NewUser() {
         ></input>
       </div>
 
-      <button className="newuser__submitBtn" onClick={onHandleSubmit}>Отправить приглашение</button>
+      <button className="newuser__submitBtn" onClick={() => {
+        onHandleSubmit();
+        navigate(`/organizations/users/${id}`);
+      }}>Отправить приглашение</button>
     </div>
   );
 }

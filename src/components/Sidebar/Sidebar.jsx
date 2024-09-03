@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Sidebar.css";
 import { actionSidebar, setHeaderTitle } from "../../redux/slices/viewSlice";
@@ -15,9 +15,16 @@ import logoChange from "../../images/sidebarBtn_changeLogo.png";
 import logoutImg from "../../images/sidebarBtn_logout.png";
 import navbarBtnImg from "../../images/navbarBtn.png";
 
-function Sidebar(onSignOut) {
+function Sidebar() {
   const openedSidebar = useSelector((state) => state.viewSlice.openedSidebar);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // выход
+  const onSignOut = () => {
+    localStorage.removeItem("token");
+    navigate("/signin", { replace: true });
+  };
 
   return (
     <div className={`sidebar ${!openedSidebar && "sidebar_close"}`}>
@@ -25,9 +32,8 @@ function Sidebar(onSignOut) {
         <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
         {openedSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
         <button
-          className={`sidebarHideBtn ${
-            !openedSidebar && "sidebarHideBtn-close"
-          }`}
+          className={`sidebarHideBtn ${!openedSidebar && "sidebarHideBtn-close"
+            }`}
           onClick={() => dispatch(actionSidebar())}
         ></button>
       </Link>
@@ -118,7 +124,7 @@ function Sidebar(onSignOut) {
         <div className="sidebarMenuCaption">Компания</div>
         <Link
           onClick={() => dispatch(setHeaderTitle("Пользователи"))}
-          to="/users"
+          to="organizations/users/:id"
           className="sidebarBtn"
           alt="Пользовователи"
           type="button"

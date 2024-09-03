@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import './NewOrganization.css';
 import mainApi from "../../utils/api/mainApi";
+import { useNavigate } from "react-router-dom";
 
 function NewOrganization() {
 
     const [name, setName] = useState("");
     const [inn, setInn] = useState("");
+    const navigate = useNavigate();
 
     const handleChangeName = (evt) => {
         setName(evt.target.value);
@@ -29,7 +31,8 @@ function NewOrganization() {
         onAddOrganization({
             inn: inn,
             name: name,
-        })
+        });
+        navigate('/organizationslist');
     }
 
     return (
@@ -39,8 +42,6 @@ function NewOrganization() {
                 <input name="inn" placeholder="Введите ИНН" onChange={handleChangeInn}></input>
                 <p>Название</p>
                 <input name="name" placeholder="Введите название" onChange={handleChangeName}></input>
-                <p>Администратор</p>
-                <input name="supervisor" placeholder="Введите email пользователя"></input>
             </div>
             <button className="newOrganization__addBtn" onClick={onHandleSubmit}>Создать организацию</button>
         </div>
