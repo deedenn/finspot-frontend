@@ -1,7 +1,7 @@
 class MainApi {
 
 
-  _url = "https://api.finspot.ru"
+  _url = "//localhost:4000"
   _headers = {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -51,9 +51,10 @@ class MainApi {
 
   // изменить согласователей заявок и реестров
   updateOrganizationApprovers(id, approveUsers) {
-    return this._request(`${this._url}/organizations/approve/${id}`, {
+    return this._request(`${this._url}/updateApproveList`, {
       method: "PATCH",
       headers: this._headers,
+      body: JSON.stringify({ id, approveUsers })
     });
   }
 
@@ -80,8 +81,11 @@ class MainApi {
 
   //получение информации о пользователе по email
   getInfoUserByEmail(email) {
+    console.log(email);
     return this._request(`${this._url}/users/email/check`, {
+      method: "POST",
       headers: this._headers,
+      body: JSON.stringify({ email })
     });
   }
 
