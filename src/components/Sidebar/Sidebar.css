@@ -83,7 +83,10 @@
     text-decoration: none;
     text-transform: none;
     font-style: normal;
-    
+}
+
+.sidebarBtn__signout {
+        
 }
 
 .sidebarBtn:hover {

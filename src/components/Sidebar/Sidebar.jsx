@@ -41,7 +41,7 @@ function Sidebar() {
       <div className="sidebarMenu">
         {openedSidebar && <div className="sidebarMenuCaption">Меню</div>}
         <Link
-          onClick={() => dispatch(setHeaderTitle("Заявки"))}
+
           to="/requestlist"
           className="sidebarBtn"
           alt="Заявки"
@@ -53,7 +53,7 @@ function Sidebar() {
         </Link>
 
         <Link
-          onClick={() => dispatch(setHeaderTitle("Реестры"))}
+
           to="/registrylist"
           className="sidebarBtn"
           alt="Реестры"
@@ -65,7 +65,7 @@ function Sidebar() {
         </Link>
 
         <Link
-          onClick={() => dispatch(setHeaderTitle("Профиль"))}
+
           to="/profile"
           className="sidebarBtn"
           alt="Профиль"
@@ -87,7 +87,6 @@ function Sidebar() {
         )}
 
         <Link
-          onClick={() => dispatch(setHeaderTitle("Создать заявку"))}
           to="/request/add"
           className="sidebarBtn"
           alt="Создать заявку"
@@ -104,7 +103,7 @@ function Sidebar() {
         </Link>
 
         <Link
-          onClick={() => dispatch(setHeaderTitle("Создать реестр"))}
+
           to="/registry"
           className="sidebarBtn"
           alt="Создать реестр"
@@ -121,12 +120,12 @@ function Sidebar() {
         </Link>
       </div>
       <div className="sidebarMenu">
-      {openedSidebar && (
+        {openedSidebar && (
           <div className="sidebarMenuCaption">Компания</div>
         )}
 
         <Link
-          onClick={() => dispatch(setHeaderTitle("Организации"))}
+
           to="/organizationslist"
           className="sidebarBtn"
           alt="Организации"
@@ -140,15 +139,15 @@ function Sidebar() {
       </div>
       <Link
         to="/signin"
-        className="sidebarBtn"
+        className="sidebarBtn sidebarBtn__signout"
         alt="Выйти"
         type="button"
         onClick={onSignOut}
       >
         <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
         {openedSidebar && (
-            <div className="sidebarBtnCaption">Выйти</div>
-          )}
+          <div className="sidebarBtnCaption">Выйти</div>
+        )}
       </Link>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import loginPagePicture from "../../images/loginPagePicture.png";
 import logo from "../../images/logo.png";
@@ -8,14 +8,11 @@ import auth from "../../utils/api/auth";
 
 function Login(props) {
   const { values, handleChange, errors, isValid } = useFormValidation();
-  console.log(values);
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(e);
 
       if (!values.email || !values.password) {
         return;
@@ -35,15 +32,6 @@ function Login(props) {
       console.error(err);
     }
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   if (!values.email || !values.password) {
-  //     return;
-  //   }
-  //   props.onLogin(values);
-  // };
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");

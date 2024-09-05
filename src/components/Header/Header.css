@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     margin-right: 76 px;
+    padding-left: 40px;
 }
 
 .header__user {

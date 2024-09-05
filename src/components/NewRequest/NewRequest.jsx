@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NewRequest.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import mainApi from "../../utils/api/mainApi";
 import { useNavigate } from "react-router-dom";
+import { setHeaderTitle } from "../../redux/slices/viewSlice";
+import { useDispatch } from "react-redux";
 
 function NewRequest() {
   const currentUser = React.useContext(CurrentUserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [typeOfPay, setTypeOfPay] = useState("");
   const [contragent, setContragent] = useState("");
@@ -63,6 +66,10 @@ function NewRequest() {
       description: description,
     });
   };
+
+useEffect(() => {
+  dispatch(setHeaderTitle("Создать заявку"));
+})
 
   return (
     <div className="request">

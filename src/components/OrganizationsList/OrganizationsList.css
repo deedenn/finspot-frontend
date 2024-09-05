@@ -1,3 +1,7 @@
+.organizationsList {
+    margin: 0px 40px;
+}
+
 .organizationsList__container {
     background-color: white;
     border-radius: 20px;
@@ -5,15 +9,24 @@
 }
 
 .organizationsList__captions {
-
+    color: #313A43;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    height: 24px;
+    padding-bottom: 10px;
 }
 
 .organizationsList__values {
     display: grid;
     grid-template-columns: 300px 150px 150px;
+    color: #313A43;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
 }
 
-.organizationsList__values:hover {
+.organizationsList__hover:hover {
     border: #879FB9 1px solid;
     background-color: #879FB9;
     border-radius: 5px;

@@ -1,3 +1,7 @@
+.request {
+    margin: 0px 40px;
+}
+
 .request__form {
     background-color: #FFFFFF;
     margin: 0 40px 32px 0;

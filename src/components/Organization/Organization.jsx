@@ -31,7 +31,7 @@ function Organization() {
   console.log(organization.isActive);
 
   return (
-    <div className="organizaion">
+    <div className="organization">
       <div className="organization__container">
         <div className="organization__headerContainer">
           <p className="organization__caption">ИНН</p>
@@ -44,11 +44,11 @@ function Organization() {
           <p className="organization__value">{organization.paystatus}</p>
         </div>
 
-        <button className="organizations__button" onClick={() => {
+        <button className="organization__button" onClick={() => {
           navigate(`/organizations/users/${id}`);
           dispatch(setHeaderTitle("Пользователи"))
         }}>Пользователи</button>
-        <button className="organizations__button" onClick={() => {
+        <button className="organization__button" onClick={() => {
           navigate('/organization/settings/:id');
           dispatch(setHeaderTitle("Настройки организации"))
         }}>Изменить маршруты</button>

@@ -1,3 +1,7 @@
+.organization {
+    margin: 0 40px;
+}
+
 .organization__headerContainer {
     display: grid;
     grid-template-columns: 150px 250px;
@@ -15,8 +19,9 @@
     height: 25px;
 }
 
-.organizations__button {
+.organization__button {
     margin-top: 32px;
+    margin-right: 32px;
     background-color: #0078FF;
     width: 278px;
     height: 48px;

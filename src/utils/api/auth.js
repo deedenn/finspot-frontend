@@ -54,7 +54,7 @@ class Auth {
 // блок подключения к апи
 
 const auth = new Auth({
-  baseUrl: "https://api.finspot.ru",
+  baseUrl: "//localhost:4000",
 });
 
 export default auth

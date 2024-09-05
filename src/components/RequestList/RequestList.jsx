@@ -3,8 +3,8 @@ import "./RequestList.css";
 import NavBar from "../NavBar/NavBar";
 import mainApi from "../../utils/api/mainApi";
 import { useNavigate } from "react-router-dom";
-import { actionSidebar, setHeaderTitle } from "../../redux/slices/viewSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { setHeaderTitle } from "../../redux/slices/viewSlice";
+import { useDispatch } from "react-redux";
 
 function RequestList() {
   const [filterRequests, setFilterRequests] = useState([]);
@@ -15,10 +15,17 @@ function RequestList() {
     navigate("/request/" + _id);
   };
 
+  const handleDate = (item) => {
+    const date = new Date(item);
+    return date.toLocaleDateString();
+  }
+
   useEffect(() => {
+    dispatch(setHeaderTitle("Заявки"));
     mainApi.getRequests().then((data) => {
       setFilterRequests(data);
-      console.log(data);
+      console.log(typeof (data[0].createdAt));
+
     });
   }, []);
 
@@ -36,24 +43,23 @@ function RequestList() {
           <p className="requestlist__header_caption">Статус</p>
         </div>
         {filterRequests.map((item, index) => {
-          console.log(typeof filterRequests);
           return (
             <div
               key={index}
-              className="requestlist__items"
+              className="requestlist__items requestlist__hover"
               onClick={() => {
                 dispatch(setHeaderTitle("Заявка " + item._id));
                 handleSelectedRequest(item);
               }}
             >
-              <p className="requestlist__items_caption">{item.createdAt}</p>
+              <p className="requestlist__items_caption">{handleDate(item.createdAt)}</p>
               <p className="requestlist__items_caption">{item.contragent}</p>
               <p className="requestlist__items_caption">
                 {item.owner.name} {item.owner.fullname}{" "}
               </p>
               <p className="requestlist__items_caption">{item.file}</p>
-              <p className="requestlist__items_caption">{item.amount}</p>
-              <p className="requestlist__items_caption">{item.status}</p>
+              <p className="requestlist__items_caption requestlist__items_sum">{item.amount}</p>
+              <p className="requestlist__items_caption requestlist__items_status">{item.status}</p>
             </div>
           );
         })}

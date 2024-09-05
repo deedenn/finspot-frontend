@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./NewUser.css";
 import mainApi from "../../utils/api/mainApi";
 import { useNavigate, useParams } from "react-router-dom";
+import { setHeaderTitle } from "../../redux/slices/viewSlice";
+import { useDispatch } from "react-redux";
 
 function NewUser() {
-
+  const dispatch = useDispatch();
   const { id } = useParams();
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [fullname, setFullname] = useState("");
@@ -52,6 +54,10 @@ const navigate = useNavigate();
       fullname: fullname,
     })
   }
+
+  useEffect(() => {
+    dispatch(setHeaderTitle("Создать пользователя"));
+  })
 
 
   return (

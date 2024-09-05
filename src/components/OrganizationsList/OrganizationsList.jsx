@@ -16,6 +16,7 @@ function OrganizationsList() {
 
 
   useEffect(() => {
+    dispatch(setHeaderTitle("Организации"))
     mainApi.getOrganizations().then((data) => {
       setOrganizations(data.organizations);
     });
@@ -24,7 +25,7 @@ function OrganizationsList() {
   return (
     <div className="organizationsList">
       <div className="organizationsList__container">
-        <div className="organizationsList__values">
+        <div className=" organizationsList__values organizationsList__captions">
           <p>Организация</p>
           <p>ИНН</p>
           <p>Оплачено до</p>
@@ -32,7 +33,7 @@ function OrganizationsList() {
 
         {Object.values(organizations).map((item, index) => {
           return (
-            <div key={index} className="organizationsList__values"
+            <div key={index} className="organizationsList__values organizationsList__hover"
               onClick={() => {
                 dispatch(setHeaderTitle("Организация " + item.name));
                 handleSelectedOrganization(item);
@@ -47,8 +48,8 @@ function OrganizationsList() {
       <button
         className="organizationsList__addBtn"
         onClick={() => {
-          dispatch(setHeaderTitle("Создать организацию"));
-          navigate("/organizations/add");}}
+          navigate("/organizations/add");
+        }}
         type="button"
       >
         Добавить организацию

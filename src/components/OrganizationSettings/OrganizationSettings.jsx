@@ -55,20 +55,21 @@ function OrganizationSettings() {
 
 
     return (
-        <div>
+        <div className="organizationSettings">
             <div>
                 <form onSubmit={handleChooseUser}>
                     <p>Маршрут согласования заявок и реестров</p>
                     <div className="organization__trackContainer">
                         <p>Согласование ГБ</p>
-                        <input
+                        {/* <input
                             name="requestGB"
                             id="requestGB"
                             className="organization__input"
                             type="email"
                             value={requestGB}
                             onChange={(e) => setRequestGB(e.target.value)}
-                        ></input>
+                        ></input> */}
+                        <select name="requestGB" id="reguestGB"></select>
                         <p>Согласование ФД</p>
                         <input
                             name="requestFD"
@@ -88,15 +89,6 @@ function OrganizationSettings() {
                             onChange={(e) => setRequestGD(e.target.value)}
                         ></input>
                     </div>
-                    {/* <p>Маршрут согласования реестров</p>
-                    <div className="organization__trackContainer">
-                        <p>Согласование ГБ</p>
-                        <input className="organization__input"></input>
-                        <p>Согласование ФД</p>
-                        <input className="organization__input"></input>
-                        <p>Утверждение ГД</p>
-                        <input className="organization__input"></input>
-                    </div> */}
                     <button className="organizations__button" >Изменить маршрут</button>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 class MainApi {
 
 
-  _url = "https://api.finspot.ru"
+  _url = "//localhost:4000"
   _headers = {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -121,7 +121,7 @@ class MainApi {
   //получение всех заявок пользователя
   getRequests() {
     return this._request(`${this._url}/requests`, {
-      headers: this._headers,
+      headers: {...this._headers, authorization: `Bearer ${localStorage.getItem("token")}`},
     });
   }
 
@@ -152,8 +152,8 @@ class MainApi {
 
   //получение всех реестров пользователя
   getRegistries() {
-    return this._request(`${this._url}/registries/all`, {
-      headers: this._headers,
+    return this._request(`${this._url}/registries/`, {
+      headers: {...this._headers, authorization: `Bearer ${localStorage.getItem("token")}`},
     });
   }
 

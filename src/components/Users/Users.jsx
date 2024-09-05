@@ -25,6 +25,7 @@ function Users() {
   }
 
   useEffect(() => {
+    dispatch(setHeaderTitle("Пользователи"));
     getDataOrganization();
   }, []);
 
@@ -55,7 +56,6 @@ function Users() {
         className="users__addBtn"
         onClick={() => {
           navigate(`/users/add/${id}`);
-          dispatch(setHeaderTitle("Создать пользователя"))
         }
         }
         type="button"

@@ -1,11 +1,10 @@
 .loginPage {
     display: flex;
-    max-height: 1024px;
     margin: 0;
 }
 
 .loginPageLeft {
-    max-width: 640px;
+    width: 640px;
     background-color: #FFFF;
     margin: 0;
 }
@@ -26,8 +25,7 @@
 }
 
 .loginPage__form {
-    width: 320px;
-    margin: 128px auto auto 160px;
+    margin: 128px 160px 160px 160px;
 }
 
 .loginPage__form_header {

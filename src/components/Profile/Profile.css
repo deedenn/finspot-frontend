@@ -1,4 +1,26 @@
+.profile {
+    margin: 0px 40px;
+}
+
 .profile__container {
     display: grid;
     grid-template-columns: 150px 200px;
+
+}
+
+.profile__button {
+    margin-top: 32px;
+    margin-right: 32px;
+    background-color: #0078FF;
+    width: 278px;
+    height: 48px;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    border-radius: 20px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
 }
