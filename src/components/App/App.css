@@ -8,6 +8,7 @@
 }
 
 .page {
+    width: 1160px;
     display: flex;
     flex-direction: column;
     background-color:   #F5F7FA;

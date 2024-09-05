@@ -42,7 +42,7 @@ class MainApi {
   }
 
   // добавить организацию
-  addOrganization({inn, name}) {
+  addOrganization({ inn, name }) {
     return this._request(`${this._url}/organizations/add`, {
       method: "POST",
       headers: this._headers,
@@ -66,12 +66,12 @@ class MainApi {
     });
   }
 
-    //получение cписка всех пользователей организации
-    getUsersByOrg(id) {
-      return this._request(`${this._url}/organizations/users/${id}`, {
-        headers: this._headers,
-      });
-    }
+  //получение cписка всех пользователей организации
+  getUsersByOrg(id) {
+    return this._request(`${this._url}/organizations/users/${id}`, {
+      headers: this._headers,
+    });
+  }
 
   //получение информации об авторизованном пользователе
   getInfoUser() {
@@ -106,14 +106,14 @@ class MainApi {
     });
   }
 
-      //добавление пользователей в организацию
-      patchUserByOrg(id, newUser) {
-        return this._request(`${this._url}/organizaions/addusers`, {
-          method: "PATCH",
-          headers: this._headers,
-          body: JSON.stringify({id, newUser})
-        });
-      }
+  //добавление пользователей в организацию
+  patchUserByOrg(id, newUser) {
+    return this._request(`${this._url}/organizaions/addusers`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ id, newUser })
+    });
+  }
 
   //редактирование профиля
 

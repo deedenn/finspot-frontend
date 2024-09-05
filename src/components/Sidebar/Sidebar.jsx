@@ -121,23 +121,10 @@ function Sidebar() {
         </Link>
       </div>
       <div className="sidebarMenu">
-        <div className="sidebarMenuCaption">Компания</div>
-        <Link
-          onClick={() => dispatch(setHeaderTitle("Пользователи"))}
-          to="organizations/users/:id"
-          className="sidebarBtn"
-          alt="Пользовователи"
-          type="button"
-        >
-          <img
-            className="sidebarBtnLogo"
-            alt="Пользователи"
-            src={usersImg}
-          ></img>
-          {openedSidebar && (
-            <div className="sidebarBtnCaption">Пользователи</div>
-          )}
-        </Link>
+      {openedSidebar && (
+          <div className="sidebarMenuCaption">Компания</div>
+        )}
+
         <Link
           onClick={() => dispatch(setHeaderTitle("Организации"))}
           to="/organizationslist"
@@ -159,7 +146,9 @@ function Sidebar() {
         onClick={onSignOut}
       >
         <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
-        <div className="sidebarBtnCaption">Выйти</div>
+        {openedSidebar && (
+            <div className="sidebarBtnCaption">Выйти</div>
+          )}
       </Link>
     </div>
   );

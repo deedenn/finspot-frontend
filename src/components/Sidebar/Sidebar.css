@@ -1,5 +1,5 @@
 .sidebar {
-    max-width: 280px;
+   
     display: flex;
     flex-direction: column;
     color: #FFFFFF;
@@ -10,7 +10,9 @@
 }
 
 .sidebar_close {
-    max-width: 112px;
+    width: 112px;
+    padding: 0;
+    align-items: center;
 }
 
 .sidebarHideBtn {
@@ -70,7 +72,8 @@
 .sidebarBtn {
     padding: 0;
     margin: 0;
-    width: 200px;
+    /* width: 200px; */
+    text-wrap: nowrap;
     height: 24px;
     display: flex;
     margin-bottom: 20px;
