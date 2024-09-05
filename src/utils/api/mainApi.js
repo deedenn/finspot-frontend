@@ -1,7 +1,7 @@
 class MainApi {
 
 
-  _url = "//localhost:4000"
+  _url = "https://api.finspot.ru"
   _headers = {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem("token")}`,
