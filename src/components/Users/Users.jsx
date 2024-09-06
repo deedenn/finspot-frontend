@@ -17,8 +17,8 @@ function Users() {
     try {
       const dataOrganization = await mainApi.getOrganizationByID(id);
       setOrganization(dataOrganization);
-      console.log(dataOrganization.users);
-      setUsers(dataOrganization.users);
+      const users = await Promise.all(dataOrganization.users.map(({id}) => mainApi.getInfoUserByID(id)));
+      setUsers(users);
     } catch (err) {
       console.log(err);
     }
@@ -35,18 +35,21 @@ function Users() {
       <div>{`Организация ${organization.name}`}</div>
       <div className="users__container">
         <div className="users__values users__captions">
-          <p>ID</p>
+          <p>Фамилия</p>
           <p>Имя</p>
           <p>email</p>
-          <p>Роль</p>
+          <p>Активный</p>
         </div>
-        {users.map((item, index) => {
+        {users.map(({user}, index) => {
           return (
             <div key={index} className="users__values">
-              <p>{item.id}</p>
-              <p>{item.name}</p>
-              <p>{item.email}</p>
-              <p></p>
+              <p>{user.fullname}</p>
+              <p>{user.name}</p>
+              <p>{user.email}</p>
+              <select className="users__select" >
+                <option value="Активный">Активный</option>
+                <option value="Неактивный">Неактивный</option>
+              </select>
             </div>
           )
         })}

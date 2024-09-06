@@ -1,7 +1,12 @@
+.users {
+    margin: 0 40px;
+}
+
 .users__container {
     margin: 0;
     background-color: #FFFFFF;
     border-radius: 20px;
+    padding: 20px 20px;
 }
 
 .users__captions {
@@ -13,7 +18,7 @@
 
 .users__values {
     display: grid;
-    grid-template-columns: 300px 300px 300px 240px;
+    grid-template-columns: 250px 250px 250px 240px;
     color: #313A43;
     font-size: 14px;
     line-height: 16px;
@@ -39,4 +44,8 @@
 .users__addBtn:hover {
     background-color: #B6CADF;
     color: #EBF4FD;
+}
+
+.users__select {
+    height: 32px;
 }

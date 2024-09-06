@@ -8,7 +8,7 @@
     padding: 32px 0;
     border-radius: 20px;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 100px 100px 100px 100px;
     grid-template-rows: 32px 32px 32px 32px;
     gap: 10px;
     
@@ -19,7 +19,11 @@
     background-color: F5F7FA;
     align-self: center;
     padding: 0;
-    
+    height: 32px;
+}
+
+.request__form_field_input {
+    background-color: #F5F7FA;
 }
 
 .request__form_caption {

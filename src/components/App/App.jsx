@@ -23,6 +23,7 @@ import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-
 import NewOrganization from "../NewOrganization/NewOrganization";
 import Organization from "../Organization/Organization";
 import OrganizationSettings from "../OrganizationSettings/OrganizationSettings";
+import NewRegistry from "../NewRegistry/NewRegistry";
 
 function App() {
   const { pathname } = useLocation();
@@ -152,6 +153,14 @@ function App() {
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Registry />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/registry/add"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <NewRegistry />
                 </ProtectedRoute>
               }
             />

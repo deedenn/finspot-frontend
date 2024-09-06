@@ -85,7 +85,7 @@ useEffect(() => {
           onChange={handleChangeContragent}
         />
         <ul className="request__form_caption">Инициатор</ul>
-        <ul className="request__form_field">
+        <ul className="request__form_field request__form_field_input">
           {currentUser.name + " " + currentUser.fullname}
         </ul>
         <ul className="request__form_caption">Содержание</ul>

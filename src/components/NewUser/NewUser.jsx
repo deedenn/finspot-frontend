@@ -109,7 +109,7 @@ function NewUser() {
       <button className="newuser__submitBtn" onClick={() => {
         onHandleSubmit();
         navigate(`/organizations/users/${id}`);
-      }}>Отправить приглашение</button>
+      }}>Зарегистрировать</button>
     </div>
   );
 }

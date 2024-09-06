@@ -104,7 +104,7 @@ function Sidebar() {
 
         <Link
 
-          to="/registry"
+          to="/registry/add"
           className="sidebarBtn"
           alt="Создать реестр"
           type="button"
