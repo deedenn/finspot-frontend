@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 function OrganizationSettings() {
 
     const { id } = useParams();
+    const [users, setUsers] = useState([]);
     const [organization, setOrganization] = useState([]);
     const [requestGB, setRequestGB] = useState("")
     const [requestFD, setRequestFD] = useState("");
@@ -28,29 +29,19 @@ function OrganizationSettings() {
 
     async function getDataOrganization() {
         try {
-            const dataOrganization = await mainApi.getOrganizationByID(id);
-            const userGB = await mainApi.getInfoUserByID(
-                dataOrganization.approveUsers[0].id
-            );
-            const userFD = await mainApi.getInfoUserByID(
-                dataOrganization.approveUsers[1].id
-            );
-            //const userGD = await mainApi.getInfoUserByID(dataOrganization.approveUsers[2].id);
-            setRequestGB(userGB.user.email);
-            setRequestFD(userFD.user.email);
-            //setRequestGD(userGD.data.email);
-
-            const newnewGB = mainApi.getInfoUserByEmail(userGB.user.email);
-            console.log(newnewGB.id);
-
-            setOrganization(dataOrganization);
+          const dataOrganization = await mainApi.getOrganizationByID(id);
+          setOrganization(dataOrganization);
+          const users = await Promise.all(dataOrganization.users.map((id) => mainApi.getInfoUserByID(id)));
+          setUsers(users);
         } catch (err) {
-            console.log(err);
+          console.log(err);
         }
-    }
+      }
 
     useState(() => {
         getDataOrganization();
+        console.log(users);
+        
     }, []);
 
 
@@ -69,7 +60,10 @@ function OrganizationSettings() {
                             value={requestGB}
                             onChange={(e) => setRequestGB(e.target.value)}
                         ></input> */}
-                        <select name="requestGB" id="reguestGB"></select>
+                        <select name="requestGB" id="reguestGB">
+                          <option>users[0]</option>
+
+                        </select>
                         <p>Согласование ФД</p>
                         <input
                             name="requestFD"

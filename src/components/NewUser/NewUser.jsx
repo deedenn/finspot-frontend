@@ -15,7 +15,7 @@ function NewUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [supervisor, setSupervisor] = useState(false);
-  const [newUserID, setNewUserID] = useState("");
+  const [newUserID, setNewUserID] = useState('');
 
   const handleChangeName = (evt) => {
     setName(evt.target.value);
@@ -38,20 +38,21 @@ function NewUser() {
   }
 
   const onAddNewUser = (newUser) => {
-    mainApi.addUser(newUser).then((newUser) => {
-      setNewUserID(newUser.id)
-      console.log(newUser);
-      console.log(newUserID);  
+    mainApi.addUser(newUser).then((User) => {
+      console.log(User);
+      console.log(User.id);
+      setNewUserID(User.id);
+      console.log(newUserID);
     })
       .catch((err) => {
         console.error(`Ошибка: ${err}`);
       })
   }
 
-  const onAddUserByOrg = (id, newUser) => {
-      mainApi.patchUserByOrg(id, newUser).then((org) => {
-        console.log(org);
-      })
+  const onAddUserByOrg = ({ id, newUser }) => {
+    mainApi.patchUserByOrg(id, newUser).then((org) => {
+      console.log(org);
+    })
       .catch((err) => {
         console.error(`Ошибка: ${err}`);
       })
@@ -64,6 +65,8 @@ function NewUser() {
       name: name,
       fullname: fullname,
     })
+    console.log(newUserID);
+
     onAddUserByOrg({
       id: id,
       newUser: newUserID,

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Users.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import mainApi from '../../utils/api/mainApi';
 
 function Users() {
@@ -17,7 +17,7 @@ function Users() {
     try {
       const dataOrganization = await mainApi.getOrganizationByID(id);
       setOrganization(dataOrganization);
-      const users = await Promise.all(dataOrganization.users.map(({id}) => mainApi.getInfoUserByID(id)));
+      const users = await Promise.all(dataOrganization.users.map((id) => mainApi.getInfoUserByID(id)));
       setUsers(users);
     } catch (err) {
       console.log(err);
@@ -27,8 +27,7 @@ function Users() {
   useEffect(() => {
     dispatch(setHeaderTitle("Пользователи"));
     getDataOrganization();
-  });
-
+  }, []);
 
   return (
     <div className="users">
@@ -40,7 +39,7 @@ function Users() {
           <p>email</p>
           <p>Активный</p>
         </div>
-        {users.map(({user}, index) => {
+        {users.map(({ user }, index) => {
           return (
             <div key={index} className="users__values">
               <p>{user.fullname}</p>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./OrganizationsList.css";
 import mainApi from "../../utils/api/mainApi";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function OrganizationsList() {

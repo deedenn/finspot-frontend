@@ -108,6 +108,9 @@ class MainApi {
 
   //добавление пользователей в организацию
   patchUserByOrg(id, newUser) {
+    console.log(id);
+    console.log(newUser);
+    
     return this._request(`${this._url}/organizations/addusers`, {
       method: "PATCH",
       headers: this._headers,

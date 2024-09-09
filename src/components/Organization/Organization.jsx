@@ -28,7 +28,6 @@ function Organization() {
   }, []);
 
   console.log(organization);
-  console.log(organization.isActive);
 
   return (
     <div className="organization">
@@ -49,8 +48,8 @@ function Organization() {
           dispatch(setHeaderTitle("Пользователи"))
         }}>Пользователи</button>
         <button className="organization__button" onClick={() => {
-          navigate('/organization/settings/:id');
-          dispatch(setHeaderTitle("Настройки организации"))
+          navigate(`/organization/settings/${id}`);
+          dispatch(setHeaderTitle(`Настройки организации ${organization.name}`))
         }}>Изменить маршруты</button>
 
       </div>
