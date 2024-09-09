@@ -67,9 +67,9 @@ function NewRequest() {
     });
   };
 
-useEffect(() => {
-  dispatch(setHeaderTitle("Создать заявку"));
-})
+  useEffect(() => {
+    dispatch(setHeaderTitle("Создать заявку"));
+  });
 
   return (
     <div className="request">
@@ -145,7 +145,9 @@ useEffect(() => {
         Создать заявку
       </button>
       <button className="requestBtn">Сохранить черновик</button>
-      <button className="requestBtn" onClick={() => (navigate('/requestlist'))}>Отменить</button>
+      <button className="requestBtn" onClick={() => navigate("/requestlist")}>
+        Отменить
+      </button>
     </div>
   );
 }

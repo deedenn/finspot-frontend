@@ -1,4 +1,4 @@
-.request__container{
+.request__container {
     box-sizing: border-box;
 }
 
@@ -6,7 +6,7 @@
     padding: 20px;
     margin: 0px 40px;
     background-color: white;
-    border-radius: 20px;   
+    border-radius: 20px;
 }
 
 .requestlist__header_caption {
@@ -56,4 +56,14 @@
     border-radius: 38px;
     border: none;
     text-align: center;
+}
+
+.requestlist__items_status-draft {
+    background-color: #EBF4FD;
+    color: #879FB9;
+}
+
+.requestlist__items_status-payd {
+    background-color: #E7F5F1;
+    color: #219653;
 }

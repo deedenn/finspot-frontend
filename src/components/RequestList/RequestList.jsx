@@ -6,6 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
 import { useDispatch } from "react-redux";
 
+const colorStatus = {
+  "Черновик": "requestlist__items_status-draft",
+  "Согласование ФД": "requestlist__items_status-draft",
+  "Оплачен": "requestlist__items_status-payd",
+};
+
 function RequestList() {
   const [filterRequests, setFilterRequests] = useState([]);
   const dispatch = useDispatch();
@@ -18,14 +24,13 @@ function RequestList() {
   const handleDate = (item) => {
     const date = new Date(item);
     return date.toLocaleDateString();
-  }
+  };
 
   useEffect(() => {
     dispatch(setHeaderTitle("Заявки"));
     mainApi.getRequests().then((data) => {
       setFilterRequests(data);
-      console.log(typeof (data[0].createdAt));
-
+      console.log(typeof data[0].createdAt);
     });
   }, []);
 
@@ -52,14 +57,20 @@ function RequestList() {
                 handleSelectedRequest(item);
               }}
             >
-              <p className="requestlist__items_caption">{handleDate(item.createdAt)}</p>
+              <p className="requestlist__items_caption">
+                {handleDate(item.createdAt)}
+              </p>
               <p className="requestlist__items_caption">{item.contragent}</p>
               <p className="requestlist__items_caption">
                 {item.owner.name} {item.owner.fullname}{" "}
               </p>
               <p className="requestlist__items_caption">{item.file}</p>
-              <p className="requestlist__items_caption requestlist__items_sum">{item.amount}</p>
-              <p className="requestlist__items_caption requestlist__items_status">{item.status}</p>
+              <p className="requestlist__items_caption requestlist__items_sum">
+                {item.amount}
+              </p>
+              <p className={`requestlist__items_caption requestlist__items_status ${colorStatus[item.status]}`}>
+                {item.status}
+              </p>
             </div>
           );
         })}

@@ -1,7 +1,7 @@
 class MainApi {
 
 
-  _url = "//localhost:4000"
+  _url = "//localhost:3000"
   _headers = {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -108,7 +108,7 @@ class MainApi {
 
   //добавление пользователей в организацию
   patchUserByOrg(id, newUser) {
-    return this._request(`${this._url}/organizaions/addusers`, {
+    return this._request(`${this._url}/organizations/addusers`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ id, newUser })
@@ -121,7 +121,7 @@ class MainApi {
   //получение всех заявок пользователя
   getRequests() {
     return this._request(`${this._url}/requests`, {
-      headers: {...this._headers, authorization: `Bearer ${localStorage.getItem("token")}`},
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token")}` },
     });
   }
 
@@ -153,7 +153,7 @@ class MainApi {
   //получение всех реестров пользователя
   getRegistries() {
     return this._request(`${this._url}/registries/`, {
-      headers: {...this._headers, authorization: `Bearer ${localStorage.getItem("token")}`},
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token")}` },
     });
   }
 

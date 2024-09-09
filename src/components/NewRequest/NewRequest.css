@@ -11,7 +11,7 @@
     grid-template-columns: 100px 100px 100px 100px;
     grid-template-rows: 32px 32px 32px 32px;
     gap: 10px;
-    
+
 }
 
 .request__form_field {
@@ -20,6 +20,7 @@
     align-self: center;
     padding: 0;
     height: 32px;
+    border: #B6CADF 1px solid;
 }
 
 .request__form_field_input {
@@ -59,15 +60,16 @@
     align-self: center;
 }
 
+.request__form_radioLabel {}
+
 @media screen and (max-width: 768px) {
 
-    .request {
-                
-    }
+    .request {}
+
     .request__form {
         margin: 0 15px;
         grid-template-columns: auto auto;
-        grid-template-rows: repeat(8, 32px);   
+        grid-template-rows: repeat(8, 32px);
     }
 
     .request__form_caption {

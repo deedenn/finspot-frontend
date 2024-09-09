@@ -15,8 +15,8 @@ function Header() {
       <div className="header__user">
         <div className="header__user_logo"></div>
         <div className="header__user_logoContainer">
-          <div className="header__user_company">{currentUser.name+' '+currentUser.fullname}</div>
-          <div className="header__user_role">Главный бухгалтер</div>
+          <div className="header__user_company">ООО "Лютик"</div>
+          <div className="header__user_role">{currentUser.name+' '+currentUser.fullname}</div>
         </div>
       </div>
     </div>

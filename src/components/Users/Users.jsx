@@ -27,7 +27,7 @@ function Users() {
   useEffect(() => {
     dispatch(setHeaderTitle("Пользователи"));
     getDataOrganization();
-  }, []);
+  });
 
 
   return (

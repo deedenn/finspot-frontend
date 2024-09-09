@@ -54,7 +54,7 @@ class Auth {
 // блок подключения к апи
 
 const auth = new Auth({
-  baseUrl: "//localhost:4000",
+  baseUrl: "//localhost:3000",
 });
 
 export default auth

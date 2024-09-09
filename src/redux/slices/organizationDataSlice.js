@@ -6,7 +6,7 @@ const initialState = {
 }
 
 // дописать
-export const organizationData = getOrganizationData({
+export const organizationDataSlice = getOrganizationData({
     name: 'counter',
     initialState,
     reducers: {
@@ -22,4 +22,4 @@ export const organizationData = getOrganizationData({
 
 export const { actionSidebar, setHeaderTitle } = viewSlice.actions;
 
-export default organizationData.reducer;
+export default organizationDataSlice.reducer;
