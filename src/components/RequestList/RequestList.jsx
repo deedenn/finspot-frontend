@@ -4,18 +4,21 @@ import NavBar from "../NavBar/NavBar";
 import mainApi from "../../utils/api/mainApi";
 import { useNavigate } from "react-router-dom";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const colorStatus = {
-  "Черновик": "requestlist__items_status-draft",
-  "Согласование ФД": "requestlist__items_status-draft",
-  "Оплачен": "requestlist__items_status-payd",
+  "Утверждено": "requestlist__items_status-approved",
+  "Оплачено": "requestlist__items_status-payd",
+  "Отменено": "requestlist__items_status-cancel",
 };
 
 function RequestList() {
   const [filterRequests, setFilterRequests] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useSelector(state => state.userSlice);
+  const { currentOrganization } = useSelector(state => state.organizationSlice);
+
 
   const handleSelectedRequest = ({ _id }) => {
     navigate("/request/" + _id);
@@ -28,11 +31,17 @@ function RequestList() {
 
   useEffect(() => {
     dispatch(setHeaderTitle("Заявки"));
-    mainApi.getRequests().then((data) => {
-      setFilterRequests(data);
-      console.log(typeof data[0].createdAt);
-    });
-  }, []);
+
+    mainApi.getUserRequests(user._id).then((data) => {
+      console.log(data);
+
+      setFilterRequests(data[0].reqs);
+    }).catch((err) => console.log(err))
+
+    // mainApi.getRequests().then((data) => {
+    //   setFilterRequests(data);
+    // }).catch((err) => console.log(err))
+  }, [currentOrganization]);
 
   return (
     <div className="request__container">
@@ -42,7 +51,7 @@ function RequestList() {
         <div className="requestlist__captions requestlist__items">
           <p className="requestlist__header_caption">Дата создания</p>
           <p className="requestlist__header_caption">Контрагент</p>
-          <p className="requestlist__header_caption">Инициатор</p>
+          <p className="requestlist__header_caption">Содержание</p>
           <p className="requestlist__header_caption">Файл</p>
           <p className="requestlist__header_caption">Сумма</p>
           <p className="requestlist__header_caption">Статус</p>
@@ -62,7 +71,7 @@ function RequestList() {
               </p>
               <p className="requestlist__items_caption">{item.contragent}</p>
               <p className="requestlist__items_caption">
-                {item.owner.name} {item.owner.fullname}{" "}
+                {item.description}
               </p>
               <p className="requestlist__items_caption">{item.file}</p>
               <p className="requestlist__items_caption requestlist__items_sum">
@@ -72,6 +81,7 @@ function RequestList() {
                 {item.status}
               </p>
             </div>
+
           );
         })}
       </div>

@@ -1,3 +1,7 @@
+.request {
+    height: 100%vh;
+}
+
 .request__form {
     background-color: #FFFFFF;
     margin: 0 40px 32px 0;
@@ -7,7 +11,7 @@
     grid-template-columns: 190px 250px 190px 350px;
     grid-template-rows: 32px 32px 32px 32px;
     gap: 10px;
-    
+
 }
 
 .request__form_field {
@@ -15,7 +19,7 @@
     background-color: F5F7FA;
     align-self: center;
     padding: 0;
-    
+
 }
 
 .request__form_caption {
@@ -51,15 +55,47 @@
     align-self: center;
 }
 
+.requestBtn_cancel {
+    background-color: red;
+    color: #FFFFFF;
+    border-radius: 8px;
+    border: none;
+    margin: 0 20px 0 0;
+    padding: 0 24px;
+    height: 48px;
+}
+
+.request__logCaptions {
+    display: grid;
+    grid-template-columns: 100px 100px 170px 210px 400px;
+    font-size: 12px;
+}
+
+.request__logFields {
+    font-size: 12px;
+}
+
+.requestBtnContainer {
+    margin: 20px 0;
+}
+
+.request__commentInput {
+    width: 500px;
+    background-color: F5F7FA;
+    align-self: center;
+    padding: 0;
+    height: 48px;
+    border: #B6CADF 1px solid;
+}
+
 @media screen and (max-width: 768px) {
 
-    .request {
-                
-    }
+    .request {}
+
     .request__form {
         margin: 0 15px;
         grid-template-columns: auto auto;
-        grid-template-rows: repeat(8, 32px);   
+        grid-template-rows: repeat(8, 32px);
     }
 
     .request__form_caption {

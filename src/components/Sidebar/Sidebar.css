@@ -1,5 +1,5 @@
 .sidebar {
-   
+
     display: flex;
     flex-direction: column;
     color: #FFFFFF;
@@ -25,7 +25,7 @@
     transition: 0.8s;
 }
 
-.sidebarHideBtn-close{
+.sidebarHideBtn-close {
     right: -25px;
     transform: scale(-1);
 }
@@ -39,7 +39,6 @@
     display: flex;
     margin-top: 28px;
     align-items: center;
-    width: 100%;
     text-decoration: none;
 }
 
@@ -85,12 +84,10 @@
     font-style: normal;
 }
 
-.sidebarBtn__signout {
-        
-}
+.sidebarBtn__signout {}
 
 .sidebarBtn:hover {
-    background-color:  #B6CADF;
+    background-color: #B6CADF;
     border-radius: 20px;
 }
 
@@ -116,7 +113,7 @@
     border-radius: 20px;
     font-size: 12px;
     line-height: 14px;
-    color:  #FFFFFF;
+    color: #FFFFFF;
     text-align: center;
 }
 
@@ -129,4 +126,10 @@
 .sidebarExitBtn {
     text-align: left;
     color: #879FB9
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
 }

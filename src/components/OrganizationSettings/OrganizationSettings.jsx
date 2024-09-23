@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './OrganizationSettings.css';
 import mainApi from "../../utils/api/mainApi";
 import { useParams } from "react-router-dom";
@@ -7,42 +7,64 @@ function OrganizationSettings() {
 
     const { id } = useParams();
     const [users, setUsers] = useState([]);
+    const [approveUsers, setApproveUsers] = useState([]);
     const [organization, setOrganization] = useState([]);
-    const [requestGB, setRequestGB] = useState("")
+    const [requestGB, setRequestGB] = useState("");
     const [requestFD, setRequestFD] = useState("");
-    const [requestGD, setRequestGD] = useState("");
+    const [requestGD, setRequestGD] = useState('Не указано');
 
     async function handleChooseUser(e) {
-        e.preventDefault();
-        const { user } = await mainApi.getInfoUserByEmail(requestGB);
-
-        if (!user) return;
-        const res = await mainApi.updateOrganizationApprovers(id, [
-            {
-                name: "Согласование ГБ",
-                id: user._id,
-            },
-        ]);
-        console.log(res);
+        try {
+            e.preventDefault();
+            console.log(requestFD, requestGB, requestGD);
+            const res = await mainApi.updateOrganizationApprovers(id, [
+                {
+                    name: "Согласование ГБ",
+                    id: requestGB,
+                },
+                {
+                    name: "Согласование ФД",
+                    id: requestFD,
+                },
+                {
+                    name: "Утверждение ГД",
+                    id: requestGD,
+                },
+            ]);
+            console.log(res);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
 
     async function getDataOrganization() {
         try {
-          const dataOrganization = await mainApi.getOrganizationByID(id);
-          setOrganization(dataOrganization);
-          const users = await Promise.all(dataOrganization.users.map((id) => mainApi.getInfoUserByID(id)));
-          setUsers(users);
-        } catch (err) {
-          console.log(err);
-        }
-      }
+            const dataOrganization = await mainApi.getOrganizationByID(id);
+            setOrganization(dataOrganization);
 
-    useState(() => {
+            console.log(dataOrganization.approveUsers[0].id);
+
+            const users = await Promise.all(dataOrganization.users.map((id) => mainApi.getInfoUserByID(id)));
+            setUsers(users);
+            const approveUsers = await Promise.all(dataOrganization.approveUsers.map(({ id }) => mainApi.getInfoUserByID(id)));
+            setApproveUsers(approveUsers);
+            setRequestGB(approveUsers[0].user._id)
+            setRequestFD(approveUsers[1].user._id)
+            setRequestGD(approveUsers[2].user._id)
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    console.log(approveUsers);
+
+
+    useEffect(() => {
         getDataOrganization();
-        console.log(users);
-        
     }, []);
+
+    console.log(requestGB, requestFD, requestGD);
 
 
     return (
@@ -52,36 +74,27 @@ function OrganizationSettings() {
                     <p>Маршрут согласования заявок и реестров</p>
                     <div className="organization__trackContainer">
                         <p>Согласование ГБ</p>
-                        {/* <input
-                            name="requestGB"
-                            id="requestGB"
-                            className="organization__input"
-                            type="email"
-                            value={requestGB}
-                            onChange={(e) => setRequestGB(e.target.value)}
-                        ></input> */}
-                        <select name="requestGB" id="reguestGB">
-                          <option>users[0]</option>
-
+                        <select name="requestGB" id="reguestGB" value={requestGB} onChange={(e) => setRequestGB(e.target.value)}>
+                            <option value="">Не Указано</option>
+                            {approveUsers.map((item, index) => {
+                                return <option key={index} value={item.user._id}>{`${item.user.name} ${item.user.fullname}`}</option>
+                            })}
                         </select>
                         <p>Согласование ФД</p>
-                        <input
-                            name="requestFD"
-                            id="requestFD"
-                            className="organization__input"
-                            type="email"
-                            value={requestFD}
-                            onChange={(e) => setRequestFD(e.target.value)}
-                        ></input>
+                        <select name="requestFD" id="reguestFD" value={requestFD} onChange={(e) => setRequestFD(e.target.value)}>
+                            <option value="">Не Указано</option>
+                            {approveUsers.map((item, index) => {
+                                return <option key={index} value={item.user._id}>{`${item.user.name} ${item.user.fullname}`}</option>
+                            })}
+                        </select>
                         <p>Утверждение ГД</p>
-                        <input
-                            name="requestGD"
-                            id="requestGD"
-                            className="organization__input"
-                            type="email"
-                            value={requestGD}
-                            onChange={(e) => setRequestGD(e.target.value)}
-                        ></input>
+                        <select name="requestGD" id="reguestGD" value={requestGD} onChange={(e) => setRequestGD(e.target.value)}>
+                            <option value="">Не Указано</option>
+                            {approveUsers.map((item, index) => {
+                                return <option key={index} value={item.user._id}>{`${item.user.name} ${item.user.fullname}`}</option>
+                            })}
+                        </select>
+
                     </div>
                     <button className="organizations__button" >Изменить маршрут</button>
                 </form>

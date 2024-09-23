@@ -1,25 +1,69 @@
 import React, { useEffect, useState } from "react";
 import "./Request.css";
-import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import mainApi from "../../utils/api/mainApi";
-import { actionSidebar, setHeaderTitle } from "../../redux/slices/viewSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { setHeaderTitle } from "../../redux/slices/viewSlice";
+import userSlice from "../../redux/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Request() {
-  const currentUser = React.useContext(CurrentUserContext);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const user = useSelector(state => state.userSlice);
+  console.log(user.user.name);
 
   const [request, setRequest] = useState({});
+  const [statuslog, setStatuslog] = useState([]);
   const [owner, setOwner] = useState({});
+  const [message, setMessage] = useState("");
 
   async function getDataRequest() {
     try {
       const dataRequest = await mainApi.getRequestByID(id);
       const { data } = await mainApi.getInfoUser(dataRequest.owner);
       setRequest(dataRequest);
+      setStatuslog(dataRequest.statuslog);
       setOwner(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleDate = (item) => {
+    const date = new Date(item);
+    return date.toLocaleDateString();
+  };
+
+  const handleTime = (item) => {
+    const date = new Date(item);
+    return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+  }
+
+  async function checkRequest() {
+    try {
+      mainApi.checkRequest({
+        _id: request._id,
+        status: "Утверждение ГД",
+        stageStatus: 1,
+        message: message,
+        user: user.user.name + " " + user.user.fullname,
+      });
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function cancelRequest() {
+    try {
+      mainApi.cancelRequest({
+        _id: request._id,
+        message: message,
+        user: user.user.name + " " + user.user.fullname,
+      });
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
@@ -30,6 +74,7 @@ function Request() {
   }, []);
 
   console.log(request, owner);
+  console.log(statuslog);
 
   return (
     <div className="request">
@@ -54,15 +99,45 @@ function Request() {
         <div className="request__form_field">{request.amount}</div>
         <ul className="request__form_caption">Срок оплаты</ul>
         <div className="request__form_field">{request.dayToPay}</div>
+        <ul className="request__form_caption">Статус</ul>
+        <div className="request__form_field">{request.status}</div>
+        <ul className="request__form_caption">Текущий ответственный</ul>
+        <div className="request__form_field">Анастасия Климантовичъ</div>
       </form>
 
-      <div className="request__log">Лог заявки</div>
+      <textarea className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
+      <div className="requestBtnContainer">
+        <button className="requestBtn" type="submit" onClick={checkRequest}>
+          Утвердить заявку
+        </button>
+        <button className="requestBtn_cancel" onClick={cancelRequest}>Отменить заявку</button>
+      </div>
 
-      <button className="requestBtn" type="submit">
-        Утвердить заявку
-      </button>
-      <button className="requestBtn">Отменить</button>
+      <div className="request__log">Лог заявки</div>
+      <div className="request__logCaptions">
+        <p>date</p>
+        <p>time</p>
+        <p>stage</p>
+        <p>user</p>
+        <p>message</p>
+      </div>
+
+      {statuslog.map((item, index) => {
+        return (
+          <div key={index} className="request__logFields request__logCaptions">
+            <p>{handleDate(item.date)}</p>
+            <p>{handleTime(item.date)}</p>
+            <p>{item.stage}</p>
+            <p>{item.user}</p>
+            <p>{item.message}</p>
+          </div>
+        )
+      })}
+
     </div>
+
+
+
   );
 }
 

@@ -41,13 +41,13 @@ class Auth {
 
   //проверка токена
   checkToken() {
-    return fetch(`${this._baseUrl}/users/`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
       },
-    })
+    }).then(this._returnResponse)
   }
 }
 

@@ -51,19 +51,31 @@
 
 .requestlist__items_status {
     height: 24px;
-    background-color: #FFECDD;
-    color: #FF7800;
+    background-color: #EBF4FD;
+    color: #879FB9;
     border-radius: 38px;
     border: none;
     text-align: center;
 }
 
-.requestlist__items_status-draft {
-    background-color: #EBF4FD;
-    color: #879FB9;
-}
 
 .requestlist__items_status-payd {
     background-color: #E7F5F1;
     color: #219653;
+}
+
+.requestlist__items_status-approved {
+    background-color: #FFECDD;
+    color: #FF7800;
+}
+
+.requestlist__items_status-cancel {
+    background-color: #FFF2F5;
+    color: #EB5757;
+}
+
+@media screen and (max-width: 768px) {
+    .requestlist {
+        margin: 0px 24px;
+    }
 }

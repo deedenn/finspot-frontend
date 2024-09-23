@@ -4,20 +4,16 @@ class MainApi {
   _url = "//localhost:3000"
   _headers = {
     "Content-Type": "application/json",
-    authorization: `Bearer ${localStorage.getItem("token")}`,
+    authorization: `Bearer ${localStorage.getItem("token") || ''}`,
   }
 
-  _returnResponse(res) {
+  async _returnResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
-      /*return Promise.reject(`Ошибка: ${res.status}`);*/
-      return res.text().then((text) => {
-        return Promise.reject({
-          statusError: res.statusCode,
-          error: JSON.parse(text).message,
-        });
-      });
+      return Promise.reject(
+        { status: res.status, message: await res.text() }
+      )
     }
   }
 
@@ -52,7 +48,7 @@ class MainApi {
 
   // изменить согласователей заявок и реестров
   updateOrganizationApprovers(id, approveUsers) {
-    return this._request(`${this._url}/updateApproveList`, {
+    return this._request(`${this._url}/organizations/updateApproveList`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ id, approveUsers })
@@ -110,7 +106,7 @@ class MainApi {
   patchUserByOrg(id, newUser) {
     console.log(id);
     console.log(newUser);
-    
+
     return this._request(`${this._url}/organizations/addusers`, {
       method: "PATCH",
       headers: this._headers,
@@ -124,7 +120,30 @@ class MainApi {
   //получение всех заявок пользователя
   getRequests() {
     return this._request(`${this._url}/requests`, {
-      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token")}` },
+      headers: { ...this._headers },
+    });
+  }
+
+
+  //получение всех заявок, доступ к которым имеет пользователь
+  getUserRequests(id) {
+    return this._request(`${this._url}/requests/approve/${id}`, {
+      headers: { ...this._headers },
+    });
+  }
+
+
+  //получение всех заявок организации
+  getRequestsByOrgID(id) {
+    return this._request(`${this._url}/requests/org/${id}`, {
+      headers: { ...this._headers },
+    });
+  }
+
+  //получение всех утвержденных заявок
+  getRequestsApproved(id) {
+    return this._request(`${this._url}/requests/approved/${id}`, {
+      headers: { ...this._headers },
     });
   }
 
@@ -153,10 +172,28 @@ class MainApi {
     });
   }
 
+  //утвержение заявки
+  checkRequest(data) {
+    return this._request(`${this._url}/requests/check`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(data)
+    });
+  }
+
+  //отмена заявки
+  cancelRequest(data) {
+    return this._request(`${this._url}/requests/cancel`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(data)
+    });
+  }
+
   //получение всех реестров пользователя
   getRegistries() {
     return this._request(`${this._url}/registries/`, {
-      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token")}` },
+      headers: { ...this._headers },
     });
   }
 

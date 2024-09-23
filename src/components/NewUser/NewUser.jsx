@@ -65,7 +65,6 @@ function NewUser() {
       name: name,
       fullname: fullname,
     })
-    console.log(newUserID);
 
     onAddUserByOrg({
       id: id,

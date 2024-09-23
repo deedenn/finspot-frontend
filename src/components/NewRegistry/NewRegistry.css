@@ -31,8 +31,7 @@
 
 .newregistryList {
     display: grid;
-    grid-template-columns: 113px auto auto auto auto 155px;
-    grid-template-rows: repeat(6, 20px);
+    grid-template-columns: auto 113px auto auto auto auto 155px;
     gap: 16px;
     padding-right: 32px;
 }
@@ -41,5 +40,5 @@
     font-size: 14px;
     line-height: 16px;
     color: #313A43;
-    
+
 }

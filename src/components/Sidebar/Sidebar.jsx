@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Sidebar.css";
-import { actionSidebar, setHeaderTitle } from "../../redux/slices/viewSlice";
+import { actionSidebar } from "../../redux/slices/viewSlice";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "../../images/logo.png";
 import requestImg from "../../images/sidebarBtn_request.png";

@@ -18,7 +18,6 @@ export const viewSlice = createSlice({
     },
 })
 
-
 export const { actionSidebar, setHeaderTitle } = viewSlice.actions;
 
 export default viewSlice.reducer;

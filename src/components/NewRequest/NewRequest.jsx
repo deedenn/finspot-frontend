@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./NewRequest.css";
-import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import mainApi from "../../utils/api/mainApi";
 import { useNavigate } from "react-router-dom";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function NewRequest() {
-  const currentUser = React.useContext(CurrentUserContext);
+  const { user } = useSelector(state => state.userSlice);
+  const { currentOrganization } = useSelector(state => state.organizationSlice);
+
+  console.log(currentOrganization);
+
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,30 +21,6 @@ function NewRequest() {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
   const [dateToPay, setDateToPay] = useState("");
-
-  function handleChangeTypeOfPay(evt) {
-    setTypeOfPay(evt.target.value);
-  }
-
-  function handleChangeContragent(evt) {
-    setContragent(evt.target.value);
-  }
-
-  function handleChangeAmount(evt) {
-    setAmount(evt.target.value);
-  }
-
-  function handleChangeDescription(evt) {
-    setDescription(evt.target.value);
-  }
-
-  function handleChangeFile(evt) {
-    setFile(evt.target.value);
-  }
-
-  function handleChangeDateToPay(evt) {
-    setDateToPay(evt.target.value);
-  }
 
   const onAddRequest = (newRequest) => {
     console.log(newRequest);
@@ -55,21 +35,27 @@ function NewRequest() {
   };
 
   const onHandleSubmit = () => {
-    console.log(typeOfPay);
-
     onAddRequest({
+      organization: currentOrganization._id,
       type: typeOfPay,
       amount: amount,
       contragent: contragent,
       dateToPay: dateToPay,
-      owner: { currentUser },
+      file: file,
+      owner: { user },
       description: description,
+      statuslog: [{
+        date: Date.now(),
+        stage: "Черновик",
+        user: user.name,
+      }]
     });
+    navigate('/');
   };
 
   useEffect(() => {
     dispatch(setHeaderTitle("Создать заявку"));
-  });
+  }, []);
 
   return (
     <div className="request">
@@ -82,11 +68,11 @@ function NewRequest() {
           type="text"
           placeholder="Введите название контрагента"
           name="contragent"
-          onChange={handleChangeContragent}
+          onChange={(evt) => setContragent(evt.target.value)}
         />
-        <ul className="request__form_caption">Инициатор</ul>
+        <ul className="request__form_caption">Организация</ul>
         <ul className="request__form_field request__form_field_input">
-          {currentUser.name + " " + currentUser.fullname}
+          {currentOrganization?.name}
         </ul>
         <ul className="request__form_caption">Содержание</ul>
         <input
@@ -94,7 +80,19 @@ function NewRequest() {
           type="text"
           placeholder="За что платим"
           name="description"
-          onChange={handleChangeDescription}
+          onChange={(evt) => setDescription(evt.target.value)}
+        />
+        <ul className="request__form_caption">Инициатор</ul>
+        <ul className="request__form_field request__form_field_input">
+          {user.name + " " + user.fullname}
+        </ul>
+        <ul className="request__form_caption">Файл</ul>
+        <input
+          className="request__form_field"
+          type="text"
+          placeholder="Вложите файл"
+          name="file"
+          onChange={(evt) => setFile(evt.target.value)}
         />
         <ul className="request__form_caption">Тип заявки</ul>
         <div className="request_form_radioContainer">
@@ -104,7 +102,7 @@ function NewRequest() {
             type="radio"
             name="radioCash"
             value="Безнал"
-            onChange={handleChangeTypeOfPay}
+            onChange={(evt) => setTypeOfPay(evt.target.value)}
           />
           <label htmlFor="radioCashless" className="request__form_radioLabel">
             Безнал
@@ -115,29 +113,28 @@ function NewRequest() {
             type="radio"
             name="radioCash"
             value="Нал"
-            onChange={handleChangeTypeOfPay}
+            onChange={(evt) => setTypeOfPay(evt.target.value)}
           />
           <label htmlFor="radioCash" className="request__form_radioLabel">
             Нал
           </label>
         </div>
 
-        <ul className="request__form_caption">Файл</ul>
-        <ul className="request__form_field">photo.jpg</ul>
+
         <ul className="request__form_caption">Сумма</ul>
         <input
           className="request__form_field"
           type="number"
           placeholder="Введите сумму"
           name="amount"
-          onChange={handleChangeAmount}
+          onChange={(evt) => setAmount(evt.target.value)}
         />
         <ul className="request__form_caption">Срок оплаты</ul>
         <input
           className="request__form_field"
           type="date"
           name="dateToPay"
-          onChange={handleChangeDateToPay}
+          onChange={(evt) => setDateToPay(evt.target.value)}
         />
       </form>
 

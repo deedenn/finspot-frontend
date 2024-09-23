@@ -4,8 +4,8 @@
 
 .request__form {
     background-color: #FFFFFF;
-    margin: 0 40px 32px 0;
-    padding: 32px 0;
+    margin: 0 0 32px 0;
+    padding: 32px 40px;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 100px 100px 100px 100px;
@@ -17,7 +17,7 @@
 .request__form_field {
     max-width: 385px;
     background-color: F5F7FA;
-    align-self: center;
+    align-content: center;
     padding: 0;
     height: 32px;
     border: #B6CADF 1px solid;
@@ -55,9 +55,6 @@
 .request_form_radioContainer {
     margin: 0;
     padding: 0;
-    align-items: end;
-    justify-items: end;
-    align-self: center;
 }
 
 .request__form_radioLabel {}

@@ -18,213 +18,163 @@ import ProtectedRoute from "../../pages/protectedRoute/protectedRoute";
 
 import auth from "../../utils/api/auth";
 
-import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import NewOrganization from "../NewOrganization/NewOrganization";
 import Organization from "../Organization/Organization";
 import OrganizationSettings from "../OrganizationSettings/OrganizationSettings";
 import NewRegistry from "../NewRegistry/NewRegistry";
+import { setUser } from "../../redux/slices/userSlice";
+import { setOrganization } from "../../redux/slices/organizationSlice";
+
 
 function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [serverError, setServerError] = React.useState({});
-  const [isOkRequest, setIsOkRequest] = React.useState(false);
 
-  // блок авторизация
 
-  //проверка токена
-  // создать отдельный хук
   React.useEffect(() => {
     const jwt = localStorage.getItem("token");
-    if (jwt) {
-      auth
-        .checkToken()
-        .then(() => {
+    jwt &&
+      Promise.all([auth.checkToken(), mainApi.getRequests(), mainApi.getOrganizations()])
+        .then(([userData, requestsData, organizations]) => {
+          dispatch(setOrganization(organizations.organizations));
           setLoggedIn(true);
+          dispatch(setUser(userData.data));
           navigate(pathname);
-        })
-        .catch((err) => {
-          console.log(`${err}`);
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  //регистрация
-  const onRegister = (values) => {
-    auth
-      .register(values.name, values.email, values.password)
-      .then(() => {
-        onLogin(values);
-      })
-      .catch((err) => {
-        console.log(`${err}`);
-        setServerError(err);
-      });
-  };
-
-  // логин
-  const onLogin = (values) => {
-    auth
-      .authorization(values.email, values.password)
-      .then((data) => {
-        if (data.token) {
-          setLoggedIn(true);
-          navigate("/requests", { replace: true });
-        }
-      })
-      .catch((err) => {
-        console.log(`${err}`);
-        setServerError(err);
-      });
-  };
-
-
-
-  React.useEffect(() => {
-    loggedIn &&
-      Promise.all([mainApi.getInfoUser(), mainApi.getRequests()])
-        .then(([userData]) => {
-          setCurrentUser(userData.data);
-          console.log(userData.data);
         })
         .catch((err) => {
           console.error(`Ошибка: ${err}`);
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="app">
-        {pathname !== "/signin" ? (
-          <Sidebar />
-        ) : null}
-        <div className="page">
-          {pathname !== "/signin" ? <Header /> : null}
-          <Routes>
-            <Route path="*" element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />} />
-            <Route
-              path="/requestlist"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <RequestList />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <RequestList />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/registrylist"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <RegistryList />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/request/:id"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Request />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/request/add"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <NewRequest />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/registry"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Registry />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/registry/add"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <NewRegistry />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/organizations/users/:id"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Users />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/users/add/:id"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <NewUser />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/organizationslist"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <OrganizationsList />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/organization/:id"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Organization />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/organization/settings/:id"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <OrganizationSettings />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/organizations/add"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <NewOrganization />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/signin" element={<Login />} />
-          </Routes>
-        </div>
+    <div className="app">
+      {pathname !== "/signin" ? (
+        <Sidebar />
+      ) : null}
+      <div className="page">
+        {pathname !== "/signin" ? <Header /> : null}
+        <Routes>
+          <Route path="*" element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />} />
+          <Route
+            path="/requestlist"
+            element={
+              <ProtectedRoute >
+                <RequestList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute >
+                <RequestList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/registrylist"
+            element={
+              <ProtectedRoute >
+                <RegistryList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/request/:id"
+            element={
+              <ProtectedRoute >
+                <Request />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/request/add"
+            element={
+              <ProtectedRoute >
+                <NewRequest />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/registry"
+            element={
+              <ProtectedRoute >
+                <Registry />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/registry/add"
+            element={
+              <ProtectedRoute >
+                <NewRegistry />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/organizations/users/:id"
+            element={
+              <ProtectedRoute >
+                <Users />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users/add/:id"
+            element={
+              <ProtectedRoute >
+                <NewUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/organizationslist"
+            element={
+              <ProtectedRoute >
+                <OrganizationsList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/organization/:id"
+            element={<ProtectedRoute >
+              <Organization />
+            </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/organization/settings/:id"
+            element={
+              <ProtectedRoute >
+                <OrganizationSettings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/organizations/add"
+            element={
+              <ProtectedRoute >
+                <NewOrganization />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute >
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/signin" element={<Login />} />
+        </Routes>
       </div>
-    </CurrentUserContext.Provider>
+    </div>
   );
 }
 

@@ -22,6 +22,8 @@
 }
 
 .header__user_company {
+    background-color: #F5F7FA;
+    border: none;
     color: #313A43;
     font-size: 16px;
     font-weight: 500;
@@ -48,4 +50,14 @@
 .header__createRequestBtn:hover {
     background-color: antiquewhite;
     color: black;
+}
+
+.header__burger {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .header__burger {
+        display: flex;
+    }
 }
