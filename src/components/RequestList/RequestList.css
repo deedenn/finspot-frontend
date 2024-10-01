@@ -78,4 +78,16 @@
     .requestlist {
         margin: 0px 24px;
     }
+    .requestlist__items {
+        display: grid;
+        grid-template-columns: 113px 110px 150px 80px 140px;
+        gap: 16px;
+        padding-right: 32px;
+    }
+    .requestlist__header_caption-none {
+        display: none;
+    }
+    .requestlist__items_caption-none {
+        display: none;
+    }
 }

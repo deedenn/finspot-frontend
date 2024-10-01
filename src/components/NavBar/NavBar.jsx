@@ -25,6 +25,7 @@ function NavBar({ setFilterRequests, requests, stateRequests }) {
 
   return (
     <div className="navbar">
+      <div className="navbar__list">
       <li
         onClick={() => {
           setActiveIndex(-1);
@@ -47,6 +48,16 @@ function NavBar({ setFilterRequests, requests, stateRequests }) {
           </li>
         );
       })}
+      </div>
+      <select className="navbar__select">
+      {arrCategory.map((item, index) => {
+        return (
+          <option key={index} onChange={(e) => handleClick(e, index)}>
+            {item}
+          </option>
+        );
+      })}
+      </select>
     </div>
   );
 }

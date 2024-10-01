@@ -7,7 +7,6 @@ function NewOrganization() {
 
     const [name, setName] = useState("");
     const [inn, setInn] = useState("");
-    const [prefix, setPrefix] = useState("");
     const navigate = useNavigate();
 
     const onAddOrganization = (newOrganization) => {
@@ -24,7 +23,6 @@ function NewOrganization() {
         onAddOrganization({
             inn: inn,
             name: name,
-            prefix: prefix,
         });
         navigate('/organizationslist');
     }
@@ -36,8 +34,6 @@ function NewOrganization() {
                 <input name="inn" placeholder="Введите ИНН" onChange={(evt) => setInn(evt.target.value)}></input>
                 <p>Название</p>
                 <input name="name" placeholder="Введите название" onChange={(evt) => setName(evt.target.value)}></input>
-                <p>Префикс (макс 4 символа)</p>
-                <input name="prefix" placeholder="Введите префикс" onChange={(evt) => setPrefix(evt.target.value)}></input>
             </div>
             <button className="newOrganization__addBtn" onClick={onHandleSubmit}>Создать организацию</button>
         </div>

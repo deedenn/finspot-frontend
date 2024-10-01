@@ -23,3 +23,14 @@
     color:  #0078FF;
     text-decoration: underline;
 }
+
+@media screen and (max-width: 768px) {
+    .navbar__list {
+        display: none;
+    }
+
+    .navbar__select {
+        width: 220px;
+        height: 48px;
+    }
+}

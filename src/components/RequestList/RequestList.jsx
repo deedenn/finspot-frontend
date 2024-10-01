@@ -59,7 +59,7 @@ function RequestList() {
           <p className="requestlist__header_caption">Дата создания</p>
           <p className="requestlist__header_caption">Контрагент</p>
           <p className="requestlist__header_caption">Содержание</p>
-          <p className="requestlist__header_caption">Файл</p>
+          <p className="requestlist__header_caption requestlist__header_caption-none">Файл</p>
           <p className="requestlist__header_caption">Сумма</p>
           <p className="requestlist__header_caption">Статус</p>
         </div>
@@ -80,7 +80,7 @@ function RequestList() {
               <p className="requestlist__items_caption">
                 {item.description}
               </p>
-              <p className="requestlist__items_caption">{item.file}</p>
+              <p className="requestlist__items_caption requestlist__items_caption-none">{item.file}</p>
               <p className="requestlist__items_caption requestlist__items_sum">
                 {item.amount}
               </p>

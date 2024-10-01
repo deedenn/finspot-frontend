@@ -11,6 +11,7 @@ function NewRegistry() {
   const { user } = useSelector(state => state.userSlice);
   const { currentOrganization } = useSelector(state => state.organizationSlice);
   const [requests, setRequests] = useState([]);
+  const [registrySum, setRegistrySum] = useState(0);
   const [approvedRequests, setApprovedRequests] = useState([]);
   const navigate = useNavigate();
 
@@ -45,6 +46,10 @@ function NewRegistry() {
     navigate('/');
   }
 
+  const onSum = () => {
+
+  }
+
   useEffect(() => {
     dispatch(setHeaderTitle("Создать реестр"));
     mainApi.getRequestsApproved(currentOrganization._id)
@@ -64,8 +69,8 @@ function NewRegistry() {
         <p className="newregistryInfoCaption">Статус</p>
 
         <p className="newregistryInfoValue">7843548949</p>
-        <p className="newregistryInfoValue">20.03.2024</p>
-        <p className="newregistryInfoValue">4 006 000,00</p>
+        <p className="newregistryInfoValue">{Date()}</p>
+        <p className="newregistryInfoValue">{registrySum}</p>
         <p className="newregistryInfoValue">Черновик</p>
 
       </div>
@@ -75,7 +80,7 @@ function NewRegistry() {
             <input onChange={() => {
               console.log(item._id);
               requests.push(item._id);
-
+              setRegistrySum(item.amount);
               console.log(requests);
             }
             }

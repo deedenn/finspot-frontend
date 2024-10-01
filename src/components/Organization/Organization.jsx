@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Organization.css";
 import mainApi from "../../utils/api/mainApi";
 import { useNavigate, useParams } from "react-router-dom";
-import { CurrentUserContext } from "../../contexts/CurrentUserContexts";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
 import { useDispatch } from "react-redux";
 
 function Organization() {
-  const currentUser = CurrentUserContext;
   const [organization, setOrganization] = useState([]);
 
   const { id } = useParams();
@@ -27,8 +25,6 @@ function Organization() {
     getDataOrganization();
   }, []);
 
-  console.log(organization);
-
   return (
     <div className="organization">
       <div className="organization__container">
@@ -38,9 +34,11 @@ function Organization() {
           <p className="organization__caption">Название</p>
           <p className="organization__value">{organization.name}</p>
           <p className="organization__caption">Активная</p>
-          <p className="organization__value">{organization.isActive}</p>
+          <p className="organization__value">{organization.isActive ? "Да" : "Нет"}</p>
+          <p className="organization__caption">Оплачено</p>
+          <p className="organization__value">{organization.paystatus ? "Да" : "Нет"}</p>
           <p className="organization__caption">Оплачено до</p>
-          <p className="organization__value">{organization.paystatus}</p>
+          <p className="organization__value">{organization.expiredof}</p>
         </div>
 
         <button className="organization__button" onClick={() => {
