@@ -14,6 +14,7 @@ const colorStatus = {
 
 function RequestList() {
   const [filterRequests, setFilterRequests] = useState([]);
+  const [stateRequests, setStateRequests] = useState([])
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector(state => state.userSlice);
@@ -32,11 +33,17 @@ function RequestList() {
   useEffect(() => {
     dispatch(setHeaderTitle("Заявки"));
 
-    mainApi.getUserRequests(user._id).then((data) => {
-      console.log(data);
+    // mainApi.getUserRequests(user._id).then((data) => {
+    //   console.log(data);
 
-      setFilterRequests(data[0].reqs);
-    }).catch((err) => console.log(err))
+    //   setFilterRequests(data[0].reqs);
+    // }).catch((err) => console.log(err))
+
+    mainApi.getRequestsByOrgID(currentOrganization._id).then((data) => {
+      console.log(data.request);
+      setStateRequests(data.request)
+      setFilterRequests(data.request);
+    }).catch((err) => console.log(err));
 
     // mainApi.getRequests().then((data) => {
     //   setFilterRequests(data);
@@ -45,7 +52,7 @@ function RequestList() {
 
   return (
     <div className="request__container">
-      <NavBar setFilterRequests={setFilterRequests} requests={filterRequests} />
+      <NavBar setFilterRequests={setFilterRequests} stateRequests={stateRequests} requests={filterRequests} />
 
       <div className="requestlist">
         <div className="requestlist__captions requestlist__items">

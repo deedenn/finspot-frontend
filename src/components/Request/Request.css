@@ -88,6 +88,10 @@
     border: #B6CADF 1px solid;
 }
 
+.request__submitContainer-none {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
 
     .request {}

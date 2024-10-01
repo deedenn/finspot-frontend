@@ -11,7 +11,6 @@ function NewRequest() {
 
   console.log(currentOrganization);
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -42,6 +41,17 @@ function NewRequest() {
       contragent: contragent,
       dateToPay: dateToPay,
       file: file,
+      track: [
+        { key: -1, name: "Отменено" },
+        { key: 0, name: "Черновик" },
+        { key: 1, name: "Согласование ГБ" },
+        { key: 2, name: "Согласование ФД" },
+        { key: 3, name: "Утверждение ГД" },
+        { key: 4, name: "Утверждено" },
+        { key: 5, name: "В реестре" },
+        { key: 6, name: "В оплате" },
+        { key: 7, name: "Оплачено" },
+      ],
       owner: { user },
       description: description,
       statuslog: [{
@@ -61,7 +71,7 @@ function NewRequest() {
     <div className="request">
       <form className="request__form">
         <ul className="request__form_caption">№ заявки</ul>
-        <ul className="request__form_field">12334213</ul>
+        <ul className="request__form_field">{user.requestId}</ul>
         <ul className="request__form_caption">Контрагент</ul>
         <input
           className="request__form_field"

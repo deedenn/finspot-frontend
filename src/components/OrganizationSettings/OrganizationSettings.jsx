@@ -73,14 +73,14 @@ function OrganizationSettings() {
                 <form onSubmit={handleChooseUser}>
                     <p>Маршрут согласования заявок и реестров</p>
                     <div className="organization__trackContainer">
-                        <p>Согласование ГБ</p>
+                        <p>Согласование главным бухгалтером</p>
                         <select name="requestGB" id="reguestGB" value={requestGB} onChange={(e) => setRequestGB(e.target.value)}>
                             <option value="">Не Указано</option>
                             {approveUsers.map((item, index) => {
                                 return <option key={index} value={item.user._id}>{`${item.user.name} ${item.user.fullname}`}</option>
                             })}
                         </select>
-                        <p>Согласование ФД</p>
+                        <p>Согласование финансовым директором</p>
                         <select name="requestFD" id="reguestFD" value={requestFD} onChange={(e) => setRequestFD(e.target.value)}>
                             <option value="">Не Указано</option>
                             {approveUsers.map((item, index) => {

@@ -3,7 +3,6 @@ import "./Request.css";
 import { useNavigate, useParams } from "react-router-dom";
 import mainApi from "../../utils/api/mainApi";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
-import userSlice from "../../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Request() {
@@ -73,9 +72,6 @@ function Request() {
     getDataRequest();
   }, []);
 
-  console.log(request, owner);
-  console.log(statuslog);
-
   return (
     <div className="request">
       <form className="request__form">
@@ -105,12 +101,14 @@ function Request() {
         <div className="request__form_field">Анастасия Климантовичъ</div>
       </form>
 
-      <textarea className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
-      <div className="requestBtnContainer">
-        <button className="requestBtn" type="submit" onClick={checkRequest}>
-          Утвердить заявку
-        </button>
-        <button className="requestBtn_cancel" onClick={cancelRequest}>Отменить заявку</button>
+      <div className={`request__submitContainer ${request.status === "Утверждено" ? 'request__submitContainer-none' : ''}`}>
+        <textarea className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
+        <div className="requestBtnContainer">
+          <button className="requestBtn" type="submit" onClick={checkRequest}>
+            Утвердить заявку
+          </button>
+          <button className="requestBtn_cancel" onClick={cancelRequest}>Отменить заявку</button>
+        </div>
       </div>
 
       <div className="request__log">Лог заявки</div>
@@ -121,6 +119,7 @@ function Request() {
         <p>user</p>
         <p>message</p>
       </div>
+
 
       {statuslog.map((item, index) => {
         return (

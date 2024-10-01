@@ -26,7 +26,7 @@ class MainApi {
   //получение списка организаций
   getOrganizations() {
     return this._request(`${this._url}/organizations`, {
-      headers: this._headers,
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token") || ''}` },
     });
   }
 
@@ -120,7 +120,7 @@ class MainApi {
   //получение всех заявок пользователя
   getRequests() {
     return this._request(`${this._url}/requests`, {
-      headers: { ...this._headers },
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token") || ''}` },
     });
   }
 
@@ -198,10 +198,11 @@ class MainApi {
   }
 
   //создание реестра
-  addRegistry() {
+  addRegistry(data) {
     return this._request(`${this._url}/registries/add`, {
       method: "POST",
       headers: this._headers,
+      body: JSON.stringify(data)
     });
   }
 

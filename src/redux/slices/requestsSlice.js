@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     requests: [],
+    requestsCounter: null,
 }
 
 export const requestsSlice = createSlice({
@@ -9,13 +10,14 @@ export const requestsSlice = createSlice({
     initialState,
     reducers: {
         getRequestsByOrg: (state, action) => {
-            console.log(action.payload);
-
             state.requests = action.payload;
-        }
+        },
+        getRequestsByUser: (state, action) => {
+            state.requests = action.payload;
+        },
     },
 })
 
-export const { getRequestsByOrg } = requestsSlice.actions;
+export const { getRequestsByOrg, getRequestsByUser } = requestsSlice.actions;
 
 export default requestsSlice.reducer;

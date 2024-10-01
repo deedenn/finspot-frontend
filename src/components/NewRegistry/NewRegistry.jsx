@@ -3,25 +3,56 @@ import './NewRegistry.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
 import mainApi from "../../utils/api/mainApi";
+import { useNavigate } from "react-router-dom";
 
 function NewRegistry() {
 
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.userSlice);
   const { currentOrganization } = useSelector(state => state.organizationSlice);
+  const [requests, setRequests] = useState([]);
   const [approvedRequests, setApprovedRequests] = useState([]);
+  const navigate = useNavigate();
 
   const handleDate = (item) => {
     const date = new Date(item);
     return date.toLocaleDateString();
   };
 
+  const onAddRegistry = (newRegistry) => {
+    console.log(newRegistry);
+    mainApi
+      .addRegistry(newRegistry)
+      .then((newRegistry) => {
+        console.log(newRegistry);
+      })
+      .catch((err) => {
+        console.error(`Ошибка: ${err}`);
+      });
+  };
+
+  function onHandleSubmit() {
+    onAddRegistry({
+      organization: currentOrganization._id,
+      owner: { user },
+      requests: requests,
+      statuslog: [{
+        date: Date.now(),
+        stage: "Черновик",
+        user: user.name,
+      }]
+    });
+    navigate('/');
+  }
+
   useEffect(() => {
     dispatch(setHeaderTitle("Создать реестр"));
     mainApi.getRequestsApproved(currentOrganization._id)
       .then((data) => {
         setApprovedRequests(data.request);
-      }).catch((err) => console.log(err))
-  })
+      }).catch((err) => console.log(err));
+
+  }, [currentOrganization])
 
   return (
     <div className="newregistry">
@@ -41,7 +72,14 @@ function NewRegistry() {
       {approvedRequests.map((item, index) => {
         return (
           <div key={index} className="newregistryList">
-            <input className="newregistrylist__item" type="checkbox"></input>
+            <input onChange={() => {
+              console.log(item._id);
+              requests.push(item._id);
+
+              console.log(requests);
+            }
+            }
+              className="newregistrylist__item" type="checkbox"></input>
             <ul className="newregistrylist__item">{handleDate(item.createdAt)}</ul>
             <ul className="newregistrylist__item">{item.contragent}</ul>
             <ul className="newregistrylist__item">{item.description}</ul>
@@ -52,10 +90,7 @@ function NewRegistry() {
         )
       })}
 
-
-      <button className="newregistryBtn">Создать реестр</button>
-      <button className="newregistryBtn">Сохранить</button>
-      <button className="newregistryBtn">Отменить</button>
+      <button className="newregistryBtn" onClick={onHandleSubmit}>Создать реестр</button>
     </div>
   )
 }

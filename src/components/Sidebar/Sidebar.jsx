@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Sidebar.css";
@@ -14,11 +14,28 @@ import usersImg from "../../images/sidebarBtn_users.png";
 import logoChange from "../../images/sidebarBtn_changeLogo.png";
 import logoutImg from "../../images/sidebarBtn_logout.png";
 import navbarBtnImg from "../../images/navbarBtn.png";
+import mainApi from "../../utils/api/mainApi";
 
 function Sidebar() {
   const openedSidebar = useSelector((state) => state.viewSlice.openedSidebar);
+  const user = useSelector((state) => state.userSlice.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // запрос заявок для реакции пользователем
+
+  const onUpdateCounter = () => {
+    mainApi.getUserRequests(user)
+      .then((requests) => {
+        console.log(requests);
+      })
+      .catch((err) => {
+        console.error(`Ошибка: ${err}`);
+      });
+  }
+
+  // useEffect(() => {
+  // }, []);
 
   // выход
   const onSignOut = () => {

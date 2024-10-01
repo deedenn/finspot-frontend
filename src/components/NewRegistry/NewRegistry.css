@@ -42,3 +42,11 @@
     color: #313A43;
 
 }
+
+.newregistryBtn {
+    background-color: #FFFFFF;
+    border: none;
+    margin: 0 20px 0 0;
+    padding: 0 24px;
+    height: 48px;
+}

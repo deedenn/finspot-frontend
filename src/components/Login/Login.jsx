@@ -5,10 +5,13 @@ import loginPagePicture from "../../images/loginPagePicture.png";
 import logo from "../../images/logo.png";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import auth from "../../utils/api/auth";
+import { setAuth } from "../../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 function Login(props) {
-  const { values, handleChange, errors, isValid } = useFormValidation();
+  const { values, handleChange } = useFormValidation();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e) => {
     try {
@@ -25,6 +28,7 @@ function Login(props) {
         const data = await res.json();
         if (data.token) {
           localStorage.setItem("token", data.token);
+          dispatch(setAuth())
           navigate("/");
         }
       }

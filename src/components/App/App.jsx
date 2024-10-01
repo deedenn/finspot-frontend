@@ -19,7 +19,7 @@ import ProtectedRoute from "../../pages/protectedRoute/protectedRoute";
 import auth from "../../utils/api/auth";
 
 import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NewOrganization from "../NewOrganization/NewOrganization";
 import Organization from "../Organization/Organization";
 import OrganizationSettings from "../OrganizationSettings/OrganizationSettings";
@@ -27,16 +27,15 @@ import NewRegistry from "../NewRegistry/NewRegistry";
 import { setUser } from "../../redux/slices/userSlice";
 import { setOrganization } from "../../redux/slices/organizationSlice";
 
-
 function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const replaceAuth = useSelector((state) => state.userSlice.replaceAuth)
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-
   React.useEffect(() => {
+    document.title = 'Finspot - финансовая платформа';
     const jwt = localStorage.getItem("token");
     jwt &&
       Promise.all([auth.checkToken(), mainApi.getRequests(), mainApi.getOrganizations()])
@@ -47,9 +46,9 @@ function App() {
           navigate(pathname);
         })
         .catch((err) => {
-          console.error(`Ошибка: ${err}`);
+          console.error(err);
         });
-  }, []);
+  }, [replaceAuth]);
 
   return (
     <div className="app">
