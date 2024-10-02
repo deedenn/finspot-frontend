@@ -49,3 +49,14 @@
 .users__select {
     height: 32px;
 }
+
+@media screen and (max-width: 768px) {
+    .users__values {
+        display: grid;
+        grid-template-columns: 160px 150px 180px 140px;
+        color: #313A43;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+    }
+}

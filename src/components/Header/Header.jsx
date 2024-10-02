@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import "./Header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getRequestsByOrg } from "../../redux/slices/requestsSlice";
-import imgBurger from '../../images/menu_burger.svg'
+import imgBurger from '../../images/menu_burger.svg';
 import mainApi from "../../utils/api/mainApi";
 import { setCurrentOrganization, setOrganization } from "../../redux/slices/organizationSlice";
+import { closeSidebar } from "../../redux/slices/viewSlice";
 
 
 function Header() {
@@ -47,7 +48,7 @@ function Header() {
           <div className="header__user_role">{user ? user.name + ' ' + user.fullname : ''}</div>
 
         </div>
-        <img className="header__burger" src={imgBurger}></img>
+        <button className="header__burger" src={imgBurger} onClick={() => dispatch(closeSidebar())}></button>
       </div>
     </div>
   );

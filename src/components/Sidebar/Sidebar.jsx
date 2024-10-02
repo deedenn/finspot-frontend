@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Sidebar.css";
-import { actionSidebar } from "../../redux/slices/viewSlice";
+import { actionSidebar, closeSidebar } from "../../redux/slices/viewSlice";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "../../images/logo.png";
 import requestImg from "../../images/sidebarBtn_request.png";
@@ -17,7 +17,8 @@ import navbarBtnImg from "../../images/navbarBtn.png";
 import mainApi from "../../utils/api/mainApi";
 
 function Sidebar() {
-  const openedSidebar = useSelector((state) => state.viewSlice.openedSidebar);
+  const smallSidebar = useSelector((state) => state.viewSlice.smallSidebar);
+  const closedSidebar = useSelector((state) => state.viewSlice.closedSidebar);
   const user = useSelector((state) => state.userSlice.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,19 +45,20 @@ function Sidebar() {
   };
 
   return (
-    <div className={`sidebar ${!openedSidebar && "sidebar_close"}`}>
+    <div className={`sidebar ${!smallSidebar && "sidebar__small"} ${!closedSidebar && "sidebar__close"}`}>
       <Link to="/" className="sidebar__logo">
         <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
-        {openedSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
+        {smallSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
         <button
-          className={`sidebarHideBtn ${!openedSidebar && "sidebarHideBtn-close"
+          className={`sidebarHideBtn ${!smallSidebar && "sidebarHideBtn-close"
             }`}
           onClick={() => dispatch(actionSidebar())}
         ></button>
       </Link>
+        <button className="sidebarCloseBtn" onClick={() => dispatch(closeSidebar())}>X</button>
 
       <div className="sidebarMenu">
-        {openedSidebar && <div className="sidebarMenuCaption">Меню</div>}
+        {smallSidebar && <div className="sidebarMenuCaption">Меню</div>}
         <Link
 
           to="/requestlist"
@@ -65,7 +67,7 @@ function Sidebar() {
           type="button"
         >
           <img className="sidebarBtnLogo" alt="Заявки" src={requestImg}></img>
-          {openedSidebar && <div className="sidebarBtnCaption">Заявки</div>}
+          {smallSidebar && <div className="sidebarBtnCaption">Заявки</div>}
           <div className="sidebarBtnCounter">3</div>
         </Link>
 
@@ -77,7 +79,7 @@ function Sidebar() {
           type="button"
         >
           <img className="sidebarBtnLogo" alt="Реестры" src={registryImg}></img>
-          {openedSidebar && <div className="sidebarBtnCaption">Реестры</div>}
+          {smallSidebar && <div className="sidebarBtnCaption">Реестры</div>}
           <div className="sidebarBtnCounter">2</div>
         </Link>
 
@@ -93,13 +95,13 @@ function Sidebar() {
             alt="Личный кабинет"
             src={profileImg}
           ></img>
-          {openedSidebar && (
+          {smallSidebar && (
             <div className="sidebarBtnCaption">Личный кабинет</div>
           )}
         </Link>
       </div>
       <div className="sidebarMenu">
-        {openedSidebar && (
+        {smallSidebar && (
           <div className="sidebarMenuCaption">Быстрые действия</div>
         )}
 
@@ -114,7 +116,7 @@ function Sidebar() {
             alt="Создать заявку"
             src={addReguestImg}
           ></img>
-          {openedSidebar && (
+          {smallSidebar && (
             <div className="sidebarBtnCaption">Создать заявку</div>
           )}
         </Link>
@@ -131,13 +133,13 @@ function Sidebar() {
             alt="Создать реестр"
             src={addRegistryImg}
           ></img>
-          {openedSidebar && (
+          {smallSidebar && (
             <div className="sidebarBtnCaption">Создать реестр</div>
           )}
         </Link>
       </div>
       <div className="sidebarMenu">
-        {openedSidebar && (
+        {smallSidebar && (
           <div className="sidebarMenuCaption">Компания</div>
         )}
 
@@ -149,7 +151,7 @@ function Sidebar() {
           type="button"
         >
           <img className="sidebarBtnLogo" alt="Организации" src={usersImg}></img>
-          {openedSidebar && (
+          {smallSidebar && (
             <div className="sidebarBtnCaption">Организации</div>
           )}
         </Link>
@@ -162,7 +164,7 @@ function Sidebar() {
         onClick={onSignOut}
       >
         <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
-        {openedSidebar && (
+        {smallSidebar && (
           <div className="sidebarBtnCaption">Выйти</div>
         )}
       </Link>

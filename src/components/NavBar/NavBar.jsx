@@ -23,6 +23,12 @@ function NavBar({ setFilterRequests, requests, stateRequests }) {
     );
   }
 
+  function handleClickSelect(e) {
+    setFilterRequests(() =>
+      stateRequests.filter((item) => item.status === e.target.value)
+    );
+  }
+
   return (
     <div className="navbar">
       <div className="navbar__list">
@@ -49,10 +55,14 @@ function NavBar({ setFilterRequests, requests, stateRequests }) {
         );
       })}
       </div>
-      <select className="navbar__select">
+      <select name="filterStatus" id="filterStatus" className="navbar__select" onChange={(e) => handleClickSelect(e)}>
+        <option onClick={() => {
+          setActiveIndex(-1);
+          setFilterRequests(requests);
+        }}>-- Фильтр -- </option>
       {arrCategory.map((item, index) => {
         return (
-          <option key={index} onChange={(e) => handleClick(e, index)}>
+          <option key={index} value={item}>
             {item}
           </option>
         );

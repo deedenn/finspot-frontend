@@ -14,7 +14,7 @@ const colorStatus = {
 
 function RequestList() {
   const [filterRequests, setFilterRequests] = useState([]);
-  const [stateRequests, setStateRequests] = useState([])
+  const [stateRequests, setStateRequests] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector(state => state.userSlice);

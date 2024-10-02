@@ -1,5 +1,4 @@
 .sidebar {
-
     display: flex;
     flex-direction: column;
     color: #FFFFFF;
@@ -9,10 +8,15 @@
     transition: 0.8s;
 }
 
-.sidebar_close {
+.sidebar__small {
     width: 112px;
     padding: 0;
     align-items: center;
+}
+
+.sidebar__close {
+    visibility: hidden;
+    transition: 0s;
 }
 
 .sidebarHideBtn {
@@ -33,6 +37,10 @@
 .sidebarHideBtn:hover {
     opacity: 60%;
     cursor: pointer;
+}
+
+.sidebarCloseBtn {
+    display: none;
 }
 
 .sidebar__logo {
@@ -129,7 +137,31 @@
 }
 
 @media screen and (max-width: 768px) {
+    
     .sidebar {
+        display: flex;
+        padding-left: 40px;
+        padding-right: 40px;
+        position: absolute;
+        right: 0;
+        background-color: #FFFFFF;
+        transition: 0.8s;
+    }
+
+    .sidebarHideBtn-close {
         display: none;
+    }
+
+    .sidebar__logo {
+        display: none;
+    }
+
+    .sidebarCloseBtn {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        border: none;
+        justify-content: center;
+        align-items: center;
     }
 }

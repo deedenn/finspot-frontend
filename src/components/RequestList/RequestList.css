@@ -91,3 +91,30 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .requestlist {
+        padding: 20px;
+        margin: 0px 40px;
+        background: none;
+        border-radius: 20px;
+    }
+
+    .requestlist__header_caption {
+        display: none;
+    }
+    .requestlist__items {
+        display: flex;
+        gap: 0px;
+        flex-direction: column;
+        margin-bottom: 10px;
+        background-color: white;
+        border-radius: 15px;
+        
+    }
+
+    .requestlist__items_caption {
+        padding: 0;
+        margin: 10px;
+    }
+}
