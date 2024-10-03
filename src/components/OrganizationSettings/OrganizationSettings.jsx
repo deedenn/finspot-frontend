@@ -32,8 +32,8 @@ function OrganizationSettings() {
                 },
             ]);
             console.log(res);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
         }
     }
 
