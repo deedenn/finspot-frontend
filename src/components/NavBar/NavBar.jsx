@@ -24,49 +24,50 @@ function NavBar({ setFilterRequests, requests, stateRequests }) {
   }
 
   function handleClickSelect(e) {
-    setFilterRequests(() =>
-      stateRequests.filter((item) => item.status === e.target.value)
-    );
+    if (e.target.value === '') {
+      setFilterRequests(stateRequests);
+    } else {
+      setFilterRequests(() =>
+        stateRequests.filter((item) => item.status === e.target.value)
+      );
+    }
   }
 
   return (
     <div className="navbar">
       <div className="navbar__list">
-      <li
-        onClick={() => {
-          setActiveIndex(-1);
-          setFilterRequests(requests);
-        }}
-        className={`navbar__status ${activeIndex === -1 && "navbar__status_active"
-          }`}
-      >
-        Все
-      </li>
-      {arrCategory.map((item, index) => {
-        return (
-          <li
-            key={index}
-            onClick={(e) => handleClick(e, index)}
-            className={`navbar__status ${activeIndex === index && "navbar__status_active"
-              }`}
-          >
-            {item}
-          </li>
-        );
-      })}
+        <li
+          onClick={() => {
+            setActiveIndex(-1);
+            setFilterRequests(requests);
+          }}
+          className={`navbar__status ${activeIndex === -1 && "navbar__status_active"
+            }`}
+        >
+          Все
+        </li>
+        {arrCategory.map((item, index) => {
+          return (
+            <li
+              key={index}
+              onClick={(e) => handleClick(e, index)}
+              className={`navbar__status ${activeIndex === index && "navbar__status_active"
+                }`}
+            >
+              {item}
+            </li>
+          );
+        })}
       </div>
       <select name="filterStatus" id="filterStatus" className="navbar__select" onChange={(e) => handleClickSelect(e)}>
-        <option onClick={() => {
-          setActiveIndex(-1);
-          setFilterRequests(requests);
-        }}>-- Фильтр -- </option>
-      {arrCategory.map((item, index) => {
-        return (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        );
-      })}
+        <option value=''> Все </option>
+        {arrCategory.map((item, index) => {
+          return (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

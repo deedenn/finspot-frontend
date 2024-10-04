@@ -45,129 +45,133 @@ function Sidebar() {
   };
 
   return (
-    <div className={`sidebar ${!smallSidebar && "sidebar__small"} ${!closedSidebar && "sidebar__close"}`}>
-      <Link to="/" className="sidebar__logo">
-        <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
-        {smallSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
-        <button
-          className={`sidebarHideBtn ${!smallSidebar && "sidebarHideBtn-close"
-            }`}
-          onClick={() => dispatch(actionSidebar())}
-        ></button>
-      </Link>
+    <div className={`${!closedSidebar && 'sidebar__close'} sidebar__overlay`}>
+
+      <div className={`sidebar ${!smallSidebar && "sidebar__small"} `}>
+        <Link to="/" className="sidebar__logo">
+          <img className="sidebar__logo_image" alt="Finspot" src={logo}></img>
+          {smallSidebar && <div className="sidebar__logo_caption">FINSPOT</div>}
+          <button
+            className={`sidebarHideBtn ${!smallSidebar && "sidebarHideBtn-close"
+              }`}
+            onClick={() => dispatch(actionSidebar())}
+          ></button>
+        </Link>
         <button className="sidebarCloseBtn" onClick={() => dispatch(closeSidebar())}>X</button>
 
-      <div className="sidebarMenu">
-        {smallSidebar && <div className="sidebarMenuCaption">Меню</div>}
-        <Link
+        <div className="sidebarMenu">
+          {smallSidebar && <div className="sidebarMenuCaption">Меню</div>}
+          <Link
 
-          to="/requestlist"
-          className="sidebarBtn"
-          alt="Заявки"
-          type="button"
-        >
-          <img className="sidebarBtnLogo" alt="Заявки" src={requestImg}></img>
-          {smallSidebar && <div className="sidebarBtnCaption">Заявки</div>}
-          <div className="sidebarBtnCounter">3</div>
-        </Link>
+            to="/requestlist"
+            className="sidebarBtn"
+            alt="Заявки"
+            type="button"
+          >
+            <img className="sidebarBtnLogo" alt="Заявки" src={requestImg}></img>
+            {smallSidebar && <div className="sidebarBtnCaption">Заявки</div>}
+            <div className="sidebarBtnCounter">3</div>
+          </Link>
 
-        <Link
+          <Link
 
-          to="/registrylist"
-          className="sidebarBtn"
-          alt="Реестры"
-          type="button"
-        >
-          <img className="sidebarBtnLogo" alt="Реестры" src={registryImg}></img>
-          {smallSidebar && <div className="sidebarBtnCaption">Реестры</div>}
-          <div className="sidebarBtnCounter">2</div>
-        </Link>
+            to="/registrylist"
+            className="sidebarBtn"
+            alt="Реестры"
+            type="button"
+          >
+            <img className="sidebarBtnLogo" alt="Реестры" src={registryImg}></img>
+            {smallSidebar && <div className="sidebarBtnCaption">Реестры</div>}
+            <div className="sidebarBtnCounter">2</div>
+          </Link>
 
-        <Link
+          <Link
 
-          to="/profile"
-          className="sidebarBtn"
-          alt="Профиль"
-          type="button"
-        >
-          <img
-            className="sidebarBtnLogo"
-            alt="Личный кабинет"
-            src={profileImg}
-          ></img>
+            to="/profile"
+            className="sidebarBtn"
+            alt="Профиль"
+            type="button"
+          >
+            <img
+              className="sidebarBtnLogo"
+              alt="Личный кабинет"
+              src={profileImg}
+            ></img>
+            {smallSidebar && (
+              <div className="sidebarBtnCaption">Личный кабинет</div>
+            )}
+          </Link>
+        </div>
+        <div className="sidebarMenu">
           {smallSidebar && (
-            <div className="sidebarBtnCaption">Личный кабинет</div>
+            <div className="sidebarMenuCaption">Быстрые действия</div>
           )}
-        </Link>
-      </div>
-      <div className="sidebarMenu">
-        {smallSidebar && (
-          <div className="sidebarMenuCaption">Быстрые действия</div>
-        )}
 
-        <Link
-          to="/request/add"
-          className="sidebarBtn"
-          alt="Создать заявку"
-          type="button"
-        >
-          <img
-            className="sidebarBtnLogo"
+          <Link
+            to="/request/add"
+            className="sidebarBtn"
             alt="Создать заявку"
-            src={addReguestImg}
-          ></img>
-          {smallSidebar && (
-            <div className="sidebarBtnCaption">Создать заявку</div>
-          )}
-        </Link>
+            type="button"
+          >
+            <img
+              className="sidebarBtnLogo"
+              alt="Создать заявку"
+              src={addReguestImg}
+            ></img>
+            {smallSidebar && (
+              <div className="sidebarBtnCaption">Создать заявку</div>
+            )}
+          </Link>
 
-        <Link
+          <Link
 
-          to="/registry/add"
-          className="sidebarBtn"
-          alt="Создать реестр"
-          type="button"
-        >
-          <img
-            className="sidebarBtnLogo"
+            to="/registry/add"
+            className="sidebarBtn"
             alt="Создать реестр"
-            src={addRegistryImg}
-          ></img>
+            type="button"
+          >
+            <img
+              className="sidebarBtnLogo"
+              alt="Создать реестр"
+              src={addRegistryImg}
+            ></img>
+            {smallSidebar && (
+              <div className="sidebarBtnCaption">Создать реестр</div>
+            )}
+          </Link>
+        </div>
+        <div className="sidebarMenu">
           {smallSidebar && (
-            <div className="sidebarBtnCaption">Создать реестр</div>
+            <div className="sidebarMenuCaption">Компания</div>
           )}
-        </Link>
-      </div>
-      <div className="sidebarMenu">
-        {smallSidebar && (
-          <div className="sidebarMenuCaption">Компания</div>
-        )}
 
+          <Link
+
+            to="/organizationslist"
+            className="sidebarBtn"
+            alt="Организации"
+            type="button"
+          >
+            <img className="sidebarBtnLogo" alt="Организации" src={usersImg}></img>
+            {smallSidebar && (
+              <div className="sidebarBtnCaption">Организации</div>
+            )}
+          </Link>
+        </div>
         <Link
-
-          to="/organizationslist"
-          className="sidebarBtn"
-          alt="Организации"
+          to="/signin"
+          className="sidebarBtn sidebarBtn__signout"
+          alt="Выйти"
           type="button"
+          onClick={onSignOut}
         >
-          <img className="sidebarBtnLogo" alt="Организации" src={usersImg}></img>
+          <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
           {smallSidebar && (
-            <div className="sidebarBtnCaption">Организации</div>
+            <div className="sidebarBtnCaption">Выйти</div>
           )}
         </Link>
       </div>
-      <Link
-        to="/signin"
-        className="sidebarBtn sidebarBtn__signout"
-        alt="Выйти"
-        type="button"
-        onClick={onSignOut}
-      >
-        <img className="sidebarBtnLogo" alt="Выйти" src={logoutImg}></img>
-        {smallSidebar && (
-          <div className="sidebarBtnCaption">Выйти</div>
-        )}
-      </Link>
+
     </div>
   );
 }

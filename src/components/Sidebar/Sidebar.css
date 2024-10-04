@@ -8,15 +8,12 @@
     transition: 0.8s;
 }
 
+
+
 .sidebar__small {
     width: 112px;
     padding: 0;
     align-items: center;
-}
-
-.sidebar__close {
-    visibility: hidden;
-    transition: 0s;
 }
 
 .sidebarHideBtn {
@@ -136,8 +133,22 @@
     color: #879FB9
 }
 
+.sidebar__overlay {
+    width: auto;
+}
+
+
 @media screen and (max-width: 768px) {
-    
+
+    .sidebar__overlay {
+        background-color: #313a4371;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+
     .sidebar {
         display: flex;
         padding-left: 40px;
@@ -145,7 +156,12 @@
         position: absolute;
         right: 0;
         background-color: #FFFFFF;
-        transition: 0.8s;
+        transition: 0s;
+    }
+
+    .sidebar__close {
+        visibility: hidden;
+        transition: 0s;
     }
 
     .sidebarHideBtn-close {
@@ -163,5 +179,9 @@
         border: none;
         justify-content: center;
         align-items: center;
+    }
+
+    .sidebarMenu {
+        margin-top: 55px;
     }
 }

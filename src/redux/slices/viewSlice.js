@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     smallSidebar: true,
-    closedSidebar: true,
+    closedSidebar: false,
     headerTitle: 'Заявки',
 }
 

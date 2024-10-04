@@ -78,15 +78,18 @@
     .requestlist {
         margin: 0px 24px;
     }
+
     .requestlist__items {
         display: grid;
         grid-template-columns: 113px 110px 150px 80px 140px;
         gap: 16px;
         padding-right: 32px;
     }
+
     .requestlist__header_caption-none {
         display: none;
     }
+
     .requestlist__items_caption-none {
         display: none;
     }
@@ -103,6 +106,7 @@
     .requestlist__header_caption {
         display: none;
     }
+
     .requestlist__items {
         display: flex;
         gap: 0px;
@@ -110,11 +114,24 @@
         margin-bottom: 10px;
         background-color: white;
         border-radius: 15px;
-        
+
     }
 
-    .requestlist__items_caption {
+    .requestlist__items_caption:nth-child(1) {
+        display: none;
+    }
+
+    .requestlist__items_caption:nth-child(2) {
         padding: 0;
         margin: 10px;
+        order: 1;
+    }
+
+    .requestlist__items_caption:nth-child(3) {
+        order: 2;
+    }
+
+    .requestlist__items_caption:nth-child(4) {
+        order: 3;
     }
 }
