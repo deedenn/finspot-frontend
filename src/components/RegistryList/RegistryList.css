@@ -2,14 +2,14 @@
     margin: 0px 40px;
     background-color: white;
     border-radius: 20px;
-    
+
 }
 
 .registrylist__header_caption {
     font-size: 12px;
     line-height: 16px;
     color: #879FB9;
-   
+
 }
 
 .registrylist__captions {
@@ -36,5 +36,5 @@
     font-weight: 400;
     line-height: 16px;
     color: #313A43;
+    padding-left: 20px;
 }
-

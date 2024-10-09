@@ -4,27 +4,32 @@ import registrys from "../../data/registrys";
 import NavBar from "../NavBar/NavBar";
 import mainApi from "../../utils/api/mainApi";
 import { setHeaderTitle } from "../../redux/slices/viewSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function RegistryList() {
+  const { currentOrganization } = useSelector(state => state.organizationSlice);
   const [filterRegistrys, setFilterRegistrys] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleDate = (item) => {
+  const formatDate = (item) => {
     const date = new Date(item);
     return date.toLocaleDateString();
   }
 
-  useEffect(() => {
-    dispatch(setHeaderTitle("Реестры"));
-    mainApi.getRegistries().then((data) => {
-      console.log(data);
-      setFilterRegistrys(data.registry);
-      console.log(data.registry);
-    }
-    )
-  }, []);
+  const handleSelectedRegistry = ({ _id }) => {
+    navigate("/registry/" + _id);
+  };
 
+  useEffect(() => {
+    if (currentOrganization) {
+      dispatch(setHeaderTitle("Реестры"));
+      mainApi.getRegistriesByOrgID(currentOrganization._id).then((data) => {
+        setFilterRegistrys(data.registry);
+      }).catch((err) => console.log(err));
+    }
+  }, [currentOrganization]);
 
   return (
     <div>
@@ -40,10 +45,14 @@ function RegistryList() {
         </div>
         {Object.values(filterRegistrys).map((item, index) => {
           return (
-            <div key={index} className="registrylist__items">
-              <p className="registrylist__itemCaption"></p>
-              <p className="registrylist__itemCaption">{handleDate(item.createdAt)}</p>
-              <p className="registrylist__itemCaption">{handleDate(item.dateOfPay)}</p>
+            <div key={index} onClick={() => {
+              dispatch(setHeaderTitle("Реестр " + item.registryID));
+              handleSelectedRegistry(item);
+            }
+            } className="registrylist__items">
+              <p className="registrylist__itemCaption">{item.registryID}</p>
+              <p className="registrylist__itemCaption">{formatDate(item.createdAt)}</p>
+              <p className="registrylist__itemCaption">{formatDate(item.dateOfPay)}</p>
               <p className="registrylist__itemCaption">{item.amount}</p>
               <p className="registrylist__itemCaption">{item.status}</p>
             </div>

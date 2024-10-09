@@ -13,9 +13,10 @@ function NewRegistry() {
   const [requests, setRequests] = useState([]);
   const [registrySum, setRegistrySum] = useState(0);
   const [approvedRequests, setApprovedRequests] = useState([]);
+
   const navigate = useNavigate();
 
-  const handleDate = (item) => {
+  const formatDate = (item) => {
     const date = new Date(item);
     return date.toLocaleDateString();
   };
@@ -32,10 +33,28 @@ function NewRegistry() {
       });
   };
 
+  useEffect(() => {
+    setRegistrySum(approvedRequests.reduce((acc, item) => {
+      return item.checked ? acc + item.amount : acc + 0
+    }, 0))
+  }, [approvedRequests])
+
+  useEffect(() => {
+    dispatch(setHeaderTitle("Создать реестр"));
+    mainApi.getRequestsApproved(currentOrganization._id)
+      .then((data) => {
+        setApprovedRequests(data.request.map(item => ({ ...item, checked: false })));
+      }).catch((err) => console.log(err));
+
+  }, [currentOrganization])
+
   function onHandleSubmit() {
+    console.log(registrySum);
+
     onAddRegistry({
       organization: currentOrganization._id,
       owner: { user },
+      amount: registrySum,
       requests: requests,
       statuslog: [{
         date: Date.now(),
@@ -43,33 +62,20 @@ function NewRegistry() {
         user: user.name,
       }]
     });
-    navigate('/');
+    navigate('/registrylist');
   }
-
-  const onSum = () => {
-
-  }
-
-  useEffect(() => {
-    dispatch(setHeaderTitle("Создать реестр"));
-    mainApi.getRequestsApproved(currentOrganization._id)
-      .then((data) => {
-        setApprovedRequests(data.request);
-      }).catch((err) => console.log(err));
-
-  }, [currentOrganization])
 
   return (
     <div className="newregistry">
       <div className="newregistryInfo">
 
-        <p className="newregistryInfoCaption">№ реестра</p>
+        <p className="newregistryInfoCaption">Организация</p>
         <p className="newregistryInfoCaption">Дата создания</p>
         <p className="newregistryInfoCaption">Итоговая сумма</p>
         <p className="newregistryInfoCaption">Статус</p>
 
-        <p className="newregistryInfoValue">7843548949</p>
-        <p className="newregistryInfoValue">{Date()}</p>
+        <p className="newregistryInfoValue">{currentOrganization.name}</p>
+        <p className="newregistryInfoValue">{formatDate(Date())}</p>
         <p className="newregistryInfoValue">{registrySum}</p>
         <p className="newregistryInfoValue">Черновик</p>
 
@@ -77,15 +83,17 @@ function NewRegistry() {
       {approvedRequests.map((item, index) => {
         return (
           <div key={index} className="newregistryList">
-            <input onChange={() => {
-              console.log(item._id);
-              requests.push(item._id);
+            <input onChange={(e) => {
+              setApprovedRequests(approvedRequests.map(elem => {
+                item.checked = e.target.checked
+                return item._id === elem._id ? item : elem
+              }))
               setRegistrySum(item.amount);
-              console.log(requests);
+              setRequests(item._id);
             }
             }
               className="newregistrylist__item" type="checkbox"></input>
-            <ul className="newregistrylist__item">{handleDate(item.createdAt)}</ul>
+            <ul className="newregistrylist__item">{formatDate(item.createdAt)}</ul>
             <ul className="newregistrylist__item">{item.contragent}</ul>
             <ul className="newregistrylist__item">{item.description}</ul>
             <ul className="newregistrylist__item">{item.file}</ul>

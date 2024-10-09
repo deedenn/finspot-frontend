@@ -25,29 +25,20 @@ function RequestList() {
     navigate("/request/" + _id);
   };
 
-  const handleDate = (item) => {
+  const formatDate = (item) => {
     const date = new Date(item);
     return date.toLocaleDateString();
   };
 
   useEffect(() => {
-    dispatch(setHeaderTitle("Заявки"));
-
-    // mainApi.getUserRequests(user._id).then((data) => {
-    //   console.log(data);
-
-    //   setFilterRequests(data[0].reqs);
-    // }).catch((err) => console.log(err))
-
-    mainApi.getRequestsByOrgID(currentOrganization._id).then((data) => {
-      console.log(data.request);
-      setStateRequests(data.request)
-      setFilterRequests(data.request);
-    }).catch((err) => console.log(err));
-
-    // mainApi.getRequests().then((data) => {
-    //   setFilterRequests(data);
-    // }).catch((err) => console.log(err))
+    if (currentOrganization) {
+      dispatch(setHeaderTitle("Заявки"));
+      mainApi.getRequestsByOrgID(currentOrganization._id).then((data) => {
+        console.log(data.request);
+        setStateRequests(data.request)
+        setFilterRequests(data.request);
+      }).catch((err) => console.log(err));
+    }
   }, [currentOrganization]);
 
   return (
@@ -74,7 +65,7 @@ function RequestList() {
               }}
             >
               <p className="requestlist__items_caption">
-                {handleDate(item.createdAt)}
+                {formatDate(item.createdAt)}
               </p>
               <p className="requestlist__items_caption">{item.contragent}</p>
               <p className="requestlist__items_caption">

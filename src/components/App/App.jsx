@@ -108,6 +108,14 @@ function App() {
             }
           />
           <Route
+            path="/registry/:id"
+            element={
+              <ProtectedRoute >
+                <Registry />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/registry/add"
             element={
               <ProtectedRoute >

@@ -9,8 +9,6 @@ function NewRequest() {
   const { user } = useSelector(state => state.userSlice);
   const { currentOrganization } = useSelector(state => state.organizationSlice);
 
-  console.log(currentOrganization);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

@@ -197,6 +197,20 @@ class MainApi {
     });
   }
 
+  //получение всех реестров организации по ID
+  getRegistriesByOrgID(id) {
+    return this._request(`${this._url}/registries/org/${id}`, {
+      headers: { ...this._headers },
+    });
+  }
+
+  //получение данных реестра по ID
+  getRegistryByID(id) {
+    return this._request(`${this._url}/registries/${id}`, {
+      headers: this._headers,
+    });
+  }
+
   //создание реестра
   addRegistry(data) {
     return this._request(`${this._url}/registries/add`, {

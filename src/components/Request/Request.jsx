@@ -11,20 +11,23 @@ function Request() {
   const navigate = useNavigate();
 
   const user = useSelector(state => state.userSlice);
-  console.log(user.user.name);
+
 
   const [request, setRequest] = useState({});
   const [statuslog, setStatuslog] = useState([]);
   const [owner, setOwner] = useState({});
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true)
 
   async function getDataRequest() {
     try {
+      setLoading(true)
       const dataRequest = await mainApi.getRequestByID(id);
       const { data } = await mainApi.getInfoUser(dataRequest.owner);
       setRequest(dataRequest);
       setStatuslog(dataRequest.statuslog);
       setOwner(data);
+      setLoading(false)
     } catch (err) {
       console.log(err);
     }
@@ -72,72 +75,76 @@ function Request() {
     getDataRequest();
   }, []);
 
-  return (
-    <div className="request">
-      <form className="request__form">
-        <ul className="request__form_caption">№ заявки</ul>
-        <ul className="request__form_field">12334213</ul>
-        <ul className="request__form_caption">Контрагент</ul>
-
-        <div className="request__form_field">{request.contragent}</div>
-        <ul className="request__form_caption">Инициатор</ul>
-        <ul className="request__form_field">
-          {owner.name + " " + owner.fullname}
-        </ul>
-        <ul className="request__form_caption">Содержание</ul>
-        <div className="request__form_field">{request.description}</div>
-        <ul className="request__form_caption">Тип заявки</ul>
-        <div className="request_form_radioContainer">{request.type}</div>
-
-        <ul className="request__form_caption">Файл</ul>
-        <ul className="request__form_field">photo.jpg</ul>
-        <ul className="request__form_caption">Сумма</ul>
-        <div className="request__form_field">{request.amount}</div>
-        <ul className="request__form_caption">Срок оплаты</ul>
-        <div className="request__form_field">{request.dayToPay}</div>
-        <ul className="request__form_caption">Статус</ul>
-        <div className="request__form_field">{request.status}</div>
-        <ul className="request__form_caption">Текущий ответственный</ul>
-        <div className="request__form_field">Анастасия Климантовичъ</div>
-      </form>
-
-      <div className={`request__submitContainer ${request.status === "Утверждено" ? 'request__submitContainer-none' : ''}`}>
-        <textarea rows="2" cols="40" autocomplete="off" autofocus maxLength="400" minLength="2" required className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
-        <div className="requestBtnContainer">
-          <button className="requestBtn" type="submit" onClick={checkRequest}>
-            Утвердить заявку
-          </button>
-          <button className="requestBtn_cancel" onClick={cancelRequest}>Отменить заявку</button>
-        </div>
-      </div>
-
-      <div className="request__log">Лог заявки</div>
-      <div className="request__logCaptions">
-        <p>date</p>
-        <p>time</p>
-        <p>stage</p>
-        <p>user</p>
-        <p>message</p>
-      </div>
 
 
-      {statuslog.map((item, index) => {
-        return (
-          <div key={index} className="request__logFields request__logCaptions">
-            <p>{handleDate(item.date)}</p>
-            <p>{handleTime(item.date)}</p>
-            <p>{item.stage}</p>
-            <p>{item.user}</p>
-            <p>{item.message}</p>
+  if (!loading) {
+    return (
+      <div className="request">
+        <form className="request__form">
+          <ul className="request__form_caption">№ заявки</ul>
+          <ul className="request__form_field">12334213</ul>
+          <ul className="request__form_caption">Контрагент</ul>
+
+          <div className="request__form_field">{request.contragent}</div>
+          <ul className="request__form_caption">Инициатор</ul>
+          <ul className="request__form_field">
+            {owner.name + " " + owner.fullname}
+          </ul>
+          <ul className="request__form_caption">Содержание</ul>
+          <div className="request__form_field">{request.description}</div>
+          <ul className="request__form_caption">Тип заявки</ul>
+          <div className="request_form_radioContainer">{request.type}</div>
+
+          <ul className="request__form_caption">Файл</ul>
+          <ul className="request__form_field">photo.jpg</ul>
+          <ul className="request__form_caption">Сумма</ul>
+          <div className="request__form_field">{request.amount}</div>
+          <ul className="request__form_caption">Срок оплаты</ul>
+          <div className="request__form_field">{request.dayToPay}</div>
+          <ul className="request__form_caption">Статус</ul>
+          <div className="request__form_field">{request.status}</div>
+          <ul className="request__form_caption">Текущий ответственный</ul>
+          <div className="request__form_field">Анастасия Климантовичъ</div>
+        </form>
+
+        <div className={`request__submitContainer ${request.status === ("Утверждено" || "Отменено") ? 'request__submitContainer-none' : ''}`}>
+          <textarea rows="2" cols="40" autocomplete="off" autofocus maxLength="400" minLength="2" required className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
+          <div className="requestBtnContainer">
+            <button className="requestBtn" type="submit" onClick={checkRequest}>
+              Утвердить заявку
+            </button>
+            <button className="requestBtn_cancel" onClick={cancelRequest}>Отменить заявку</button>
           </div>
-        )
-      })}
+        </div>
 
-    </div>
+        <div className="request__log">Лог заявки</div>
+        <div className="request__logCaptions">
+          <p>date</p>
+          <p>time</p>
+          <p>stage</p>
+          <p>user</p>
+          <p>message</p>
+        </div>
 
 
+        {statuslog.map((item, index) => {
+          return (
+            <div key={index} className="request__logFields request__logCaptions">
+              <p>{handleDate(item.date)}</p>
+              <p>{handleTime(item.date)}</p>
+              <p>{item.stage}</p>
+              <p>{item.user}</p>
+              <p>{item.message}</p>
+            </div>
+          )
+        })}
 
-  );
+      </div>
+    );
+  }
+
+  // добавить preloader
+
 }
 
 export default Request;
