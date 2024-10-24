@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './OrganizationSettings.css';
 import mainApi from "../../utils/api/mainApi";
-import { useParams } from "react-router-dom";
+import { useFetchers, useParams } from "react-router-dom";
 
 function OrganizationSettings() {
 
@@ -71,32 +71,31 @@ function OrganizationSettings() {
         <div className="organizationSettings">
             <div>
                 <form onSubmit={handleChooseUser}>
-                    <p>Маршрут согласования заявок и реестров</p>
+                    <p>Маршрут согласования заявок</p>
                     <div className="organization__trackContainer">
-                        <p>Согласование главным бухгалтером</p>
+                        <p>Главный бухгалтер (создание реестров, согласование заявок)</p>
                         <select name="requestGB" id="reguestGB" value={requestGB} onChange={(e) => setRequestGB(e.target.value)}>
                             <option value="">Не Указано</option>
-                            {approveUsers.map((item, index) => {
+                            {users.map((item, index) => {
                                 return <option key={index} value={item.user._id}>{`${item.user.name} ${item.user.fullname}`}</option>
                             })}
                         </select>
                         <p>Согласование финансовым директором</p>
                         <select name="requestFD" id="reguestFD" value={requestFD} onChange={(e) => setRequestFD(e.target.value)}>
                             <option value="">Не Указано</option>
-                            {approveUsers.map((item, index) => {
+                            {users.map((item, index) => {
                                 return <option key={index} value={item.user._id}>{`${item.user.name} ${item.user.fullname}`}</option>
                             })}
                         </select>
                         <p>Утверждение ГД</p>
                         <select name="requestGD" id="reguestGD" value={requestGD} onChange={(e) => setRequestGD(e.target.value)}>
                             <option value="">Не Указано</option>
-                            {approveUsers.map((item, index) => {
+                            {users.map((item, index) => {
                                 return <option key={index} value={item.user._id}>{`${item.user.name} ${item.user.fullname}`}</option>
                             })}
                         </select>
-
                     </div>
-                    <button className="organizations__button" >Изменить маршрут</button>
+                    <button className="organization__button" >Изменить маршрут</button>
                 </form>
             </div>
         </div>

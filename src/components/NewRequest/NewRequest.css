@@ -53,14 +53,16 @@
 }
 
 .request_form_radioContainer {
+    display: flex;
+    justify-items: center;
     margin: 0;
     padding: 0;
-    display: flex;
-    align-items: center;
     gap: 10px;
 }
 
-.request__form_radioLabel {}
+.request__form_radioLabel {
+    align-self: center;
+}
 
 @media screen and (max-width: 768px) {
 

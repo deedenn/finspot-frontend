@@ -28,6 +28,7 @@ function Request() {
       setStatuslog(dataRequest.statuslog);
       setOwner(data);
       setLoading(false)
+      dispatch(setHeaderTitle("Заявка " + request.requestID));
     } catch (err) {
       console.log(err);
     }
@@ -82,7 +83,7 @@ function Request() {
       <div className="request">
         <form className="request__form">
           <ul className="request__form_caption">№ заявки</ul>
-          <ul className="request__form_field">12334213</ul>
+          <ul className="request__form_field">{request.requestID}</ul>
           <ul className="request__form_caption">Контрагент</ul>
 
           <div className="request__form_field">{request.contragent}</div>
@@ -109,7 +110,7 @@ function Request() {
 
         <div className={`request__submitContainer ${request.status === ("Утверждено" || "Отменено") ? 'request__submitContainer-none' : ''}`}>
           <textarea rows="2" cols="40" autocomplete="off" autofocus maxLength="400" minLength="2" required className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
-          <div className="requestBtnContainer">
+          <div className="requestBtnContainer">r
             <button className="requestBtn" type="submit" onClick={checkRequest}>
               Утвердить заявку
             </button>

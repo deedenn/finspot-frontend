@@ -31,13 +31,12 @@ function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const replaceAuth = useSelector((state) => state.userSlice.replaceAuth)
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     document.title = 'Finspot - финансовая платформа';
     const jwt = localStorage.getItem("token");
-    jwt &&
+    if (jwt) {
       Promise.all([auth.checkToken(), mainApi.getRequests(), mainApi.getOrganizations()])
         .then(([userData, requestsData, organizations]) => {
           dispatch(setOrganization(organizations.organizations));
@@ -46,9 +45,10 @@ function App() {
           navigate(pathname);
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
         });
-  }, [replaceAuth]);
+    }
+  }, [navigate]);
 
   return (
     <div className="app">

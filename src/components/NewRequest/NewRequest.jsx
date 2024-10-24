@@ -18,6 +18,20 @@ function NewRequest() {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
   const [dateToPay, setDateToPay] = useState("");
+  const [message, setMessage] = useState("");
+
+  const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png', 'application/pdf'];
+
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+
+    if (!validFileTypes.find(type => type === file.type)) {
+      console.log('file must be jpg or pdf');
+      return;
+    }
+
+  }
 
   const onAddRequest = (newRequest) => {
     console.log(newRequest);
@@ -55,7 +69,8 @@ function NewRequest() {
       statuslog: [{
         date: Date.now(),
         stage: "Черновик",
-        user: user.name,
+        user: user.name + " " + user.fullname,
+        message: message,
       }]
     });
     navigate('/');
@@ -68,8 +83,11 @@ function NewRequest() {
   return (
     <div className="request">
       <form className="request__form">
-        <ul className="request__form_caption">№ заявки</ul>
-        <ul className="request__form_field">{user.requestId}</ul>
+        <ul className="request__form_caption">Организация</ul>
+        <ul className="request__form_field request__form_field_input">
+          {currentOrganization?.name}
+        </ul>
+
         <ul className="request__form_caption">Контрагент</ul>
         <input
           className="request__form_field"
@@ -78,9 +96,9 @@ function NewRequest() {
           name="contragent"
           onChange={(evt) => setContragent(evt.target.value)}
         />
-        <ul className="request__form_caption">Организация</ul>
+        <ul className="request__form_caption">Инициатор</ul>
         <ul className="request__form_field request__form_field_input">
-          {currentOrganization?.name}
+          {user.name + " " + user.fullname}
         </ul>
         <ul className="request__form_caption">Содержание</ul>
         <input
@@ -89,18 +107,6 @@ function NewRequest() {
           placeholder="За что платим"
           name="description"
           onChange={(evt) => setDescription(evt.target.value)}
-        />
-        <ul className="request__form_caption">Инициатор</ul>
-        <ul className="request__form_field request__form_field_input">
-          {user.name + " " + user.fullname}
-        </ul>
-        <ul className="request__form_caption">Файл</ul>
-        <input
-          className="request__form_field"
-          type="text"
-          placeholder="Вложите файл"
-          name="file"
-          onChange={(evt) => setFile(evt.target.value)}
         />
         <ul className="request__form_caption">Тип заявки</ul>
         <div className="request_form_radioContainer">
@@ -127,6 +133,14 @@ function NewRequest() {
             Нал
           </label>
         </div>
+        <ul className="request__form_caption">Файл</ul>
+        <input
+          className="request__form_field"
+          type="file"
+          placeholder="Вложите файл"
+          name="file"
+          onChange={handleUpload}
+        />
 
 
         <ul className="request__form_caption">Сумма</ul>
@@ -146,13 +160,20 @@ function NewRequest() {
         />
       </form>
 
-      <button className="requestBtn" type="submit" onClick={onHandleSubmit}>
-        Создать заявку
-      </button>
-      <button className="requestBtn">Сохранить черновик</button>
-      <button className="requestBtn" onClick={() => navigate("/requestlist")}>
-        Отменить
-      </button>
+      <div className='request__submitContainer'>
+        <textarea rows="2" cols="40" autocomplete="off" autofocus maxLength="400" minLength="2" required className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
+        <div className="requestBtnContainer">
+          <button className="requestBtn" type="submit" onClick={onHandleSubmit}>
+            Утвердить заявку
+          </button>
+          <button className="requestBtn">
+            Сохранить черновик
+          </button>
+          <button className="requestBtn" onClick={() => navigate("/requestlist")}>
+            Отменить
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

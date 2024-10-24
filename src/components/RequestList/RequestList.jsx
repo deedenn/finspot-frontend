@@ -31,15 +31,15 @@ function RequestList() {
   };
 
   useEffect(() => {
-    if (currentOrganization) {
+    const jwt = localStorage.getItem('token')
+    if (currentOrganization?._id && jwt) {
       dispatch(setHeaderTitle("Заявки"));
       mainApi.getRequestsByOrgID(currentOrganization._id).then((data) => {
-        console.log(data.request);
         setStateRequests(data.request)
         setFilterRequests(data.request);
       }).catch((err) => console.log(err));
     }
-  }, [currentOrganization]);
+  }, [currentOrganization, dispatch]);
 
   return (
     <div className="request__container">
@@ -60,7 +60,7 @@ function RequestList() {
               key={index}
               className="requestlist__items requestlist__hover"
               onClick={() => {
-                dispatch(setHeaderTitle("Заявка " + item._id));
+
                 handleSelectedRequest(item);
               }}
             >

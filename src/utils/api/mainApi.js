@@ -4,7 +4,6 @@ class MainApi {
   _url = "//localhost:3000"
   _headers = {
     "Content-Type": "application/json",
-    authorization: `Bearer ${localStorage.getItem("token") || ''}`,
   }
 
   async _returnResponse(res) {
@@ -26,14 +25,14 @@ class MainApi {
   //получение списка организаций
   getOrganizations() {
     return this._request(`${this._url}/organizations`, {
-      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token") || ''}` },
+      headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
     });
   }
 
   //открыть одну организацию
   getOrganizationByID(id) {
     return this._request(`${this._url}/organizations/${id}`, {
-      headers: this._headers,
+      headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
     });
   }
 
@@ -85,7 +84,6 @@ class MainApi {
 
   //получение информации о пользователе по email
   getInfoUserByEmail(email) {
-    console.log(email);
     return this._request(`${this._url}/users/email/check`, {
       method: "POST",
       headers: this._headers,
@@ -104,9 +102,6 @@ class MainApi {
 
   //добавление пользователей в организацию
   patchUserByOrg(id, newUser) {
-    console.log(id);
-    console.log(newUser);
-
     return this._request(`${this._url}/organizations/addusers`, {
       method: "PATCH",
       headers: this._headers,
@@ -120,7 +115,7 @@ class MainApi {
   //получение всех заявок пользователя
   getRequests() {
     return this._request(`${this._url}/requests`, {
-      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("token") || ''}` },
+      headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
     });
   }
 
@@ -136,7 +131,7 @@ class MainApi {
   //получение всех заявок организации
   getRequestsByOrgID(id) {
     return this._request(`${this._url}/requests/org/${id}`, {
-      headers: { ...this._headers },
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
