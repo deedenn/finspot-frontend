@@ -98,7 +98,7 @@ function NewRequest() {
         />
         <ul className="request__form_caption">Инициатор</ul>
         <ul className="request__form_field request__form_field_input">
-          {user.name + " " + user.fullname}
+          {user?.name + " " + user?.fullname}
         </ul>
         <ul className="request__form_caption">Содержание</ul>
         <input
@@ -161,7 +161,7 @@ function NewRequest() {
       </form>
 
       <div className='request__submitContainer'>
-        <textarea rows="2" cols="40" autocomplete="off" autofocus maxLength="400" minLength="2" required className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
+        <textarea rows="2" cols="40" autoComplete="off" autoFocus maxLength="400" minLength="2" required className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
         <div className="requestBtnContainer">
           <button className="requestBtn" type="submit" onClick={onHandleSubmit}>
             Утвердить заявку

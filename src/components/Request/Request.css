@@ -18,7 +18,8 @@
     max-width: 385px;
     background-color: F5F7FA;
     align-self: center;
-    padding: 0;
+    padding: 0px 5px;
+    border-radius: 4px;
 
 }
 
@@ -83,10 +84,11 @@
     width: 500px;
     background-color: F5F7FA;
     align-self: center;
-    padding: 0;
+    padding: 16px;
     height: 48px;
     border: #B6CADF 1px solid;
     resize: none;
+    border-radius: 6px;
 }
 
 .request__submitContainer-none {

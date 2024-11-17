@@ -8,11 +8,12 @@
 }
 
 .page {
-    width: 1160px;
+    width: auto;
     display: flex;
     flex-direction: column;
     background-color: #F5F7FA;
     padding: 0;
+    width: 100%;
 }
 
 @media screen and (max-width: 768px) {

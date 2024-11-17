@@ -23,6 +23,7 @@ function RegistryList() {
   };
 
   useEffect(() => {
+    console.log(currentOrganization);
     if (currentOrganization) {
       dispatch(setHeaderTitle("Реестры"));
       mainApi.getRegistriesByOrgID(currentOrganization._id).then((data) => {

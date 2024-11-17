@@ -110,7 +110,7 @@ function Request() {
 
         <div className={`request__submitContainer ${request.status === ("Утверждено" || "Отменено") ? 'request__submitContainer-none' : ''}`}>
           <textarea rows="2" cols="40" autocomplete="off" autofocus maxLength="400" minLength="2" required className="request__commentInput" placeholder="Укажите комментарий" onChange={(evt) => { setMessage(evt.target.value) }}></textarea>
-          <div className="requestBtnContainer">r
+          <div className="requestBtnContainer">
             <button className="requestBtn" type="submit" onClick={checkRequest}>
               Утвердить заявку
             </button>

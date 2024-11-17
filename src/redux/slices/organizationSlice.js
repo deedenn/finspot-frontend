@@ -19,6 +19,7 @@ export const organizationSlice = createSlice({
     },
 })
 
+
 export const { setOrganization, setCurrentOrganization } = organizationSlice.actions;
 
 export default organizationSlice.reducer;

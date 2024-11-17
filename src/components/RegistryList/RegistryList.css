@@ -1,8 +1,13 @@
 .registrylist {
-    margin: 0px 40px;
+    margin: 0 40px;
+    padding: 20px;
     background-color: white;
     border-radius: 20px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+    height: calc(100vh - 120px);
 }
 
 .registrylist__header_caption {
@@ -25,10 +30,12 @@
 
 
 .registrylist__items {
-    display: grid;
-    grid-template-columns: 180px 95px 96px 140px 200px;
-    gap: 16px;
-    padding-right: 32px;
+        display: grid;
+        grid-template-columns: 6rem 6rem 6rem 9rem 10rem;
+        gap: 10px;
+        justify-content: space-between;
+        padding: 5px;
+        width: 100%;
 }
 
 .registrylist__itemCaption {

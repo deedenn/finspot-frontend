@@ -20,7 +20,6 @@ function RequestList() {
   const { user } = useSelector(state => state.userSlice);
   const { currentOrganization } = useSelector(state => state.organizationSlice);
 
-
   const handleSelectedRequest = ({ _id }) => {
     navigate("/request/" + _id);
   };
@@ -31,15 +30,15 @@ function RequestList() {
   };
 
   useEffect(() => {
-    const jwt = localStorage.getItem('token')
-    if (currentOrganization?._id && jwt) {
+    console.log(currentOrganization);
+    if (currentOrganization && user) {
       dispatch(setHeaderTitle("Заявки"));
       mainApi.getRequestsByOrgID(currentOrganization._id).then((data) => {
-        setStateRequests(data.request)
+        setStateRequests(data.request);
         setFilterRequests(data.request);
       }).catch((err) => console.log(err));
     }
-  }, [currentOrganization, dispatch]);
+  }, [currentOrganization, user]);
 
   return (
     <div className="request__container">

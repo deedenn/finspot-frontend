@@ -40,7 +40,7 @@ class MainApi {
   addOrganization({ inn, name }) {
     return this._request(`${this._url}/organizations/add`, {
       method: "POST",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify({ inn, name })
     });
   }
@@ -49,7 +49,7 @@ class MainApi {
   updateOrganizationApprovers(id, approveUsers) {
     return this._request(`${this._url}/organizations/updateApproveList`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify({ id, approveUsers })
     });
   }
@@ -57,28 +57,28 @@ class MainApi {
   //получение cписка всех пользователей
   getUsers() {
     return this._request(`${this._url}/users/`, {
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
   //получение cписка всех пользователей организации
   getUsersByOrg(id) {
     return this._request(`${this._url}/organizations/users/${id}`, {
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
   //получение информации об авторизованном пользователе
   getInfoUser() {
     return this._request(`${this._url}/users/me`, {
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
   //получение информации о пользователе по ID
   getInfoUserByID(id) {
     return this._request(`${this._url}/users/${id}`, {
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
@@ -86,7 +86,7 @@ class MainApi {
   getInfoUserByEmail(email) {
     return this._request(`${this._url}/users/email/check`, {
       method: "POST",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify({ email })
     });
   }
@@ -95,7 +95,7 @@ class MainApi {
   addUser(data) {
     return this._request(`${this._url}/signup`, {
       method: "POST",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify(data)
     });
   }
@@ -104,7 +104,7 @@ class MainApi {
   patchUserByOrg(id, newUser) {
     return this._request(`${this._url}/organizations/addusers`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify({ id, newUser })
     });
   }
@@ -123,7 +123,7 @@ class MainApi {
   //получение всех заявок, доступ к которым имеет пользователь
   getUserRequests(id) {
     return this._request(`${this._url}/requests/approve/${id}`, {
-      headers: { ...this._headers },
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
@@ -138,14 +138,14 @@ class MainApi {
   //получение всех утвержденных заявок
   getRequestsApproved(id) {
     return this._request(`${this._url}/requests/approved/${id}`, {
-      headers: { ...this._headers },
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
   //открыть одну заявку
   getRequestByID(id) {
     return this._request(`${this._url}/requests/${id}`, {
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
@@ -153,7 +153,7 @@ class MainApi {
   addRequest(data) {
     return this._request(`${this._url}/requests/add`, {
       method: "POST",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify(data)
     });
   }
@@ -162,7 +162,7 @@ class MainApi {
   editRequest(data) {
     return this._request(`${this._url}/requests/edit`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify(data)
     });
   }
@@ -171,7 +171,7 @@ class MainApi {
   checkRequest(data) {
     return this._request(`${this._url}/requests/check`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify(data)
     });
   }
@@ -180,7 +180,7 @@ class MainApi {
   cancelRequest(data) {
     return this._request(`${this._url}/requests/cancel`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify(data)
     });
   }
@@ -188,21 +188,21 @@ class MainApi {
   //получение всех реестров пользователя
   getRegistries() {
     return this._request(`${this._url}/registries/`, {
-      headers: { ...this._headers },
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
   //получение всех реестров организации по ID
   getRegistriesByOrgID(id) {
     return this._request(`${this._url}/registries/org/${id}`, {
-      headers: { ...this._headers },
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
   //получение данных реестра по ID
   getRegistryByID(id) {
     return this._request(`${this._url}/registries/${id}`, {
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
 
@@ -210,7 +210,7 @@ class MainApi {
   addRegistry(data) {
     return this._request(`${this._url}/registries/add`, {
       method: "POST",
-      headers: this._headers,
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') },
       body: JSON.stringify(data)
     });
   }

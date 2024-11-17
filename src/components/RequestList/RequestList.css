@@ -1,12 +1,18 @@
 .request__container {
     box-sizing: border-box;
+    width: 100%;
 }
 
 .requestlist {
+    margin: 0 40px;
     padding: 20px;
-    margin: 0px 40px;
     background-color: white;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+    height: calc(100vh - 120px);
 }
 
 .requestlist__header_caption {
@@ -26,9 +32,11 @@
 
 .requestlist__items {
     display: grid;
-    grid-template-columns: 113px 190px 164px 164px 130px 155px;
-    gap: 16px;
-    padding-right: 32px;
+    grid-template-columns: 6rem 9rem 9rem 9rem 9rem 10rem;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 5px;
+    width: 100%;
 }
 
 .requestlist__hover:hover {
@@ -50,7 +58,8 @@
 }
 
 .requestlist__items_status {
-    height: 24px;
+    line-height: 20px;
+    padding: 5px;
     background-color: #EBF4FD;
     color: #879FB9;
     border-radius: 38px;

@@ -75,35 +75,36 @@ function Registry() {
 
   return (
     <div className="registry">
-      <div className="registryInfo">
+      <div className="registry__container">
+        <div className="registryInfo">
 
-        <p className="registryInfoCaption">№ реестра</p>
-        <p className="registryInfoCaption">Дата создания</p>
-        <p className="registryInfoCaption">Итоговая сумма</p>
-        <p className="registryInfoCaption">Статус</p>
+          <p className="registryInfoCaption">№ реестра</p>
+          <p className="registryInfoCaption">Дата создания</p>
+          <p className="registryInfoCaption">Итоговая сумма</p>
+          <p className="registryInfoCaption">Статус</p>
 
-        <p className="registryInfoValue">{registry.registryID}</p>
-        <p className="registryInfoValue">{formatDate(registry.createdAt)}</p>
-        <p className="registryInfoValue">{registry.amount}</p>
-        <p className="registryInfoValue">{registry.status}</p>
+          <p className="registryInfoValue">{registry.registryID}</p>
+          <p className="registryInfoValue">{formatDate(registry.createdAt)}</p>
+          <p className="registryInfoValue">{registry.amount}</p>
+          <p className="registryInfoValue">{registry.status}</p>
 
+        </div>
+        {requestList.map((item, index) => {
+          return (
+            <div key={index} className="registryList">
+              <ul className="registrylist__item">{formatDate(item.createdAt)}</ul>
+              <ul className="registrylist__item">{item.contragent}</ul>
+              <ul className="registrylist__item">{item.description}</ul>
+              <ul className="registrylist__item">{item.file}</ul>
+              <ul className="registrylist__item">{item.amount}</ul>
+            </div>
+          )
+
+        })}
       </div>
-      {requestList.map((item, index) => {
-        return (
-          <div key={index} className="registryList">
-            <ul className="registrylist__item">{item.createdAt}</ul>
-            <ul className="registrylist__item">{item.contragent}</ul>
-            <ul className="registrylist__item">d</ul>
-            <ul className="registrylist__item">{item.file}</ul>
-            <ul className="registrylist__item">{item.amount}</ul>
-            <ul className="registrylist__item">{item.status}</ul>
-          </div>
-        )
 
-      })}
-
-      <button className="requestBtn">Создать реестр</button>
-      <button className="requestBtn">Отменить</button>
+      <button className="registryBtn">Создать реестр</button>
+      <button className="registryBtn">Отменить</button>
     </div>
 
   );

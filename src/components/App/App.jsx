@@ -26,6 +26,7 @@ import OrganizationSettings from "../OrganizationSettings/OrganizationSettings";
 import NewRegistry from "../NewRegistry/NewRegistry";
 import { setUser } from "../../redux/slices/userSlice";
 import { setOrganization } from "../../redux/slices/organizationSlice";
+import AdminPage from "../AdminPage/AdminPage";
 
 function App() {
   const { pathname } = useLocation();
@@ -175,6 +176,14 @@ function App() {
             element={
               <ProtectedRoute >
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute >
+                <AdminPage />
               </ProtectedRoute>
             }
           />

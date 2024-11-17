@@ -31,9 +31,11 @@
 
 .newregistryList {
     display: grid;
-    grid-template-columns: 15px 100px 150px 160px 130px 110px 110px;
-    gap: 16px;
-    padding-right: 32px;
+    grid-template-columns: 6rem 6rem 6rem 6rem 6rem 6rem 6rem;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 5px;
+    width: 100%;
 }
 
 .newregistrylist__item {

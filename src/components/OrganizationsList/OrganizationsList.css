@@ -24,6 +24,7 @@
     font-size: 14px;
     line-height: 16px;
     font-weight: 400;
+    padding: 10px;
 }
 
 .organizationsList__hover:hover {

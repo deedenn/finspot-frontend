@@ -18,9 +18,11 @@ function Header() {
     const saveCurrentOrganization = JSON.parse(localStorage.getItem('currentOrg'))
     console.log(saveCurrentOrganization)
     if (saveCurrentOrganization) {
-      dispatch(setCurrentOrganization(currentOrganization));
+      dispatch(setCurrentOrganization(saveCurrentOrganization));
+      console.log(`Current organization: ${saveCurrentOrganization._id}`)
     } else {
       dispatch(setCurrentOrganization(organizations[0]));
+      console.log(`Current organization: ${saveCurrentOrganization._id}`)
     }
   }, [])
 
@@ -32,6 +34,7 @@ function Header() {
     if (currentOrganization) {
       localStorage.setItem('currentOrg', JSON.stringify(currentOrganization))
       dispatch(setCurrentOrganization(currentOrganization));
+      console.log(`Current organization: ${currentOrganization._id}`)
     }
   }
 

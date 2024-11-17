@@ -1,4 +1,5 @@
 .sidebar {
+    width: 240px;
     display: flex;
     flex-direction: column;
     color: #FFFFFF;
@@ -6,13 +7,13 @@
     padding-right: 40px;
     position: relative;
     transition: 0.8s;
+    height: 100vh;
+    padding: 20px 40px;
 }
 
-
-
 .sidebar__small {
-    width: 112px;
-    padding: 0;
+    width: 92px;
+    padding: 20px;
     align-items: center;
 }
 
@@ -42,7 +43,6 @@
 
 .sidebar__logo {
     display: flex;
-    margin-top: 28px;
     align-items: center;
     text-decoration: none;
 }
@@ -61,6 +61,8 @@
 }
 
 .sidebarMenu {
+    display: flex;
+    flex-direction: column;
     margin-top: 80px;
     margin-bottom: 40px;
     color: #879FB9;
